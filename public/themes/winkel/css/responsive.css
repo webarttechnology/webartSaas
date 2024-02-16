@@ -1,0 +1,383 @@
+@media only screen and (min-width:1024px) and (max-width:1279px){
+    .submenu {
+        width: 900px;
+    }
+}
+@media screen and (max-width: 991px) {
+.submenu {
+    position: static;
+    width: 100%;
+    padding: 15px 20px;
+    height: auto;
+    display: none;
+    font-size: 12px;
+    border-radius: 0;
+}
+.has-mega-menu:hover .submenu , .has-mega-menu:focus .submenu {
+    display: block;
+}
+.submenu .show {
+    line-height: 24px;
+    height: calc(100% + 51px);
+    overflow-y: scroll;
+    padding: 15px 0;
+}
+}
+@media only screen and (min-width:768px) and (max-width:900px){
+    .ftco-navbar-light {
+        padding: 5px 15px;
+    }
+    .owl-carousel.home-slider .slider-item .slider-text h1 {
+        font-size: 40px;
+    }
+}
+
+@media only screen and (min-width:576px) and (max-width:767px){
+    .ftco-navbar-light {
+        padding: 5px 15px;
+    }
+    .side {
+        justify-content: center;
+    }
+    .owl-carousel.home-slider .slider-item .slider-text h1 {
+        font-size: 34px;
+    }
+    .owl-carousel.home-slider .slider-item .slider-text p {
+        font-size: 22px;
+    }
+    .text-right {
+        text-align: left!important;
+        margin-top: 20px;
+        margin-left: -59px;
+    }
+    .block-23 ul li, .block-23 ul li>a {
+        margin-bottom: 0;
+        padding: 5px 0;
+    }
+    .submenu-child >li > a {
+        width: 122px;
+    }
+    .thirdLabel {
+        width: calc(100% - 140px);
+    }
+    .thirdLabel ul > li li {
+        PADDING: 0;
+    }
+    .submenu .cat-title {
+        font-size: 14px;
+        margin-bottom: 10PX;
+    }
+    .submenu .show {
+        line-height: 24px;
+        height: 210px;
+        overflow-y: scroll;
+        padding: 0;
+        margin: 10px 0;
+    }
+}
+
+@media only screen and (min-width:481px) and (max-width:575px){
+   
+    .side {
+        justify-content: center;
+    }
+.ftco-navbar-light {
+    padding: 5px 15px;
+}
+.wrap-about .heading-section-bold h2 {
+    font-size: 34px;
+}
+.ftco-choose h2 {
+    font-size: 28px;
+}
+.text-right {
+    text-align: left!important;
+    margin-top: 20px;
+    margin-left: -59px;
+}
+footer .block-23 ul li, .block-23 ul li>a {
+    margin-bottom: 0;
+    padding: 5px 0;
+}
+/* .randome {
+    text-align: end;
+    margin-top: -29px;
+}
+.slid {
+    margin-top: 2px;
+    margin-left: 18rem;
+} */
+.randome{
+ 
+    justify-content: end;
+  
+}
+/* .topper {
+    margin-bottom: 5px;
+} */
+.owl-carousel.home-slider .slider-item .slider-text h1 {
+    font-size: 30px;
+}
+.owl-carousel.home-slider .slider-item .slider-text p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 22px;
+}
+.navbar li.has-mega-menu:hover > .submenu {
+    position: static;
+    padding: 15px;
+}
+.submenu .cat-title {
+    font-size: 14px;
+    margin-bottom: 6px;
+}
+.thirdLabel ul > li {
+    padding: 0 8px;
+}
+.thirdLabel {
+    position: static;
+    width: 100%;
+    display: none;
+    float: left;
+    padding: 10px 0;
+    height: 150px; overflow-y: auto;
+}
+.submenu-child >li:hover .thirdLabel {
+    opacity: 1 !important; display: block;
+}
+.submenu .cat-title {
+    font-size: 14px;
+    margin-bottom: 10PX;
+}
+.submenu .show {
+    line-height: 24px;
+    height: 210px;
+    overflow-y: scroll;
+    padding: 0;
+    margin: 10px 0;
+}
+.submenu-child >li > a {
+    width: 100%;
+}
+}
+
+@media only screen and (min-width:401px) and (max-width:480px){
+    .ftco-footer .ftco-footer-widget ul li {
+        padding-top: 12px;
+    }
+    footer .block-23 ul li, .block-23 ul li>a {
+        margin-bottom: 0;
+    }
+    /* .slid {
+        padding-left: 202px;
+        margin-top: -29px;
+    }
+    .slid1 {
+        margin-top: -29px;
+        text-align: left;
+    } */
+    /* .topper {
+        margin-bottom: 5px;
+    } */
+    .side{
+        text-align: center;
+    }
+    .ftco-navbar-light {
+        padding: 3px 15px;
+    }
+    .owl-carousel.home-slider .slider-item .slider-text h1 {
+        font-size: 32px;
+    }
+    .owl-carousel.home-slider .slider-item .slider-text p {
+        font-size: 18px;
+    }
+    .wrap-about .heading-section-bold h2 {
+        font-size: 32px;
+    }
+    .ftco-choose h2 {
+        font-size: 28px;
+    }
+    .ftco-section {
+        padding: 3rem 0;
+    }
+    .randome{
+      
+        justify-content: end;
+    }
+    .submenu .cat-title {
+        font-size: 14px;
+        margin-bottom: 6px;
+    }
+    .navbar li.has-mega-menu:hover > .submenu {
+        position: static;
+        padding: 0 20px;
+    }
+    .thirdLabel {
+        position: static;
+        width: 100%;
+        display: none;
+        float: left;
+        padding: 10px 0;
+        height: 150px; overflow-y: auto;
+    }
+    .submenu-child >li:hover .thirdLabel {
+        opacity: 1 !important; display: block;
+    }
+    .submenu-child >li > a {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width:479px){
+    .ftco-navbar-light .navbar-toggler {
+        color: #fff !important;
+    }
+    .ftco-navbar-light .navbar-nav>.nav-item .dropdown-menu {
+        background: #000 !important;
+    }
+    .ftco-navbar-light .navbar-nav>.nav-item .dropdown-menu .dropdown-item {
+        color: #ffff !important;
+    }
+    .ftco-footer .ftco-footer-widget ul li {
+        padding-top: 0;
+    }
+    footer .block-23 ul li, .block-23 ul li>a {
+        margin-bottom: 0;
+    }
+    /* .slid{
+        padding-left: 8rem;
+        margin-top: -29px;
+    }
+    .slid1 {
+        margin-top: -29px;
+        text-align: center;
+    } */
+    /* .topper {
+        margin-bottom: 5px;
+    } */
+    .side {
+        justify-content: center;
+    }
+    .ftco-navbar-light {
+        padding: 4px 15px;
+    }
+    .owl-carousel.home-slider .slider-item .slider-text h1 {
+        font-size: 22px;
+        text-shadow: 0 0 16px black;
+    }
+    .owl-carousel.home-slider .slider-item .slider-text p {
+        font-size: 15px;
+        text-shadow: 12px 1px 20px black;
+        color: #ffff;
+        line-height: 19px;
+    }
+    .owl-carousel.home-slider .slider-item .slider-text .subheading {
+        text-shadow: 0 0 12px black;
+    }
+    .wrap-about .heading-section-bold h2 {
+        font-size: 22px;
+    }
+    .ftco-choose h2 {
+        font-size: 22px;
+    }
+    .submenu .cat-title {
+        font-size: 14px;
+        margin-bottom: 6px;
+    }
+    .navbar li.has-mega-menu:hover > .submenu {
+        position: static;
+        padding: 0 20px;
+    }
+    .thirdLabel {
+        position: static;
+        width: 100%;
+        display: none;
+        float: left;
+        padding: 10px 0;
+        height: 150px; overflow-y: auto;
+    }
+    .submenu-child >li:hover .thirdLabel {
+        opacity: 1 !important; display: block;
+    }
+    .thirdLabel ul > li li {
+        PADDING: 0;
+    }
+    .submenu .cat-title {
+        font-size: 14px;
+        margin-bottom: 10PX;
+    }
+    .submenu .show {
+        line-height: 24px;
+        height: 210px;
+        overflow-y: scroll;
+        padding: 0;
+        margin: 10px 0;
+    }
+    .thirdLabel ul > li {
+        width: 100%;
+        float: left;
+        padding: 0 15px;
+        border-right: #eee 1px solid;
+    }
+    .submenu-child >li > a {
+        width: 100%;
+    }
+}
+
+
+@media only screen and (max-width:375px){
+    .topper .text {
+        width: auto;
+        color: #fff;
+       text-align: center;
+    }
+    .form-control {
+
+        line-height: 0.5;
+    }
+    .side {
+        justify-content: center;
+    }
+    .submenu {
+        right: 0;
+        width: 100%;
+        height: auto;
+    }
+    .thirdLabel ul > li {
+        width: 100%;
+    }
+    .comment-list .children {
+        padding: 50px 0 0 0px;
+        margin: 0;
+        float: left;
+        width: 100%;
+    }
+    .sidebar-box {
+        padding: 10px;
+    }
+    .ftco-section {
+        padding: 2em 0;
+    }
+    .randome {
+       
+        justify-content: end;
+        
+    }
+}
+@media only screen and (max-width:320px){
+    .side{
+        display: none !important;
+    }
+    .header-top-row{
+        flex-direction: column;
+        align-items: center;
+    }
+    .randome {
+        justify-content: center;
+    }
+}
+
+
+
+
+
+

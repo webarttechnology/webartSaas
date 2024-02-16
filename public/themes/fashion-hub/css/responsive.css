@@ -1,0 +1,98 @@
+@media only screen and (max-width: 1024px){
+    .header-info .header-item p {
+        font-size: 11px; 
+    }
+}
+@media only screen and (max-width: 992px){
+    .inner-header .main-menu {
+        margin-right: 28px;
+    }
+    .header-info .header-item p {
+        font-size: 10px;
+    }
+}
+@media only screen and (max-width: 768px){
+    /* .header-section {
+        height: 122px;
+    } */
+    .inner-header .main-menu {
+        margin-right: 28px;
+        margin-top: 0rem;
+    }
+}
+@media only screen and (max-width: 600px){
+    .header-right{
+        display: none;
+    } 
+    
+    .ph{
+        display: block !important;
+    }
+    .ph{
+        position: absolute;
+        top: 89px;
+        z-index: 1;
+        right: 0;
+    }
+    
+    }
+   
+    .ph img {
+        filter: brightness(0) invert(1);
+    }
+   
+    .slicknav_btn {
+        vertical-align: middle;
+        float: inline-start;
+      
+    }
+    /* .slicknav_menu {
+        font-size: 16px;
+         background:transparent; 
+        padding: 5px;
+    } */
+    .header-info .header-item {
+        margin-bottom: 7px;
+        text-align: center;
+    }
+    .header-info .header-item p {
+    font-size: 12px;
+}
+    .header-info .header-item img {
+    margin-right: 11px;
+    width: 26px;
+}
+    .addeffect::before {
+       display: none;
+    }
+    .track {
+        padding: 2rem 0 8rem 0;
+    }
+
+@media only screen and (max-width: 479px){
+    .header-section {
+        height: 125px;
+    }
+    .page-add .page-breadcrumb h2 {
+        font-size: 41px;
+    }
+    .wrap-about .heading-section-bold h2 {
+        font-size: 30px;
+    }
+    .single-slider-item {
+        padding: 148px 0;
+    }
+    .text-about{
+        font-size: 36px;
+    }
+    .fa-4x {
+        padding-right: 1rem;
+    }
+}
+@media only screen and (max-width: 320px){
+    .ph {
+        position: absolute;
+        top: 111px;
+        z-index: 1;
+    }
+}

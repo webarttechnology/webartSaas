@@ -1,0 +1,22 @@
+.custom-toaster-container {
+    position: fixed;
+    z-index: 9999999999;
+    max-width: 250px;
+}
+
+.custom-toaster {
+    padding: 15px 20px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    display: none;
+}
+
+.custom-toaster.success {
+    background-color: #4CAF50;
+    color: #fff;
+}
+
+.custom-toaster.error {
+    background-color: #f44336;
+    color: #fff;
+}

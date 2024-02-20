@@ -27,7 +27,7 @@ include 'common/sidebar.php';
                                 </ul>
                             </div>
                         </li> -->
-                        <li><a href="<?= url('dw-admin/product')  ?>" class="btn btn-sm btn-light">Back</a></li>
+                        <li><a href="<?= url('/dw-admin/product') ?>" class="btn btn-sm btn-light">Back</a></li>
                     </ul>
                 </div>
 
@@ -58,7 +58,7 @@ include 'common/sidebar.php';
                                     <div class="accordion jsTreeAccordian" id="jsTreeAccordian">
                                         <div class="accordion-item">
                                             <h2 class="accordion-header" id="jsTreeOne">
-                                                <div class="form-check accordion-button" data-bs-toggle="collapse" data-bs-target="#jsTreecollapseOne">
+                                                <div class="form-check accordion-button" data-bs-target="#jsTreecollapseOne">
                                                     <input class="form-check-input" type="checkbox" id="tree_check1" name="option1" value="something">
                                                     <label class="form-check-label" for="tree_check1"><i class="fa-solid fa-box-open"></i> Product 1</label>
                                                 </div>								
@@ -76,7 +76,7 @@ include 'common/sidebar.php';
                                                     <div class="accordion" id="jsTree-sub-accordion">
                                                         <div class="accordion-item">
                                                             <h2 class="accordion-header" id="jsTree-sub-headingOne">
-                                                                <div class="form-check accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#jsTree-sub-collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                                <div class="form-check accordion-button" type="button"  data-bs-target="#jsTree-sub-collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                                                     <input class="form-check-input" type="checkbox" id="subtree_check4" name="option1" value="something">
                                                                     <label class="form-check-label" for="subtree_check4"><i class="fa-solid fa-box-open"></i> Product Sub 3</label>
                                                                 </div>
@@ -96,12 +96,12 @@ include 'common/sidebar.php';
                                                         </div>
                                                         <div class="accordion-item">
                                                             <h2 class="accordion-header" id="jsTree-sub-headingTwo">
-                                                                <div class="form-check accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#jsTree-sub-collapseTwo" aria-expanded="false" aria-controls="jsTree-sub-collapseTwo">
+                                                                <div class="form-check accordion-button" type="button" data-bs-target="#jsTree-sub-collapseTwo" aria-expanded="false" aria-controls="jsTree-sub-collapseTwo">
                                                                     <input class="form-check-input" type="checkbox" id="tree_check3" name="option1" value="something">
                                                                     <label class="form-check-label" for="tree_check3"><i class="fa-solid fa-box-open"></i> Product Sub 4</label>
                                                                 </div>
                                                             </h2>
-                                                            <div id="jsTree-sub-collapseTwo" class="accordion-collapse collapse" aria-labelledby="jsTree-sub-headingTwo" data-bs-parent="#jsTree-sub-accordion">
+                                                            <div id="jsTree-sub-collapseTwo" class="accordion-collapse collapse show" aria-labelledby="jsTree-sub-headingTwo" data-bs-parent="#jsTree-sub-accordion">
                                                                 <div class="card-body">
                                                                     <div class="form-check">
                                                                         <input class="form-check-input" type="checkbox" id="label2tree_check4" name="option1" value="something">
@@ -131,7 +131,7 @@ include 'common/sidebar.php';
                                     </div>
                                 </div>
                             </div>
-                            <!-- <div class="col-md-6">
+                            <div class="col-md-12">
                                 <h6 class="mb-3">Media</h6>
                                 <fieldset class="upload_dropZone text-center mb-3">
 
@@ -148,7 +148,7 @@ include 'common/sidebar.php';
                                     <div class="upload_gallery d-flex flex-wrap justify-content-center gap-2 mb-0"></div>
                                 
                                 </fieldset>
-                            </div> -->
+                            </div>
                         </div>
                         
                         <!-- <h6 class="mb-3">Pricing</h6>
@@ -182,34 +182,15 @@ include 'common/sidebar.php';
                             <div class="col-12">
                             <hr>
                             <h6 class="mb-3">Inventory</h6>
-                                <div class="row align-items-center">
-                                    <div class="form-floating mb-3 col-sm-6">
-                                        <select class="js-example-basic-multiple" name="states[]" multiple="multiple">
-                                            <option value="AL">Option 1</option>
-                                            <option value="WY">Option 2</option>
-                                            <option value="AL">Option 3</option>
-                                            <option value="WY">Option 4</option>
-                                        </select>
-                                        <label for="floatCompare">Inventory will be stocked at</label>
-                                    </div>  
+                                <div class="row mt-3 align-items-center">
+                                    <div class="form-floating mb-3 col-sm-4">
+                                        <input type="number" class="form-control" id="floatChino" placeholder="">
+                                        <label for="floatChino">Quantity</label>
+                                    </div> 
                                     <div class="form-check mb-3 col-sm-6">
-                                        <input type="checkbox" class="form-check-input trackQuantity" id="check3" name="option2" value="something">
-                                        <label class="form-check-label" for="check3">Track quantity</label>
-                                    </div>  
-                                    <div class="col-12" id="quantity" style="display:none">
-                                        <div class="box2">
-                                            <div class="row mt-3">
-                                                <div class="form-floating mb-3 col-sm-4">
-                                                    <input type="number" class="form-control" id="floatChino" placeholder="">
-                                                    <label for="floatChino">Quantity</label>
-                                                </div> 
-                                                <div class="form-check mb-3 col-sm-6">
-                                                    <input type="checkbox" class="form-check-input" id="check4" name="option2" value="something">
-                                                    <label class="form-check-label" for="check4">Continue selling when out of stock</label>
-                                                </div>   
-                                            </div>
-                                        </div>
-                                    </div>
+                                        <input type="checkbox" class="form-check-input" id="check4" name="option2" value="something">
+                                        <label class="form-check-label" for="check4">Continue selling when out of stock</label>
+                                    </div>   
                                 </div>
                             </div>
                            
@@ -248,10 +229,6 @@ include 'common/sidebar.php';
                                         <input type="text" class="form-control" id="floatWeight" placeholder="">
                                         <label for="floatWeight">Weight</label>
                                     </div>  
-                                    <div class="form-floating mb-3 col-sm-2">
-                                        <input type="number" class="form-control" id="floatIb" placeholder="">
-                                        <label for="floatIb">Ib</label>
-                                    </div> 
                                     <div class="form-check mb-3 ml-10 col-12">
                                         <input type="checkbox" class="form-check-input" id="check6" name="option2" value="something">
                                         <label class="form-check-label" for="check6">This is a physical product</label>
@@ -308,6 +285,10 @@ include 'common/sidebar.php';
                                                         <div class="form-floating mb-3 col-sm-6 col-md-6">
                                                             <input type="text" class="form-control" id="floatSKU" placeholder="">
                                                             <label for="floatSKU">SKU Code </label>
+                                                        </div> 
+                                                        <div class="form-floating mb-3 col-sm-6">
+                                                            <input type="number" class="form-control" id="floatChino" placeholder="">
+                                                            <label for="floatChino">Quantity</label>
                                                         </div> 
                                                     </div>
                                                 </div>

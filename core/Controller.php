@@ -30,6 +30,11 @@ class Controller {
 
     public function render()
     {
+        if (!is_array($this->_data)) {
+            $this->_data = [];
+        }
+
+
         $this->_render = true;
 
         ob_start();
@@ -38,7 +43,7 @@ class Controller {
 
         include BASE_PATH . "/app/views/$this->_view.php";
 
-        return ob_get_clean();
+        echo ob_get_clean();
     }
 
     public function __destruct()

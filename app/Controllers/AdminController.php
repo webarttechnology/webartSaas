@@ -4,8 +4,13 @@ namespace App\Controllers;
 
 use Core\Request;
 use Core\Controller;
+use Core\ImageTools;
 use Core\Validation;
 use App\Models\Option;
+use App\Models\Country;
+use App\Models\Category;
+use App\Models\Currency;
+use App\Models\Location;
 
 class AdminController extends Controller {
 
@@ -51,7 +56,7 @@ class AdminController extends Controller {
                $url = 'http://saas.test/api/login-action';
             }else{
                ///// Live 
-               $url = 'http://saas.webartechnology.com/api/login-action';
+               $url = 'https://trixcart.com/api/login-action';
             }
             
 
@@ -119,6 +124,16 @@ class AdminController extends Controller {
   
      public function dashboard()
      {
+
+
+      // $source        = PUBLIC_PATH.'user/images/theme.jpg';
+      // $destination   = PUBLIC_PATH.'img/theme12.jpg';
+      // // fire($source);
+      // $img = new ImageTools($source);
+      // // $img->resize(200, 200)
+      // $img->compress(90)
+      // ->save($destination);
+      // fire('o');
   
         $this->view('admin/dashboard');
   
@@ -133,13 +148,15 @@ class AdminController extends Controller {
      {
         $this->view('admin/add-product');
      }
-  
+
      public function add_product_category()
      {
-        $this->view('admin/add-product-category');
+        $category = new Category;
+        $data['category']  = $category->getCategory();
+        $this->view('admin/add-product-category',  $data);
      }
   
-     
+
   
      public function single_product()
      {
@@ -211,7 +228,7 @@ class AdminController extends Controller {
         $data['patternDescription']  = '/Description:\s*(.+)/';
         $data['patternVersion']      = '/Version:\s*(.+)/';
         $data['patternTags']         = '/Tags:\s*(.+)/';
-        $data['patternUrl']         = '/Url:\s*(.+)/';
+        $data['patternUrl']          = '/Url:\s*(.+)/';
         $data['screenshot']          = $name.'/'.basename(storeThemes($dir)[$name]);
         $data['themeInfo'] = $optionM->getActive();
   
@@ -219,10 +236,6 @@ class AdminController extends Controller {
         
      }
   
-     public function settings()
-     {
-        $this->view('admin/settings');
-     }
   
      public function theme_upload()
      {
@@ -265,6 +278,18 @@ class AdminController extends Controller {
   
      }
 
+
+     public function settings()
+     {
+        $locations = new Location;
+        $country = new Country;
+        $currency = new Currency;
+        $data['location'] = $locations->getLocationData($_SESSION['Auth_Admin_Id']);
+        $data['countryType']  = $country->getCountryType();
+        $data['currency']  = $currency->getCurrency();
+        $this->view('admin/settings',  $data);
+     }
+     
 
 
 }

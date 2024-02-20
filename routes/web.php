@@ -117,7 +117,14 @@ $routes = [
                 [AuthMiddleware::class, 'index']
             ]
             ]
-        ],                   
+        ], 
+        
+        '/dw-admin/location-data'           => ['SettingsController@location_data',[
+            'middleware' => [
+                [AuthMiddleware::class, 'index']
+            ]
+            ]
+        ],   
 
     ],
 
@@ -125,6 +132,14 @@ $routes = [
         '/dw-admin/admin-login-action'   => ['AdminController@Admin_Login_Action'],
         '/dw-admin/theme-upload'         => ['AdminController@theme_upload'],
         '/dw-admin/active-theme'         => ['AdminController@active_theme'],
+        '/dw-admin/save-location'    => ['SettingsController@save_location'],
+        '/dw-admin/make-default'    => ['SettingsController@make_defaultlocation'],
+        '/dw-admin/delete-location'    => ['SettingsController@delete_location'],
+        '/dw-admin/get-states'    => ['SettingsController@getStates'],
+        '/dw-admin/get-city'    => ['SettingsController@getCities'],
+        '/dw-admin/save-store'    => ['SettingsController@save_store'],
+        '/dw-admin/save-category'    => ['CategoryController@save_category'],
+        '/dw-admin/get-category'    => ['CategoryController@getCategory'],
     ],
 
 

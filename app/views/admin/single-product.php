@@ -29,7 +29,7 @@ include 'common/sidebar.php';
                                 </ul>
                             </div>
                         </li>
-                        <li><a href="product.php" class="btn btn-sm btn-light">Back</a></li>
+                        <li><a href="<?= url('dw-admin/product') ?>" class="btn btn-sm btn-light">Back</a></li>
                     </ul>
                 </div>
 

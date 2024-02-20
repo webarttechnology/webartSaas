@@ -330,11 +330,11 @@ include 'common/sidebar.php';
                                                 <label class="form-check-label" for="check6"></label>
                                             </div>
                                         </td>
-                                        <td><strong><a href="order-details.php">#PBC1805</a></strong></td>
+                                        <td><strong><a href="<?=  url('/dw-admin/order-details') ?>">#PBC1805</a></strong></td>
                                         <td>Monday at 10:24 pm</td>
                                         <td><span class="badge bg-secondary">Voided</span></td>
                                         <td>$1,687.66</td>
-                                        <td><span><a href="order-details.php" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="view"><i class="fa-regular fa-eye"></i></a></span><span><a href="#" class="text-secondary" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="fa-regular fa-pen-to-square"></i></a></span><span><a href="#" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fa-regular fa-trash-can"></i></a></span></td>
+                                        <td><span><a href="<?=  url('/dw-admin/order-details') ?>" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="view"><i class="fa-regular fa-eye"></i></a></span><span><a href="#" class="text-secondary" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="fa-regular fa-pen-to-square"></i></a></span><span><a href="#" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fa-regular fa-trash-can"></i></a></span></td>
                                     </tr>
                                     <tr>
                                         <td>
@@ -343,11 +343,11 @@ include 'common/sidebar.php';
                                                 <label class="form-check-label" for="check7"></label>
                                             </div>
                                         </td>
-                                        <td><strong><a href="order-details.php">#PBC1805</a></strong></td>
+                                        <td><strong><a href="<?=  url('/dw-admin/order-details') ?>">#PBC1805</a></strong></td>
                                         <td>Monday at 10:24 pm</td>
                                         <td><span class="badge bg-secondary">Voided</span></td>
                                         <td>$1,687.66</td>
-                                        <td><span><a href="order-details.php" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="view"><i class="fa-regular fa-eye"></i></a></span><span><a href="#" class="text-secondary" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="fa-regular fa-pen-to-square"></i></a></span><span><a href="#" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fa-regular fa-trash-can"></i></a></span></td>
+                                        <td><span><a href="<?=  url('/dw-admin/order-details') ?>" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="view"><i class="fa-regular fa-eye"></i></a></span><span><a href="#" class="text-secondary" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="fa-regular fa-pen-to-square"></i></a></span><span><a href="#" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fa-regular fa-trash-can"></i></a></span></td>
                                     </tr>
                                     <tr>
                                         <td>
@@ -356,11 +356,11 @@ include 'common/sidebar.php';
                                                 <label class="form-check-label" for="check8"></label>
                                             </div>
                                         </td>
-                                        <td><strong><a href="order-details.php">#PBC1805</a></strong></td>
+                                        <td><strong><a href="<?=  url('/dw-admin/order-details') ?>">#PBC1805</a></strong></td>
                                         <td>Monday at 10:24 pm</td>
                                         <td><span class="badge bg-secondary">Voided</span></td>
                                         <td>$1,687.66</td>
-                                        <td><span><a href="order-details.php" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="view"><i class="fa-regular fa-eye"></i></a></span><span><a href="#" class="text-secondary" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="fa-regular fa-pen-to-square"></i></a></span><span><a href="#" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fa-regular fa-trash-can"></i></a></span></td>
+                                        <td><span><a href="<?=  url('/dw-admin/order-details') ?>" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="view"><i class="fa-regular fa-eye"></i></a></span><span><a href="#" class="text-secondary" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="fa-regular fa-pen-to-square"></i></a></span><span><a href="#" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fa-regular fa-trash-can"></i></a></span></td>
                                     </tr>
                                 </tbody>
                             </table>

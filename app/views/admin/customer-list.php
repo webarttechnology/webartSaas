@@ -95,7 +95,7 @@ include 'common/sidebar.php';
                                     <td><span class="badge bg-primary">Hold</span></td>
                                     <td>13</td>
                                     <td><span class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#myModal">Send mail</span></td>
-                                    <td><span><a href="<?=  url('customer-details') ?>" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="view"><i class="fa-regular fa-eye"></i></a></span><span><a href="#" class="text-secondary" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="fa-regular fa-pen-to-square"></i></a></span><span><a href="#" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fa-regular fa-trash-can"></i></a></span></td>
+                                    <td><span><a href="<?=  url('dw-admin/customer-details') ?>" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="view"><i class="fa-regular fa-eye"></i></a></span><span><a href="#" class="text-secondary" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="fa-regular fa-pen-to-square"></i></a></span><span><a href="#" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fa-regular fa-trash-can"></i></a></span></td>
                                 </tr>
                                 <tr>
                                     <td>
@@ -111,7 +111,7 @@ include 'common/sidebar.php';
                                     <td><span class="badge bg-primary">Hold</span></td>
                                     <td>13</td>
                                     <td><span class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#myModal">Send mail</span></td>
-                                    <td><span><a href="<?=  url('customer-details') ?>" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="view"><i class="fa-regular fa-eye"></i></a></span><span><a href="#" class="text-secondary" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="fa-regular fa-pen-to-square"></i></a></span><span><a href="#" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fa-regular fa-trash-can"></i></a></span></td>
+                                    <td><span><a href="<?=  url('dw-admin/customer-details') ?>" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="view"><i class="fa-regular fa-eye"></i></a></span><span><a href="#" class="text-secondary" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="fa-regular fa-pen-to-square"></i></a></span><span><a href="#" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fa-regular fa-trash-can"></i></a></span></td>
                                 </tr>
                                 <tr>
                                     <td>
@@ -127,7 +127,7 @@ include 'common/sidebar.php';
                                     <td><span class="badge bg-primary">Hold</span></td>
                                     <td>13</td>
                                     <td><span class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#myModal">Send mail</span></td>
-                                    <td><span><a href="<?=  url('customer-details') ?>" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="view"><i class="fa-regular fa-eye"></i></a></span><span><a href="#" class="text-secondary" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="fa-regular fa-pen-to-square"></i></a></span><span><a href="#" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fa-regular fa-trash-can"></i></a></span></td>
+                                    <td><span><a href="<?=  url('dw-admin/customer-details') ?>" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="view"><i class="fa-regular fa-eye"></i></a></span><span><a href="#" class="text-secondary" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="fa-regular fa-pen-to-square"></i></a></span><span><a href="#" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fa-regular fa-trash-can"></i></a></span></td>
                                 </tr>
                                 <tr>
                                     <td>
@@ -143,7 +143,7 @@ include 'common/sidebar.php';
                                     <td><span class="badge bg-primary">Hold</span></td>
                                     <td>13</td>
                                     <td><span class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#myModal">Send mail</span></td>
-                                    <td><span><a href="<?=  url('customer-details') ?>" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="view"><i class="fa-regular fa-eye"></i></a></span><span><a href="#" class="text-secondary" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="fa-regular fa-pen-to-square"></i></a></span><span><a href="#" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fa-regular fa-trash-can"></i></a></span></td>
+                                    <td><span><a href="<?=  url('dw-admin/customer-details') ?>" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="view"><i class="fa-regular fa-eye"></i></a></span><span><a href="#" class="text-secondary" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="fa-regular fa-pen-to-square"></i></a></span><span><a href="#" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fa-regular fa-trash-can"></i></a></span></td>
                                 </tr>
                             </tbody>
                         </table>

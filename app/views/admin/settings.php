@@ -68,61 +68,66 @@ include 'common/sidebar.php';
                             <hr class="mb-2 mt-2">
                             <div class="row mb-3">
                                 <div class="form-floating mt-3 col-sm-6">
-                                    <input type="text" class="form-control" id="floatStore" placeholder="">
+                                    <input type="text" class="form-control store" id="store_name" placeholder="">
                                     <label for="floatStore">STORE NAME</label>
                                 </div>
                                 <div class="form-floating mt-3 col-sm-6">
-                                    <input type="text" class="form-control" id="floatStore" placeholder="">
+                                    <input type="text" class="form-control store" id="store_phone" placeholder="">
                                     <label for="floatStore">PHONE</label>
                                 </div>
                                 <div class="form-floating mt-3 col-sm-6">
-                                    <input type="email" class="form-control" id="floatEmail" placeholder="">
+                                    <input type="email" class="form-control store" id="contact_email" placeholder="">
                                     <label for="floatEmail">STORE CONTACT EMAIL</label>
                                 </div>
                                 <div class="form-floating mt-3 col-sm-6">
-                                    <input type="email" class="form-control" id="floatSenderEmail" placeholder="">
+                                    <input type="email" class="form-control store" id="sender_email" placeholder="">
                                     <label for="floatSenderEmail">SENDER EMAIL</label>
                                 </div>
-                                <div class="col-12 mt-3">
+                                <!-- <div class="col-12 mt-3">
                                     <div class="alert alert-warning m-0">
                                         <strong><i class="fa-solid fa-bell"></i></strong> Confirm that you have access to johndoe@gmail.com in sender email settings.
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                             <h5>Billing information</h5>
                             <hr class="mb-2 mt-2">
                             <div class="row mb-3">
                                 <div class="form-floating mt-3 col-sm-6">
-                                    <input type="text" class="form-control" id="floatStore" placeholder="">
+                                    <input type="text" class="form-control store" id="business_name" placeholder="">
                                     <label for="floatBname">LEGAL BUSINESS NAME</label>
                                 </div>
                                 <div class="form-floating mt-3 col-sm-6">
-                                    <select class="form-select" id="floatingCountry" aria-label="Floating label">
-                                        <option value="1">Option One</option>
-                                        <option value="2">Option Two</option>
-                                        <option value="3">Option Three</option>
+                                    <select class="form-control store" id="store_country" aria-label="Floating label">
+                                        <option>Select Country</option>
+                                        <?php foreach ($countryType as $item) : ?>
+                                            <option value="<?php echo $item->id  ?>"><?php echo $item->name  ?></option>
+                                        <?php endforeach ?>
                                     </select>
                                     <label for="floatingCountry">COUNTRY/REGION
                                     </label>
                                 </div>
-                                <div class="form-floating mt-3 col-sm-6">
-                                    <input type="text" class="form-control" id="floatAddress" placeholder="">
-                                    <label for="floatAddress">ADDRESS</label>
-                                </div>
-                                <div class="form-floating mt-3 col-sm-6">
-                                    <input type="text" class="form-control" id="floatApartment" placeholder="">
-                                    <label for="floatApartment">APARTMENT, SUITE, ETC.</label>
-                                </div>
                                 <div class="form-floating mt-3 col-sm-6 col-md-4">
-                                    <input type="text" class="form-control" id="floatCity" placeholder="">
-                                    <label for="floatCity">CITY</label>
-                                </div>
-                                <div class="form-floating mt-3 col-sm-6 col-md-4">
-                                    <input type="text" class="form-control" id="floatState" placeholder="">
+                                    <select class="form-control store" id="store_state">
+                                        <option>Select state</option>
+                                    </select>
                                     <label for="floatState">STATE</label>
                                 </div>
                                 <div class="form-floating mt-3 col-sm-6 col-md-4">
-                                    <input type="text" class="form-control" id="floatPin" placeholder="">
+                                    <select class="form-control store" id="store_city">
+                                        <option>Select city</option>
+                                    </select>
+                                    <label for="floatCity">CITY</label>
+                                </div>
+                                <div class="form-floating mt-3 col-sm-6">
+                                    <input type="text" class="form-control store" id="store_address" placeholder="">
+                                    <label for="floatAddress">ADDRESS</label>
+                                </div>
+                                <div class="form-floating mt-3 col-sm-6">
+                                    <input type="text" class="form-control store" id="store_apartment" placeholder="">
+                                    <label for="floatApartment">APARTMENT, SUITE, ETC.</label>
+                                </div>
+                                <div class="form-floating mt-3 col-sm-6 col-md-4">
+                                    <input type="text" class="form-control store" id="store_pincode" placeholder="">
                                     <label for="floatPin">PIN CODE</label>
                                 </div>
                             </div>
@@ -131,7 +136,7 @@ include 'common/sidebar.php';
                             <p>Used to calculate product prices, shipping weighs, and order times.</p>
                             <div class="row mb-3">
                                 <div class="form-floating mt-3 col-sm-12">
-                                    <select class="form-control js-example-tags">
+                                    <select class="form-control store" id="store_timezone">
                                         <option selected="selected">(GMT-12:00) International Date Line West</option>
                                         <option>(GMT-11:00) Midway Island, Samoa</option>
                                         <option>(GMT-10:00) Hawaii</option>
@@ -139,7 +144,7 @@ include 'common/sidebar.php';
                                     <label for="floatTime">TIME ZONE</label>
                                 </div>
                                 <div class="form-floating mt-3 col-sm-6">
-                                    <select class="form-control js-example-tags">
+                                    <select class="form-control store" id="store_unitsystem">
                                         <option selected="selected">(GMT-12:00) International Date Line West</option>
                                         <option>(GMT-11:00) Midway Island, Samoa</option>
                                         <option>(GMT-10:00) Hawaii</option>
@@ -147,7 +152,7 @@ include 'common/sidebar.php';
                                     <label for="floatUnit">UNIT SYSTEM</label>
                                 </div>
                                 <div class="form-floating mt-3 col-sm-6">
-                                    <select class="form-control js-example-tags">
+                                    <select class="form-control store" id="store_weight">
                                         <option selected="selected">(GMT-12:00) International Date Line West</option>
                                         <option>(GMT-11:00) Midway Island, Samoa</option>
                                         <option>(GMT-10:00) Hawaii</option>
@@ -160,10 +165,11 @@ include 'common/sidebar.php';
                             <hr class="mb-2 mt-2">
                             <div class="row mb-3">
                                 <div class="form-floating mt-3 col-sm-6">
-                                    <select class="form-control js-example-tags">
-                                        <option selected="selected">Euro</option>
-                                        <option>USD</option>
-                                        <option>Pound</option>
+                                    <select class="form-control store" id="store_currency">
+                                        <option>Select Currency</option>
+                                        <?php foreach ($currency as $item) : ?>
+                                            <option value="<?php echo $item->id  ?>"><?php echo $item->name  ?></option>
+                                        <?php endforeach ?>
                                     </select>
                                     <label for="floatCurency">STORE CURRENCY</label>
                                 </div>
@@ -173,18 +179,23 @@ include 'common/sidebar.php';
                             <hr class="mb-2 mt-2">
                             <div class="row mb-3">
                                 <div class="form-floating mt-3 col-sm-6">
-                                    <input type="number" class="form-control" id="floatPrefix" placeholder="">
+                                    <input type="number" class="form-control store" id="store_prefix" placeholder="">
                                     <label for="floatPrefix">PREFIX</label>
                                 </div>
                                 <div class="form-floating mt-3 col-sm-6">
-                                    <input type="text" class="form-control" id="floatSuffix" placeholder="">
+                                    <input type="text" class="form-control store" id="store_suffix" placeholder="">
                                     <label for="floatSuffix">SUFFIX</label>
                                 </div>
                                 <div class="form-floating mt-3 col-12">
                                     <p>Your order ID will appear as #1001, #1002, #1003 ...</p>
                                 </div>
                             </div>
+                            <div class="col-sm-12 text-end">
+                                <input type="button" value="Submit" id="store-submit" class="btn btn-primary">
+                            </div>
                         </div>
+
+
                         <div class="tab-pane fade" id="menu2">
                             <h5 class="mb-2">Payment providers</h5>
                             <p>Providers that enable you to accept payment methods at a rate set by the third-party.
@@ -225,6 +236,8 @@ include 'common/sidebar.php';
                                 </ul>
                             </div>
                         </div>
+
+
                         <div class="tab-pane fade" id="menu3">
                             <h5 class="mb-2">Customer contact method</h5>
                             <p>Select what contact method customers use to check out.</p>
@@ -328,6 +341,8 @@ include 'common/sidebar.php';
                                     Minimize failed deliveries by offering suggestions when customers enter an invalid shipping address.</label>
                             </div>
                         </div>
+
+
                         <div class="tab-pane fade" id="menu4">
                             <h6 class="mb-2">Shipping</h6>
                             <p>Choose where you ship and how much you charge for shipping at checkout.</p>
@@ -369,56 +384,63 @@ include 'common/sidebar.php';
                                 <p style="flex-grow:1; margin:0"><strong>Chino</strong><br><small>12345 Mills Avenue, Unit 28, Chino California 91710, United States</small> <span class="badge bg-light float-end">Doesn't offer delivery <i class="fa-solid fa-chevron-right"></i></span></p>
                             </div>
                         </div>
+
+
                         <div class="tab-pane fade" id="menu5">
                             <h6 class="mb-2">Locations</h6>
                             <p></p>
-                            <div class="box d-flex mt-2">
-                                <span><i class="fa-solid fa-location-dot mr-10"></i></span>
-                                <p style="flex-grow:1; margin:0"><strong>Chino</strong><br><small>12345 Mills Avenue, Unit 28, Chino California 91710, United States</small> <span class="badge bg-light float-end">Default</span></p>
+                            <div class="location-data">
+
                             </div>
-                            <div class="box d-flex mt-2">
-                                <span><i class="fa-solid fa-location-dot mr-10"></i></span>
-                                <p style="flex-grow:1; margin:0"><strong>Chino</strong><br><small>12345 Mills Avenue, Unit 28, Chino California 91710, United States</small></p>
-                            </div>
+
                             <h6 class="mb-2">Add Location</h6>
                             <div class="row">
+                                <input type="hidden" class="form-control location" id="default" value="No">
                                 <div class="form-floating mt-3 col-sm-12 mb-3">
-                                    <select class="form-control js-example-tags">
-                                        <option selected="selected">Option 1</option>
-                                        <option>Option 2</option>
-                                        <option>Option 3</option>
+                                    <select class="form-control location js-example-tags" id="country">
+                                        <option>Select Country</option>
+                                        <?php foreach ($countryType as $item) : ?>
+                                            <option value="<?php echo $item->id  ?>"><?php echo $item->name  ?></option>
+                                        <?php endforeach ?>
                                     </select>
-                                    <label for="floatCountry2">COUNTRY/REGION</label>
+                                    <label for="floatCountry2">COUNTRY/REGION <span class="text-danger">*</span></label>
                                 </div>
                                 <div class="form-floating mb-3 col-sm-4 mb-3">
-                                    <input type="text" class="form-control" id="floatAddress" placeholder="">
-                                    <label for="floatAddress">Address</label>
+                                    <select class="form-control location js-example-tags" id="state">
+                                        <option>Select state</option>
+                                    </select>
+                                    <label for="floatState2">STATE <span class="text-danger">*</span></label>
                                 </div>
                                 <div class="form-floating mb-3 col-sm-4 mb-3">
-                                    <input type="text" class="form-control" id="floatSuite" placeholder="">
-                                    <label for="floatSuite">APARTMENT, SUITE, ETC.</label>
+                                    <select class="form-control location js-example-tags" id="city">
+                                        <option>Select city</option>
+                                    </select>
+                                    <label for="floatCity2">City <span class="text-danger">*</span></label>
+                                </div>
+                                <div class="form-floating mb-3 col-sm-4 mb-3">
+                                    <input type="text" class="form-control location" id="pincode" placeholder="">
+                                    <label for="floatPin2">PIN CODE <span class="text-danger">*</span></label>
+                                </div>
+                                <div class="form-floating mb-3 col-sm-4 mb-3">
+                                    <input type="text" class="form-control location" id="address" placeholder="">
+                                    <label for="floatAddress">Address <span class="text-danger">*</span></label>
+                                </div>
+                                <div class="form-floating mb-3 col-sm-4 mb-3">
+                                    <input type="text" class="form-control location" id="apartment" placeholder="">
+                                    <label for="floatSuite">APARTMENT, SUITE, ETC. <span class="text-danger">*</span></label>
                                 </div>
                                 <div class="form-floating mb-3 col-sm-4">
-                                    <input type="text" class="form-control" id="floatPhone2" placeholder="">
-                                    <label for="floatPhone2">PHONE</label>
+                                    <input type="text" class="form-control location" id="phone" placeholder="">
+                                    <label for="floatPhone2">PHONE <span class="text-danger">*</span></label>
                                 </div>
-                                <div class="form-floating mb-3 col-sm-4 mb-3">
-                                    <input type="text" class="form-control" id="floatCity2" placeholder="">
-                                    <label for="floatCity2">City</label>
-                                </div>
-                                <div class="form-floating mb-3 col-sm-4 mb-3">
-                                    <input type="text" class="form-control" id="floatState2" placeholder="">
-                                    <label for="floatState2">STATE</label>
-                                </div>
-                                <div class="form-floating mb-3 col-sm-4 mb-3">
-                                    <input type="text" class="form-control" id="floatPin2" placeholder="">
-                                    <label for="floatPin2">PIN CODE</label>
-                                </div>
+                                
                                 <div class="col-sm-12 text-end">
-                                    <input type="button" value="Submit" class="btn btn-primary">
+                                    <input type="button" value="Submit" id="location-submit" class="btn btn-primary">
                                 </div>
                             </div>
                         </div>
+
+
                     </div>
                 </div>
             </div>

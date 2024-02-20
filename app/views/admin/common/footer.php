@@ -13,5 +13,7 @@
 <script src="<?php echo url('user/js/script.js') ?>"></script>
 <script src="<?php echo url('admin/js/login.js') ?>"></script>
 <script src="<?php echo url('admin/js/theme.js') ?>"></script>
+<script src="<?php echo url('admin/js/settings.js') ?>"></script>
+<script src="<?php echo url('admin/js/category.js') ?>"></script>
 </body>
 </html>

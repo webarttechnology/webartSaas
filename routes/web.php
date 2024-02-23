@@ -32,8 +32,13 @@ $routes = [
         
 
         // Admin Route
-
+        
         '/dw-admin'                  => ['AdminController@login'],
+        '/dw-admin/reset-password'                  => ['AdminController@reset_password'],
+        '/dw-admin/new-password'                  => ['AdminController@new_password'],
+        '/dw-admin/sign-up'                       => ['AdminController@sign_up'],
+        '/dw-admin/coming-soon'                       => ['AdminController@coming_soon'],
+
         '/dw-admin/dashboard'        => ['AdminController@dashboard', [
             'middleware' => [
                 [AuthMiddleware::class, 'index']
@@ -51,8 +56,27 @@ $routes = [
                 [AuthMiddleware::class, 'index']
             ]
             ]
-        ],                   
-        '/dw-admin/add-product-category'   => ['AdminController@add_product_category',[
+        ], 
+        '/dw-admin/edit-product'      => ['AdminController@edit_product',[
+            'middleware' => [
+                [AuthMiddleware::class, 'index']
+            ]
+            ]
+        ],                    
+       
+        '/dw-admin/categories'   => ['AdminController@categories',[
+            'middleware' => [
+                [AuthMiddleware::class, 'index']
+            ]
+            ]
+        ], 
+        '/dw-admin/add-category'   => ['AdminController@add_category',[
+            'middleware' => [
+                [AuthMiddleware::class, 'index']
+            ]
+            ]
+        ],
+        '/dw-admin/edit-category'   => ['AdminController@edit_category',[
             'middleware' => [
                 [AuthMiddleware::class, 'index']
             ]
@@ -75,7 +99,45 @@ $routes = [
                 [AuthMiddleware::class, 'index']
             ]
             ]
-        ],                   
+        ], 
+        
+        '/dw-admin/add-order'    => ['AdminController@add_order',[
+            'middleware' => [
+                [AuthMiddleware::class, 'index']
+            ]
+            ]
+        ], 
+        
+        '/dw-admin/edit-order'    => ['AdminController@edit_order',[
+            'middleware' => [
+                [AuthMiddleware::class, 'index']
+            ]
+            ]
+        ], 
+
+        '/dw-admin/invoice'    => ['AdminController@invoice',[
+            'middleware' => [
+                [AuthMiddleware::class, 'index']
+            ]
+            ]
+        ],
+        
+        '/dw-admin/create-invoice'    => ['AdminController@create_invoice',[
+            'middleware' => [
+                [AuthMiddleware::class, 'index']
+            ]
+            ]
+        ],
+
+        
+        
+        '/dw-admin/getting-started'    => ['AdminController@getting_started',[
+            'middleware' => [
+                [AuthMiddleware::class, 'index']
+            ]
+            ]
+        ],           
+        
         '/dw-admin/customer-list'    => ['AdminController@customer_list',[
             'middleware' => [
                 [AuthMiddleware::class, 'index']
@@ -99,7 +161,14 @@ $routes = [
                 [AuthMiddleware::class, 'index']
             ]
             ]
-        ],                   
+        ], 
+        
+        '/dw-admin/theme-store'            => ['AdminController@theme_store',[
+            'middleware' => [
+                [AuthMiddleware::class, 'index']
+            ]
+            ]
+        ], 
         '/dw-admin/theme-details/{name}'    => ['AdminController@theme_details',[
             'middleware' => [
                 [AuthMiddleware::class, 'index']
@@ -124,7 +193,11 @@ $routes = [
                 [AuthMiddleware::class, 'index']
             ]
             ]
-        ],   
+        ],  
+        
+        
+        '/dw-admin/reset-password'                        => ['AdminController@forgotPassword'],
+        '/dw-admin/password/resetdata/{token}/{id}'       => ['AdminController@showResetForm'],
 
     ],
 
@@ -140,6 +213,8 @@ $routes = [
         '/dw-admin/save-store'    => ['SettingsController@save_store'],
         '/dw-admin/save-category'    => ['CategoryController@save_category'],
         '/dw-admin/get-category'    => ['CategoryController@getCategory'],
+        '/dw-admin/password/email'     => ['AdminController@sendresetLinkemail'],
+        '/dw-admin/password/reset'     => ['AdminController@resetPassword'],
     ],
 
 

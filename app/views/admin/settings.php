@@ -1,721 +1,1463 @@
 <?php
 include 'common/header.php';
-include 'common/navbar.php';
+include 'common/navber.php';
 include 'common/sidebar.php';
 ?>
-
-<!-- content part start -->
-<section class="main_content settings">
-    <div class="container-fluid">
-        <div class="row">
-            <!-- page title part -->
-            <div class="col-sm-6">
-                <h4>Settings</h4>
-            </div>
-            <div class="col-sm-6">
-                <!-- <ul class="d-flex flex-wrap justify-content-end btns_group">
-                        <li><a href="#" class="btn btn-sm btn-light">Export</a></li>
-                        <li><a href="#" class="btn btn-sm btn-light">Import</a></li>
-                        <li>
-                            <div class="dropdown">
-                                <button type="button" class="btn btn-light btn-sm dropdown-toggle" data-bs-toggle="dropdown">
-                                  More Option
-                                </button>
-                                <ul class="dropdown-menu">
-                                  <li><a class="dropdown-item" href="#">Hide analytics bar</a></li>
-                                  <li><a class="dropdown-item" href="#">Pin new products to Pinterest</a></li>
-                                  <li><a class="dropdown-item" href="#">All product reviews</a></li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li><a href="add-product.php" class="btn btn-sm btn-primary">Add product</a></li>
-                    </ul> -->
-            </div>
-
-            <div class="col-sm-4 col-md-3 mt-3 sidebar-item">
-                <!-- product tab nav part-->
-                <div class="widget make-me-sticky">
-                    <ul class="nav tabHead">
-                        <li class="nav-item">
-                            <a class="nav-link active" data-bs-toggle="tab" href="#menu1"><i class="fa-solid fa-store"></i> Store Details</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="tab" href="#menu2"><i class="fa-solid fa-credit-card"></i> Payments</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="tab" href="#menu3"><i class="fa-solid fa-cart-shopping"></i> Checkout</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="tab" href="#menu4"><i class="fa-solid fa-truck-ramp-box"></i> Shipping & delivery</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="tab" href="#menu5"><i class="fa-solid fa-route"></i> Locations</a>
-                        </li>
-                        <!-- <li class="nav-item">
-                                <a class="nav-link" data-bs-toggle="tab" href="#menu5"><i class="fa-regular fa-bell"></i> Notifications</a>
-                            </li> -->
-                    </ul>
-                </div>
-            </div>
-
-            <!-- page body part -->
-            <div class="col-sm-8 col-md-9 mt-3 content-section">
-                <!-- product tab content part -->
-                <div class="panel_body m-0">
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="menu1">
-                            <h5>Profile</h5>
-                            <hr class="mb-2 mt-2">
-                            <div class="row mb-3">
-                                <div class="form-floating mt-3 col-sm-6">
-                                    <input type="text" class="form-control store" id="store_name" placeholder="">
-                                    <label for="floatStore">STORE NAME</label>
-                                </div>
-                                <div class="form-floating mt-3 col-sm-6">
-                                    <input type="text" class="form-control store" id="store_phone" placeholder="">
-                                    <label for="floatStore">PHONE</label>
-                                </div>
-                                <div class="form-floating mt-3 col-sm-6">
-                                    <input type="email" class="form-control store" id="contact_email" placeholder="">
-                                    <label for="floatEmail">STORE CONTACT EMAIL</label>
-                                </div>
-                                <div class="form-floating mt-3 col-sm-6">
-                                    <input type="email" class="form-control store" id="sender_email" placeholder="">
-                                    <label for="floatSenderEmail">SENDER EMAIL</label>
-                                </div>
-                                <!-- <div class="col-12 mt-3">
-                                    <div class="alert alert-warning m-0">
-                                        <strong><i class="fa-solid fa-bell"></i></strong> Confirm that you have access to johndoe@gmail.com in sender email settings.
-                                    </div>
-                                </div> -->
-                            </div>
-                            <h5>Billing information</h5>
-                            <hr class="mb-2 mt-2">
-                            <div class="row mb-3">
-                                <div class="form-floating mt-3 col-sm-6">
-                                    <input type="text" class="form-control store" id="business_name" placeholder="">
-                                    <label for="floatBname">LEGAL BUSINESS NAME</label>
-                                </div>
-                                <div class="form-floating mt-3 col-sm-6">
-                                    <select class="form-control store" id="store_country" aria-label="Floating label">
-                                        <option>Select Country</option>
-                                        <?php foreach ($countryType as $item) : ?>
-                                            <option value="<?php echo $item->id  ?>"><?php echo $item->name  ?></option>
-                                        <?php endforeach ?>
-                                    </select>
-                                    <label for="floatingCountry">COUNTRY/REGION
-                                    </label>
-                                </div>
-                                <div class="form-floating mt-3 col-sm-6 col-md-4">
-                                    <select class="form-control store" id="store_state">
-                                        <option>Select state</option>
-                                    </select>
-                                    <label for="floatState">STATE</label>
-                                </div>
-                                <div class="form-floating mt-3 col-sm-6 col-md-4">
-                                    <select class="form-control store" id="store_city">
-                                        <option>Select city</option>
-                                    </select>
-                                    <label for="floatCity">CITY</label>
-                                </div>
-                                <div class="form-floating mt-3 col-sm-6">
-                                    <input type="text" class="form-control store" id="store_address" placeholder="">
-                                    <label for="floatAddress">ADDRESS</label>
-                                </div>
-                                <div class="form-floating mt-3 col-sm-6">
-                                    <input type="text" class="form-control store" id="store_apartment" placeholder="">
-                                    <label for="floatApartment">APARTMENT, SUITE, ETC.</label>
-                                </div>
-                                <div class="form-floating mt-3 col-sm-6 col-md-4">
-                                    <input type="text" class="form-control store" id="store_pincode" placeholder="">
-                                    <label for="floatPin">PIN CODE</label>
-                                </div>
-                            </div>
-                            <h5>Time zone and units of measurement</h5>
-                            <hr class="mb-2 mt-2">
-                            <p>Used to calculate product prices, shipping weighs, and order times.</p>
-                            <div class="row mb-3">
-                                <div class="form-floating mt-3 col-sm-12">
-                                    <select class="form-control store" id="store_timezone">
-                                        <option selected="selected">(GMT-12:00) International Date Line West</option>
-                                        <option>(GMT-11:00) Midway Island, Samoa</option>
-                                        <option>(GMT-10:00) Hawaii</option>
-                                    </select>
-                                    <label for="floatTime">TIME ZONE</label>
-                                </div>
-                                <div class="form-floating mt-3 col-sm-6">
-                                    <select class="form-control store" id="store_unitsystem">
-                                        <option selected="selected">(GMT-12:00) International Date Line West</option>
-                                        <option>(GMT-11:00) Midway Island, Samoa</option>
-                                        <option>(GMT-10:00) Hawaii</option>
-                                    </select>
-                                    <label for="floatUnit">UNIT SYSTEM</label>
-                                </div>
-                                <div class="form-floating mt-3 col-sm-6">
-                                    <select class="form-control store" id="store_weight">
-                                        <option selected="selected">(GMT-12:00) International Date Line West</option>
-                                        <option>(GMT-11:00) Midway Island, Samoa</option>
-                                        <option>(GMT-10:00) Hawaii</option>
-                                    </select>
-                                    <label for="floatWeightUnit">DEFAULT WEIGHT UNIT</label>
-                                </div>
-                            </div>
-                            <h5>Store currency</h5>
-                            <p>The currency your products are sold in.</p>
-                            <hr class="mb-2 mt-2">
-                            <div class="row mb-3">
-                                <div class="form-floating mt-3 col-sm-6">
-                                    <select class="form-control store" id="store_currency">
-                                        <option>Select Currency</option>
-                                        <?php foreach ($currency as $item) : ?>
-                                            <option value="<?php echo $item->id  ?>"><?php echo $item->name  ?></option>
-                                        <?php endforeach ?>
-                                    </select>
-                                    <label for="floatCurency">STORE CURRENCY</label>
-                                </div>
-                            </div>
-                            <h5>Order id format</h5>
-                            <p>Shown on the Orders page, customer pages, and customer order notifications to identify orders.</p>
-                            <hr class="mb-2 mt-2">
-                            <div class="row mb-3">
-                                <div class="form-floating mt-3 col-sm-6">
-                                    <input type="number" class="form-control store" id="store_prefix" placeholder="">
-                                    <label for="floatPrefix">PREFIX</label>
-                                </div>
-                                <div class="form-floating mt-3 col-sm-6">
-                                    <input type="text" class="form-control store" id="store_suffix" placeholder="">
-                                    <label for="floatSuffix">SUFFIX</label>
-                                </div>
-                                <div class="form-floating mt-3 col-12">
-                                    <p>Your order ID will appear as #1001, #1002, #1003 ...</p>
-                                </div>
-                            </div>
-                            <div class="col-sm-12 text-end">
-                                <input type="button" value="Submit" id="store-submit" class="btn btn-primary">
-                            </div>
-                        </div>
-
-
-                        <div class="tab-pane fade" id="menu2">
-                            <h5 class="mb-2">Payment providers</h5>
-                            <p>Providers that enable you to accept payment methods at a rate set by the third-party.
-                                An additional fee will apply to new orders once you select a plan</p>
-                            <span><a href="#" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#providerModal">Choose a Provider</a></span>
-                            <hr class="mb-3">
-                            <h5 class="mb-2">Supported payment methods</h5>
-                            <p>Payment methods that are available with one of Vuexy's approved payment providers.</p>
-
-                            <div class="box">
-                                <div class="table-responsive">
-                                    <table class="table table-borderd">
-                                        <tr>
-                                            <td><img src="images/master-light.png" alt="" class="card_pic"></td>
-                                            <td colspan="2" class="text-end"><a href="#" class="text-success">Activate Paypal</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>Provider</strong><br>Paypal</td>
-                                            <td><strong>Status</strong><br><span class="badge bg-warning">INACTIVE</span></td>
-                                            <td><strong>Transaction Fee</strong><br>2.99%</td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                            <span><a href="javascipt:void;" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addpaymentModal"><i class="fa-solid fa-plus"></i> Add payment method</a></span>
-                            <hr class="mb-3">
-                            <h5 class="mb-2">Manual payment methods</h5>
-                            <p>Payments that are made outside your online store. When a customer selects a manual payment method such as cash on delivery. You'll need to approve their order before it can be fulfilled.</p>
-                            <div class="dropdown">
-                                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
-                                    <i class="fa-solid fa-plus"></i> Manual payment method
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#manualpaymentModal">Create custom payment method</a></li>
-                                    <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#manualpaymentModal">Bank Deposit</a></li>
-                                    <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#manualpaymentModal">Money Order</a></li>
-                                    <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#manualpaymentModal">Cash on Delivery (COD)</a></li>
-                                </ul>
-                            </div>
-                        </div>
-
-
-                        <div class="tab-pane fade" id="menu3">
-                            <h5 class="mb-2">Customer contact method</h5>
-                            <p>Select what contact method customers use to check out.</p>
-                            <hr class="mb-2 mt-2">
-                            <div class="form-check form-check-inline">
-                                <input type="radio" class="form-check-input" id="radio3" name="optradio" value="option1" checked>
-                                <label class="form-check-label" for="radio3">Phone number</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input type="radio" class="form-check-input" id="radio4" name="optradio" value="option1" checked>
-                                <label class="form-check-label" for="radio4">Email</label>
-                            </div>
-                            <div class="col-12 mt-3">
-                                <div class="alert alert-info">
-                                    <strong><i class="fa-solid fa-circle-info"></i></strong> To send SMS updates, you need to install an SMS App.
-                                </div>
-                            </div>
-                            <h5 class="mb-2">Customer information</h5>
-                            <hr class="mb-2 mt-2">
-                            <div class="row customer_infos">
-                                <div class="col-sm-6 col-md-4">
-                                    <div class="box">
-                                        <h6 class="mb-2">Full name</h6>
-                                        <div class="form-check mt-2">
-                                            <input type="radio" class="form-check-input" id="radio5" name="optradio" value="option1" checked>
-                                            <label class="form-check-label" for="radio5">Only require last name</label>
-                                        </div>
-                                        <div class="form-check mt-2">
-                                            <input type="radio" class="form-check-input" id="radio6" name="optradio" value="option1" checked>
-                                            <label class="form-check-label" for="radio6">Require first and last name</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-4">
-                                    <div class="box">
-                                        <h6 class="mb-2">Company name</h6>
-                                        <div class="form-check mt-2">
-                                            <input type="radio" class="form-check-input" id="radio7" name="optradio" value="option1" checked>
-                                            <label class="form-check-label" for="radio7">Don't include name</label>
-                                        </div>
-                                        <div class="form-check mt-2">
-                                            <input type="radio" class="form-check-input" id="radio8" name="optradio" value="option1" checked>
-                                            <label class="form-check-label" for="radio8">Optional</label>
-                                        </div>
-                                        <div class="form-check mt-2">
-                                            <input type="radio" class="form-check-input" id="radio9" name="optradio" value="option1" checked>
-                                            <label class="form-check-label" for="radio9">Required</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-4">
-                                    <div class="box">
-                                        <h6 class="mb-2">Address line 2 (apartment, unit, etc.)</h6>
-                                        <div class="form-check mt-2">
-                                            <input type="radio" class="form-check-input" id="radio10" name="optradio" value="option1" checked>
-                                            <label class="form-check-label" for="radio10">Don't include name</label>
-                                        </div>
-                                        <div class="form-check mt-2">
-                                            <input type="radio" class="form-check-input" id="radio11" name="optradio" value="option1" checked>
-                                            <label class="form-check-label" for="radio11">Optional</label>
-                                        </div>
-                                        <div class="form-check mt-2">
-                                            <input type="radio" class="form-check-input" id="radio12" name="optradio" value="option1" checked>
-                                            <label class="form-check-label" for="radio12">Required</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-4">
-                                    <div class="box">
-                                        <h6 class="mb-2">Shipping address phone number</h6>
-                                        <div class="form-check mt-2">
-                                            <input type="radio" class="form-check-input" id="radio13" name="optradio" value="option1" checked>
-                                            <label class="form-check-label" for="radio13">Don't include name</label>
-                                        </div>
-                                        <div class="form-check mt-2">
-                                            <input type="radio" class="form-check-input" id="radio14" name="optradio" value="option1" checked>
-                                            <label class="form-check-label" for="radio14">Optional</label>
-                                        </div>
-                                        <div class="form-check mt-2">
-                                            <input type="radio" class="form-check-input" id="radio15" name="optradio" value="option1" checked>
-                                            <label class="form-check-label" for="radio15">Required</label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <h5 class="mb-2">Address collection preferences</h5>
-                            <hr class="mb-2 mt-2">
-                            <div class="form-check mt-3">
-                                <input type="checkbox" class="form-check-input" id="check1" name="option1" value="something" checked>
-                                <label class="form-check-label" for="check1">Use the shipping address as the billing address by default
-                                    The billing address can still be edited.</label>
-                            </div>
-                            <div class="form-check mt-3">
-                                <input type="checkbox" class="form-check-input" id="check2" name="option1" value="something">
-                                <label class="form-check-label" for="check2">Use address autocompletion
-                                    Offer suggestions when customers enter their address.</label>
-                            </div>
-                            <div class="form-check mt-3">
-                                <input type="checkbox" class="form-check-input" id="check3" name="option1" value="something" checked>
-                                <label class="form-check-label" for="check3">Validate shipping address
-                                    Minimize failed deliveries by offering suggestions when customers enter an invalid shipping address.</label>
-                            </div>
-                        </div>
-
-
-                        <div class="tab-pane fade" id="menu4">
-                            <h6 class="mb-2">Shipping</h6>
-                            <p>Choose where you ship and how much you charge for shipping at checkout.</p>
-                            <hr class="mb-2 mt-2">
-                            <p><strong>General shipping rates</strong></p>
-                            <div class="box generalShipping">
-                                <a href="javascript:script;" data-bs-toggle="modal" data-bs-target="#generalProfileModal">
-                                    <strong>General</strong>
-                                    <p>All products <span class="float-end"><i class="fa-solid fa-chevron-right"></i></span></p>
-                                    <ul class="p_status d-flex justify-content-between">
-                                        <li>
-                                            <strong>Rates for</strong><br>
-                                            <i class="fa-solid fa-location-dot"></i> 1 Location
-                                        </li>
-                                        <li>
-                                            <strong></strong><br>
-                                            <i class="fa-solid fa-earth-africa"></i> 2 Zones
-                                        </li>
-                                        <li>
-                                            <strong>No Rates for</strong><br>
-                                            <i class="fa-solid fa-location-dot"></i> 2 Location
-                                        </li>
-                                    </ul>
-                                </a>
-                            </div>
-                            <hr class="mb-3 mt-3">
-                            <p><strong>Expected delivery dates</strong></p>
-                            <div class="box2 d-flex justify-content-between pointer" data-bs-toggle="modal" data-bs-target="#dateModal">
-                                <span class="text-primary">Show delivery dates at checkout</span>
-                                <div class="form-check form-switch pointer">
-                                    <input class="form-check-input" type="checkbox" id="mySwitch" name="darkmode" value="yes" disabled>
-                                    <label class="form-check-label" for="mySwitch">Off</label>
-                                </div>
-                            </div>
-                            <hr class="mb-3 mt-3">
-                            <p><strong>Local delivery</strong></p>
-                            <div class="box d-flex mt-3 pointer" data-bs-toggle="modal" data-bs-target="#locationModal">
-                                <span><i class="fa-solid fa-location-dot mr-10"></i></span>
-                                <p style="flex-grow:1; margin:0"><strong>Chino</strong><br><small>12345 Mills Avenue, Unit 28, Chino California 91710, United States</small> <span class="badge bg-light float-end">Doesn't offer delivery <i class="fa-solid fa-chevron-right"></i></span></p>
-                            </div>
-                        </div>
-
-
-                        <div class="tab-pane fade" id="menu5">
-                            <h6 class="mb-2">Locations</h6>
-                            <p></p>
-                            <div class="location-data">
-
-                            </div>
-
-                            <h6 class="mb-2">Add Location</h6>
-                            <div class="row">
-                                <input type="hidden" class="form-control location" id="default" value="No">
-                                <div class="form-floating mt-3 col-sm-12 mb-3">
-                                    <select class="form-control location js-example-tags" id="country">
-                                        <option>Select Country</option>
-                                        <?php foreach ($countryType as $item) : ?>
-                                            <option value="<?php echo $item->id  ?>"><?php echo $item->name  ?></option>
-                                        <?php endforeach ?>
-                                    </select>
-                                    <label for="floatCountry2">COUNTRY/REGION <span class="text-danger">*</span></label>
-                                </div>
-                                <div class="form-floating mb-3 col-sm-4 mb-3">
-                                    <select class="form-control location js-example-tags" id="state">
-                                        <option>Select state</option>
-                                    </select>
-                                    <label for="floatState2">STATE <span class="text-danger">*</span></label>
-                                </div>
-                                <div class="form-floating mb-3 col-sm-4 mb-3">
-                                    <select class="form-control location js-example-tags" id="city">
-                                        <option>Select city</option>
-                                    </select>
-                                    <label for="floatCity2">City <span class="text-danger">*</span></label>
-                                </div>
-                                <div class="form-floating mb-3 col-sm-4 mb-3">
-                                    <input type="text" class="form-control location" id="pincode" placeholder="">
-                                    <label for="floatPin2">PIN CODE <span class="text-danger">*</span></label>
-                                </div>
-                                <div class="form-floating mb-3 col-sm-4 mb-3">
-                                    <input type="text" class="form-control location" id="address" placeholder="">
-                                    <label for="floatAddress">Address <span class="text-danger">*</span></label>
-                                </div>
-                                <div class="form-floating mb-3 col-sm-4 mb-3">
-                                    <input type="text" class="form-control location" id="apartment" placeholder="">
-                                    <label for="floatSuite">APARTMENT, SUITE, ETC. <span class="text-danger">*</span></label>
-                                </div>
-                                <div class="form-floating mb-3 col-sm-4">
-                                    <input type="text" class="form-control location" id="phone" placeholder="">
-                                    <label for="floatPhone2">PHONE <span class="text-danger">*</span></label>
-                                </div>
-                                
-                                <div class="col-sm-12 text-end">
-                                    <input type="button" value="Submit" id="location-submit" class="btn btn-primary">
-                                </div>
-                            </div>
-                        </div>
-
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- content part end -->
-
-<!-- General profile Modal -->
-<div class="modal" id="generalProfileModal">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-            <!-- Modal body -->
-            <div class="modal-body">
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                <h4 class="modal-title">General profile</h4>
-                <p>New products are added to this profile.</p>
-                <div class="row">
-                    <div class="col-sm-6 mt-3">
-                        <div class="box row">
-                            <span class="col-3"><img src="images/1.webp" alt="" class="img-fluid img-thumbnail"></span>
-                            <p class="col-9"><strong>Marquee Photobooth System Package</strong><br><small>16 of 16 variants</small></p>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 mt-3">
-                        <div class="box row">
-                            <span class="col-3"><img src="images/1.webp" alt="" class="img-fluid img-thumbnail"></span>
-                            <p class="col-9"><strong>Marquee Photobooth System Package</strong><br><small>16 of 16 variants</small></p>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 mt-3">
-                        <div class="box row">
-                            <span class="col-3"><img src="images/1.webp" alt="" class="img-fluid img-thumbnail"></span>
-                            <p class="col-9"><strong>Marquee Photobooth System Package</strong><br><small>16 of 16 variants</small></p>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 mt-3">
-                        <div class="box row">
-                            <span class="col-3"><img src="images/1.webp" alt="" class="img-fluid img-thumbnail"></span>
-                            <p class="col-9"><strong>Marquee Photobooth System Package</strong><br><small>16 of 16 variants</small></p>
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <h5>Shipping origins</h5>
-                <div class="box d-flex mt-3">
-                    <span><i class="fa-solid fa-location-dot mr-10"></i></span>
-                    <p><strong>Chino</strong><br><small>12345 Mills Avenue, Unit 28, Chino California 91710, United States</small></p>
-                </div>
-                <h6 class="mb-2">Shipping zones <small class="text-primary float-end zonebtn">Create zone</small></h6>
-                <div class="box2" id="newZone" style="display:none">
-                    <p><strong>Create new shipping zone</strong></p>
-                    <div class="row">
-                        <div class="form-floating col-md-6 mb-3">
-                            <input type="text" class="form-control" id="floatZone" placeholder="">
-                            <label for="floatZone">Zone name</label>
-                        </div>
-                        <div class="form-floating col-md-6 mb-3">
-                            <div class="searchBox">
-                                <input type="text" name="" id="" class="form-control" placeholder="Search">
-                                <button class="btn"><i class="fa-solid fa-magnifying-glass"></i></button>
-                            </div>
-                        </div>
-                        <div class="col-12 mb-3 text-end">
-                            <input type="button" value="Cancel" class="btn btn-sm btn-danger m-h-1">
-                            <input type="button" value="Done" class="btn btn-sm btn-dark m-h-1">
-                        </div>
-                    </div>
-                </div>
-
-                <p class="text-primary">United States (59 of 62 states)</p>
-                <ul class="nav tabHead">
-                    <li class="nav-item">
-                        <a class="nav-link active" data-bs-toggle="tab" href="#menu1">Your Rates(4)</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-bs-toggle="tab" href="#menu2">Carrier and app rates (2)</a>
-                    </li>
-                </ul>
-                <div class="tab-content">
-                    <div class="tab-pane active" id="menu1">
-                        <div class="table-responsive">
-                            <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Rate </th>
-                                        <th>Condition</th>
-                                        <th>Transit time</th>
-                                        <th>Price</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Economy</td>
-                                        <td>$51.00–$499.00</td>
-                                        <td>5 to 8 business days</td>
-                                        <td>$50.00 USD</td>
-                                        <td>
-                                            <!-- <span><a href="#" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="view"><i class="fa-regular fa-eye"></i></a></span> -->
-                                            <span><a href="#" class="text-secondary" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="fa-regular fa-pen-to-square"></i></a></span><span><a href="#" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fa-regular fa-trash-can"></i></a></span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Economy</td>
-                                        <td>$51.00–$499.00</td>
-                                        <td>5 to 8 business days</td>
-                                        <td>$50.00 USD</td>
-                                        <td>
-                                            <!-- <span><a href="#" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="view"><i class="fa-regular fa-eye"></i></a></span> -->
-                                            <span><a href="#" class="text-secondary" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="fa-regular fa-pen-to-square"></i></a></span><span><a href="#" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fa-regular fa-trash-can"></i></a></span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Economy</td>
-                                        <td>$51.00–$499.00</td>
-                                        <td>5 to 8 business days</td>
-                                        <td>$50.00 USD</td>
-                                        <td>
-                                            <!-- <span><a href="#" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="view"><i class="fa-regular fa-eye"></i></a></span> -->
-                                            <span><a href="#" class="text-secondary" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="fa-regular fa-pen-to-square"></i></a></span><span><a href="#" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fa-regular fa-trash-can"></i></a></span>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="menu2">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- add payment Modal -->
-<div class="modal" id="addpaymentModal">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-            <!-- Modal body -->
-            <div class="modal-body">
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                <h4 class="modal-title text-center">Add payment method</h4>
-                <div class="d-flex flex-wrap mt-3 justify-content-center">
-                    <button class="btn btn-secondary m-h-1 col-sm-5">Search by payment method</button>
-                    <button class="btn btn-secondary m-h-1 col-sm-5">Search by provider</button>
-                    <div class="col-md-10 mt-3">
-                        <div class="searchBox">
-                            <input type="text" name="" id="" class="form-control" placeholder="Search">
-                            <button class="btn"><i class="fa-solid fa-magnifying-glass"></i></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<!-- manual payment Modal -->
-<div class="modal" id="manualpaymentModal">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <!-- Modal body -->
-            <div class="modal-body">
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                <h4 class="modal-title text-center">Set up manual payment method</h4>
-                <div class="d-flex flex-wrap mt-3">
-                    <div class="form-floating mb-3 col-sm-12">
-                        <input type="text" class="form-control" id="floatCmethod" placeholder="">
-                        <label for="floatCmethod">Custom payment method name</label>
-                    </div>
-                    <div class="form-floating mb-3 col-sm-12">
-                        <textarea class="form-control" id="floatingAdetails" style="height:85px"></textarea>
-                        <label for="floatingAdetails">Additional details</label>
-                        <small>Displays to customers when they’re choosing a payment method.</small>
-                    </div>
-                    <div class="form-floating mb-3 col-sm-12">
-                        <textarea class="form-control" id="floatingPayinstructions" style="height:85px"></textarea>
-                        <label for="floatingPayinstructions">Payment instructions</label>
-                        <small>Displays to customers after they place an order with this payment method.</small>
-                    </div>
-                    <div class="col-sm-12 text-center">
-                        <input type="button" value="Cancel" class="btn btn-danger m-h-1">
-                        <input type="button" value="Active" class="btn btn-success m-h-1">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Expected delivery dates Modal -->
-<div class="modal" id="dateModal">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <!-- Modal body -->
-            <div class="modal-body">
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                <h4 class="modal-title mb-3">Expected delivery dates</h4>
-                <p>Expected delivery dates are calculated by adding a shipping rate’s transit time to your order processing time.</p>
-                <div class="form-check mt-3">
-                    <input type="checkbox" class="form-check-input" id="check1" name="option20" value="something" checked>
-                    <label class="form-check-label" for="check20">Show expected delivery dates at checkout</label>
-                </div>
-                <div class="mt-3">
-                    <input type="button" value="Cancel" class="btn btn-danger m-h-1">
-                    <input type="button" value="Save" class="btn btn-success m-h-1">
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Expected delivery dates Modal -->
-<div class="modal" id="locationModal">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-            <!-- Modal body -->
-            <div class="modal-body">
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                <h4 class="modal-title mb-3">Location status</h4>
-                <hr>
-                <div class="box d-flex mt-3">
-                    <span><i class="fa-solid fa-location-dot mr-10"></i></span>
-                    <p style="flex-grow:1; margin:0"><strong>Chino</strong><br><small>12345 Mills Avenue, Unit 28, Chino California 91710, United States</small></p>
-                </div>
-                <div class="form-check mt-1">
-                    <input type="checkbox" class="form-check-input" id="check21" name="option2" value="something">
-                    <label class="form-check-label" for="check21">This location offers local delivery</label>
-                </div>
-                <div class="box2 p-30">
-                    <h6 class="mb-2">Delivery area</h6>
-                    <p>Define your delivery area with one of these methods</p>
-                    <ul>
-                        <li>
-                            <div class="form-check col-12 mt-2">
-                                <input type="radio" class="form-check-input" id="radio16" name="optradio" value="option1" checked>
-                                <label class="form-check-label" for="radio16">Use ZIP codes
-                                    Choose specific areas that you deliver to.</label>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="form-check col-12 mt-2">
-                                <input type="radio" class="form-check-input" id="radio17" name="optradio" value="option1" checked>
-                                <label class="form-check-label" for="radio17">Set a delivery radius
-                                    Set a distance around your location that you deliver to.</label>
-                            </div>
-                            <ul>
-                                <li>
-                                    <div class="form-check mt-3">
-                                        <input type="checkbox" class="form-check-input" id="check1" name="option21" value="something" checked>
-                                        <label class="form-check-label" for="check21">
-                                            Include neighboring states or regions</label>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="form-check form-check-inline">
-                                        <input type="radio" class="form-check-input" id="radio17" name="optradio" value="option1" checked>
-                                        <label class="form-check-label" for="radio17">Km</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input type="radio" class="form-check-input" id="radio18" name="optradio" value="option1" checked>
-                                        <label class="form-check-label" for="radio18">mi</label>
-                                    </div>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<?php
-include 'common/footer.php';
-?>
+					<!--begin::Main-->
+					<div class="app-main flex-column flex-row-fluid" id="kt_app_main">
+						<!--begin::Content wrapper-->
+						<div class="d-flex flex-column flex-column-fluid">
+							<!--begin::Toolbar-->
+							<div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
+								<!--begin::Toolbar container-->
+								<div id="kt_app_toolbar_container" class="app-container container-xxl d-flex flex-stack">
+									<!--begin::Page title-->
+									<div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
+										<!--begin::Title-->
+										<h1 class="page-heading d-flex text-gray-900 fw-bold fs-3 flex-column justify-content-center my-0">Settings</h1>
+										<!--end::Title-->
+										<!--begin::Breadcrumb-->
+										<ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
+											<!--begin::Item-->
+											<li class="breadcrumb-item text-muted">
+												<a href="<?=  url('/dw-admin/dashboard') ?>" class="text-muted text-hover-primary">Home</a>
+											</li>
+											<!--end::Item-->
+											<!--begin::Item-->
+											<li class="breadcrumb-item">
+												<span class="bullet bg-gray-500 w-5px h-2px"></span>
+											</li>
+											<!--end::Item-->
+											<!--begin::Item-->
+											<li class="breadcrumb-item text-muted">eCommerce</li>
+											<!--end::Item-->
+										</ul>
+										<!--end::Breadcrumb-->
+									</div>
+									<!--end::Page title-->
+									<!--begin::Actions-->
+									<div class="d-flex align-items-center gap-2 gap-lg-3">
+										<!--begin::Filter menu-->
+										<div class="m-0">
+											<!--begin::Menu toggle-->
+											<a href="#" class="btn btn-sm btn-flex btn-secondary fw-bold" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+											<i class="ki-duotone ki-filter fs-6 text-muted me-1">
+												<span class="path1"></span>
+												<span class="path2"></span>
+											</i>Filter</a>
+											<!--end::Menu toggle-->
+											<!--begin::Menu 1-->
+											<div class="menu menu-sub menu-sub-dropdown w-250px w-md-300px" data-kt-menu="true" id="kt_menu_65a12141a6414">
+												<!--begin::Header-->
+												<div class="px-7 py-5">
+													<div class="fs-5 text-gray-900 fw-bold">Filter Options</div>
+												</div>
+												<!--end::Header-->
+												<!--begin::Menu separator-->
+												<div class="separator border-gray-200"></div>
+												<!--end::Menu separator-->
+												<!--begin::Form-->
+												<div class="px-7 py-5">
+													<!--begin::Input group-->
+													<div class="mb-10">
+														<!--begin::Label-->
+														<label class="form-label fw-semibold">Status:</label>
+														<!--end::Label-->
+														<!--begin::Input-->
+														<div>
+															<select class="form-select form-select-solid" multiple="multiple" data-kt-select2="true" data-close-on-select="false" data-placeholder="Select option" data-dropdown-parent="#kt_menu_65a12141a6414" data-allow-clear="true">
+																<option></option>
+																<option value="1">Approved</option>
+																<option value="2">Pending</option>
+																<option value="2">In Process</option>
+																<option value="2">Rejected</option>
+															</select>
+														</div>
+														<!--end::Input-->
+													</div>
+													<!--end::Input group-->
+													<!--begin::Input group-->
+													<div class="mb-10">
+														<!--begin::Label-->
+														<label class="form-label fw-semibold">Member Type:</label>
+														<!--end::Label-->
+														<!--begin::Options-->
+														<div class="d-flex">
+															<!--begin::Options-->
+															<label class="form-check form-check-sm form-check-custom form-check-solid me-5">
+																<input class="form-check-input" type="checkbox" value="1" />
+																<span class="form-check-label">Author</span>
+															</label>
+															<!--end::Options-->
+															<!--begin::Options-->
+															<label class="form-check form-check-sm form-check-custom form-check-solid">
+																<input class="form-check-input" type="checkbox" value="2" checked="checked" />
+																<span class="form-check-label">Customer</span>
+															</label>
+															<!--end::Options-->
+														</div>
+														<!--end::Options-->
+													</div>
+													<!--end::Input group-->
+													<!--begin::Input group-->
+													<div class="mb-10">
+														<!--begin::Label-->
+														<label class="form-label fw-semibold">Notifications:</label>
+														<!--end::Label-->
+														<!--begin::Switch-->
+														<div class="form-check form-switch form-switch-sm form-check-custom form-check-solid">
+															<input class="form-check-input" type="checkbox" value="" name="notifications" checked="checked" />
+															<label class="form-check-label">Enabled</label>
+														</div>
+														<!--end::Switch-->
+													</div>
+													<!--end::Input group-->
+													<!--begin::Actions-->
+													<div class="d-flex justify-content-end">
+														<button type="reset" class="btn btn-sm btn-light btn-active-light-primary me-2" data-kt-menu-dismiss="true">Reset</button>
+														<button type="submit" class="btn btn-sm btn-primary" data-kt-menu-dismiss="true">Apply</button>
+													</div>
+													<!--end::Actions-->
+												</div>
+												<!--end::Form-->
+											</div>
+											<!--end::Menu 1-->
+										</div>
+										<!--end::Filter menu-->
+										<!--begin::Secondary button-->
+										<!--end::Secondary button-->
+										<!--begin::Primary button-->
+										<a href="#" class="btn btn-sm fw-bold btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_create_app">Create</a>
+										<!--end::Primary button-->
+									</div>
+									<!--end::Actions-->
+								</div>
+								<!--end::Toolbar container-->
+							</div>
+							<!--end::Toolbar-->
+							<!--begin::Content-->
+							<div id="kt_app_content" class="app-content flex-column-fluid">
+								<!--begin::Content container-->
+								<div id="kt_app_content_container" class="app-container container-xxl">
+									<!--begin::Card-->
+									<div class="card card-flush">
+										<!--begin::Card body-->
+										<div class="card-body">
+											<!--begin:::Tabs-->
+											<ul class="nav nav-tabs nav-line-tabs nav-line-tabs-2x border-transparent fs-4 fw-semibold mb-15">
+												<!--begin:::Tab item-->
+												<li class="nav-item">
+													<a class="nav-link text-active-primary d-flex align-items-center pb-5 active" data-bs-toggle="tab" href="#kt_ecommerce_settings_general">
+													<i class="ki-duotone ki-home fs-2 me-2"></i>General</a>
+												</li>
+												<!--end:::Tab item-->
+												<!--begin:::Tab item-->
+												<li class="nav-item">
+													<a class="nav-link text-active-primary d-flex align-items-center pb-5" data-bs-toggle="tab" href="#kt_ecommerce_settings_store">
+													<i class="ki-duotone ki-shop fs-2 me-2">
+														<span class="path1"></span>
+														<span class="path2"></span>
+														<span class="path3"></span>
+														<span class="path4"></span>
+														<span class="path5"></span>
+													</i>Store</a>
+												</li>
+												<!--end:::Tab item-->
+												<!--begin:::Tab item-->
+												<li class="nav-item">
+													<a class="nav-link text-active-primary d-flex align-items-center pb-5" data-bs-toggle="tab" href="#kt_ecommerce_settings_localization">
+													<i class="ki-duotone ki-compass fs-2 me-2">
+														<span class="path1"></span>
+														<span class="path2"></span>
+													</i>Localization</a>
+												</li>
+												<!--end:::Tab item-->
+												<!--begin:::Tab item-->
+												<li class="nav-item">
+													<a class="nav-link text-active-primary d-flex align-items-center pb-5" data-bs-toggle="tab" href="#kt_ecommerce_settings_products">
+													<i class="ki-duotone ki-package fs-2 me-2">
+														<span class="path1"></span>
+														<span class="path2"></span>
+														<span class="path3"></span>
+													</i>Products</a>
+												</li>
+												<!--end:::Tab item-->
+												<!--begin:::Tab item-->
+												<li class="nav-item">
+													<a class="nav-link text-active-primary d-flex align-items-center pb-5" data-bs-toggle="tab" href="#kt_ecommerce_settings_customers">
+													<i class="ki-duotone ki-people fs-2 me-2">
+														<span class="path1"></span>
+														<span class="path2"></span>
+														<span class="path3"></span>
+														<span class="path4"></span>
+														<span class="path5"></span>
+													</i>Customers</a>
+												</li>
+												<!--end:::Tab item-->
+											</ul>
+											<!--end:::Tabs-->
+											<!--begin:::Tab content-->
+											<div class="tab-content" id="myTabContent">
+												<!--begin:::Tab pane-->
+												<div class="tab-pane fade show active" id="kt_ecommerce_settings_general" role="tabpanel">
+													<!--begin::Form-->
+													<form id="kt_ecommerce_settings_general_form" class="form" action="#">
+														<!--begin::Heading-->
+														<div class="row mb-7">
+															<div class="col-md-9 offset-md-3">
+																<h2>General Settings</h2>
+															</div>
+														</div>
+														<!--end::Heading-->
+														<!--begin::Input group-->
+														<div class="row fv-row mb-7">
+															<div class="col-md-3 text-md-end">
+																<!--begin::Label-->
+																<label class="fs-6 fw-semibold form-label mt-3">
+																	<span class="required">Meta Title</span>
+																	<span class="ms-1" data-bs-toggle="tooltip" title="Set the title of the store for SEO.">
+																		<i class="ki-duotone ki-information-5 text-gray-500 fs-6">
+																			<span class="path1"></span>
+																			<span class="path2"></span>
+																			<span class="path3"></span>
+																		</i>
+																	</span>
+																</label>
+																<!--end::Label-->
+															</div>
+															<div class="col-md-9">
+																<!--begin::Input-->
+																<input type="text" class="form-control form-control-solid" name="meta_title" value="" />
+																<!--end::Input-->
+															</div>
+														</div>
+														<!--end::Input group-->
+														<!--begin::Input group-->
+														<div class="row fv-row mb-7">
+															<div class="col-md-3 text-md-end">
+																<!--begin::Label-->
+																<label class="fs-6 fw-semibold form-label mt-3">
+																	<span>Meta Tag Description</span>
+																	<span class="ms-1" data-bs-toggle="tooltip" title="Set the description of the store for SEO.">
+																		<i class="ki-duotone ki-information-5 text-gray-500 fs-6">
+																			<span class="path1"></span>
+																			<span class="path2"></span>
+																			<span class="path3"></span>
+																		</i>
+																	</span>
+																</label>
+																<!--end::Label-->
+															</div>
+															<div class="col-md-9">
+																<!--begin::Input-->
+																<textarea class="form-control form-control-solid" name="meta_description"></textarea>
+																<!--end::Input-->
+															</div>
+														</div>
+														<!--end::Input group-->
+														<!--begin::Input group-->
+														<div class="row fv-row mb-7">
+															<div class="col-md-3 text-md-end">
+																<!--begin::Label-->
+																<label class="fs-6 fw-semibold form-label mt-3">
+																	<span>Meta Keywords</span>
+																	<span class="ms-1" data-bs-toggle="tooltip" title="Set keywords for the store separated by a comma.">
+																		<i class="ki-duotone ki-information-5 text-gray-500 fs-6">
+																			<span class="path1"></span>
+																			<span class="path2"></span>
+																			<span class="path3"></span>
+																		</i>
+																	</span>
+																</label>
+																<!--end::Label-->
+															</div>
+															<div class="col-md-9">
+																<!--begin::Input-->
+																<input type="text" class="form-control form-control-solid" name="meta_keywords" value="" data-kt-ecommerce-settings-type="tagify" />
+																<!--end::Input-->
+															</div>
+														</div>
+														<!--end::Input group-->
+														<!--begin::Input group-->
+														<div class="row fv-row mb-7">
+															<div class="col-md-3 text-md-end">
+																<!--begin::Label-->
+																<label class="fs-6 fw-semibold form-label mt-3">
+																	<span>Theme</span>
+																	<span class="ms-1" data-bs-toggle="tooltip" title="Set theme style for the store.">
+																		<i class="ki-duotone ki-information-5 text-gray-500 fs-6">
+																			<span class="path1"></span>
+																			<span class="path2"></span>
+																			<span class="path3"></span>
+																		</i>
+																	</span>
+																</label>
+																<!--end::Label-->
+															</div>
+															<div class="col-md-9">
+																<div class="w-100">
+																	<!--begin::Select2-->
+																	<select class="form-select form-select-solid" name="theme" data-control="select2" data-hide-search="true" data-placeholder="Select a layout">
+																		<option></option>
+																		<option value="Default" selected="selected">Default</option>
+																		<option value="Minimalist">Minimalist</option>
+																		<option value="Dark">Dark</option>
+																		<option value="High_Contrast">High Contrast</option>
+																	</select>
+																	<!--end::Select2-->
+																</div>
+															</div>
+														</div>
+														<!--end::Input group-->
+														<!--begin::Input group-->
+														<div class="row fv-row mb-7">
+															<div class="col-md-3 text-md-end">
+																<!--begin::Label-->
+																<label class="fs-6 fw-semibold form-label mt-3">
+																	<span>Default Layout</span>
+																	<span class="ms-1" data-bs-toggle="tooltip" title="Set default layout style for the store.">
+																		<i class="ki-duotone ki-information-5 text-gray-500 fs-6">
+																			<span class="path1"></span>
+																			<span class="path2"></span>
+																			<span class="path3"></span>
+																		</i>
+																	</span>
+																</label>
+																<!--end::Label-->
+															</div>
+															<div class="col-md-9">
+																<div class="w-100">
+																	<!--begin::Select2-->
+																	<select class="form-select form-select-solid" name="layout" data-control="select2" data-hide-search="true" data-placeholder="Select a layout">
+																		<option></option>
+																		<option value="Default" selected="selected">Default</option>
+																		<option value="Electronics">Electronics</option>
+																		<option value="Fashion">Fashion</option>
+																		<option value="Home">Home</option>
+																		<option value="Dining">Dining</option>
+																		<option value="Interior">Interior</option>
+																	</select>
+																	<!--end::Select2-->
+																</div>
+															</div>
+														</div>
+														<!--end::Input group-->
+														<!--begin::Action buttons-->
+														<div class="row py-5">
+															<div class="col-md-9 offset-md-3">
+																<div class="d-flex">
+																	<!--begin::Button-->
+																	<button type="reset" data-kt-ecommerce-settings-type="cancel" class="btn btn-light me-3">Cancel</button>
+																	<!--end::Button-->
+																	<!--begin::Button-->
+																	<button type="submit" data-kt-ecommerce-settings-type="submit" class="btn btn-primary">
+																		<span class="indicator-label">Save</span>
+																		<span class="indicator-progress">Please wait... 
+																		<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+																	</button>
+																	<!--end::Button-->
+																</div>
+															</div>
+														</div>
+														<!--end::Action buttons-->
+													</form>
+													<!--end::Form-->
+												</div>
+												<!--end:::Tab pane-->
+												<!--begin:::Tab pane-->
+												<div class="tab-pane fade" id="kt_ecommerce_settings_store" role="tabpanel">
+													<!--begin::Form-->
+													<form id="kt_ecommerce_settings_general_store" class="form" action="#">
+														<!--begin::Heading-->
+														<div class="row mb-7">
+															<div class="col-md-9 offset-md-3">
+																<h2>Store Settings</h2>
+															</div>
+														</div>
+														<!--end::Heading-->
+														<!--begin::Input group-->
+														<div class="row fv-row mb-7">
+															<div class="col-md-3 text-md-end">
+																<!--begin::Label-->
+																<label class="fs-6 fw-semibold form-label mt-3">
+																	<span class="required">Store Name</span>
+																	<span class="ms-1" data-bs-toggle="tooltip" title="Set the name of the store">
+																		<i class="ki-duotone ki-information-5 text-gray-500 fs-6">
+																			<span class="path1"></span>
+																			<span class="path2"></span>
+																			<span class="path3"></span>
+																		</i>
+																	</span>
+																</label>
+																<!--end::Label-->
+															</div>
+															<div class="col-md-9">
+																<!--begin::Input-->
+																<input type="text" class="form-control form-control-solid" name="store_name" value="" />
+																<!--end::Input-->
+															</div>
+														</div>
+														<!--end::Input group-->
+														<!--begin::Input group-->
+														<div class="row fv-row mb-7">
+															<div class="col-md-3 text-md-end">
+																<!--begin::Label-->
+																<label class="fs-6 fw-semibold form-label mt-3">
+																	<span class="required">Store Owner</span>
+																	<span class="ms-1" data-bs-toggle="tooltip" title="Set the store owner's name">
+																		<i class="ki-duotone ki-information-5 text-gray-500 fs-6">
+																			<span class="path1"></span>
+																			<span class="path2"></span>
+																			<span class="path3"></span>
+																		</i>
+																	</span>
+																</label>
+																<!--end::Label-->
+															</div>
+															<div class="col-md-9">
+																<!--begin::Input-->
+																<input type="text" class="form-control form-control-solid" name="store_owner" value="" />
+																<!--end::Input-->
+															</div>
+														</div>
+														<!--end::Input group-->
+														<!--begin::Input group-->
+														<div class="row fv-row mb-7">
+															<div class="col-md-3 text-md-end">
+																<!--begin::Label-->
+																<label class="fs-6 fw-semibold form-label mt-3">
+																	<span class="required">Address</span>
+																	<span class="ms-1" data-bs-toggle="tooltip" title="Set the store's full address.">
+																		<i class="ki-duotone ki-information-5 text-gray-500 fs-6">
+																			<span class="path1"></span>
+																			<span class="path2"></span>
+																			<span class="path3"></span>
+																		</i>
+																	</span>
+																</label>
+																<!--end::Label-->
+															</div>
+															<div class="col-md-9">
+																<!--begin::Input-->
+																<textarea class="form-control form-control-solid" name="store_address"></textarea>
+																<!--end::Input-->
+															</div>
+														</div>
+														<!--end::Input group-->
+														<!--begin::Input group-->
+														<div class="row fv-row mb-7">
+															<div class="col-md-3 text-md-end">
+																<!--begin::Label-->
+																<label class="fs-6 fw-semibold form-label mt-3">
+																	<span>Geocode</span>
+																	<span class="ms-1" data-bs-toggle="tooltip" title="Enter the store geocode manually (optional)">
+																		<i class="ki-duotone ki-information-5 text-gray-500 fs-6">
+																			<span class="path1"></span>
+																			<span class="path2"></span>
+																			<span class="path3"></span>
+																		</i>
+																	</span>
+																</label>
+																<!--end::Label-->
+															</div>
+															<div class="col-md-9">
+																<!--begin::Input-->
+																<input type="text" class="form-control form-control-solid" name="store_geocode" value="" />
+																<!--end::Input-->
+															</div>
+														</div>
+														<!--end::Input group-->
+														<!--begin::Input group-->
+														<div class="row fv-row mb-7">
+															<div class="col-md-3 text-md-end">
+																<!--begin::Label-->
+																<label class="fs-6 fw-semibold form-label mt-3">
+																	<span class="required">Email</span>
+																</label>
+																<!--end::Label-->
+															</div>
+															<div class="col-md-9">
+																<!--begin::Input-->
+																<input type="email" class="form-control form-control-solid" name="store_email" value="" />
+																<!--end::Input-->
+															</div>
+														</div>
+														<!--end::Input group-->
+														<!--begin::Input group-->
+														<div class="row fv-row mb-7">
+															<div class="col-md-3 text-md-end">
+																<!--begin::Label-->
+																<label class="fs-6 fw-semibold form-label mt-3">
+																	<span class="required">Phone</span>
+																</label>
+																<!--end::Label-->
+															</div>
+															<div class="col-md-9">
+																<!--begin::Input-->
+																<input type="text" class="form-control form-control-solid" name="store_phone" value="" />
+																<!--end::Input-->
+															</div>
+														</div>
+														<!--end::Input group-->
+														<!--begin::Input group-->
+														<div class="row fv-row mb-7">
+															<div class="col-md-3 text-md-end">
+																<!--begin::Label-->
+																<label class="fs-6 fw-semibold form-label mt-3">
+																	<span>Fax</span>
+																</label>
+																<!--end::Label-->
+															</div>
+															<div class="col-md-9">
+																<!--begin::Input-->
+																<input type="text" class="form-control form-control-solid" name="store_fax" value="" />
+																<!--end::Input-->
+															</div>
+														</div>
+														<!--end::Input group-->
+														<!--begin::Action buttons-->
+														<div class="row py-5">
+															<div class="col-md-9 offset-md-3">
+																<div class="d-flex">
+																	<!--begin::Button-->
+																	<button type="reset" data-kt-ecommerce-settings-type="cancel" class="btn btn-light me-3">Cancel</button>
+																	<!--end::Button-->
+																	<!--begin::Button-->
+																	<button type="submit" data-kt-ecommerce-settings-type="submit" class="btn btn-primary">
+																		<span class="indicator-label">Save</span>
+																		<span class="indicator-progress">Please wait... 
+																		<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+																	</button>
+																	<!--end::Button-->
+																</div>
+															</div>
+														</div>
+														<!--end::Action buttons-->
+													</form>
+													<!--end::Form-->
+												</div>
+												<!--end:::Tab pane-->
+												<!--begin:::Tab pane-->
+												<div class="tab-pane fade" id="kt_ecommerce_settings_localization" role="tabpanel">
+													<!--begin::Form-->
+													<form id="kt_ecommerce_settings_general_localization" class="form" action="#">
+														<!--begin::Heading-->
+														<div class="row mb-7">
+															<div class="col-md-9 offset-md-3">
+																<h2>Localization Settings</h2>
+															</div>
+														</div>
+														<!--end::Heading-->
+														<!--begin::Input group-->
+														<div class="row fv-row mb-7">
+															<div class="col-md-3 text-md-end">
+																<!--begin::Label-->
+																<label class="fs-6 fw-semibold form-label mt-3">
+																	<span class="required">Country</span>
+																</label>
+																<!--end::Label-->
+															</div>
+															<div class="col-md-9">
+																<!--begin::Select2-->
+																<select id="kt_ecommerce_localization_country" class="form-select form-select-solid" name="localization_country" data-kt-ecommerce-settings-type="select2_flags" data-placeholder="Select a country">
+																	<option></option>
+																	<option value="AF" data-kt-select2-country="assets/media/flags/afghanistan.svg">Afghanistan</option>
+																	<option value="AX" data-kt-select2-country="assets/media/flags/aland-islands.svg">Aland Islands</option>
+																	<option value="AL" data-kt-select2-country="assets/media/flags/albania.svg">Albania</option>
+																	<option value="DZ" data-kt-select2-country="assets/media/flags/algeria.svg">Algeria</option>
+																	<option value="AS" data-kt-select2-country="assets/media/flags/american-samoa.svg">American Samoa</option>
+																	<option value="AD" data-kt-select2-country="assets/media/flags/andorra.svg">Andorra</option>
+																	<option value="AO" data-kt-select2-country="assets/media/flags/angola.svg">Angola</option>
+																	<option value="AI" data-kt-select2-country="assets/media/flags/anguilla.svg">Anguilla</option>
+																	<option value="AG" data-kt-select2-country="assets/media/flags/antigua-and-barbuda.svg">Antigua and Barbuda</option>
+																	<option value="AR" data-kt-select2-country="assets/media/flags/argentina.svg">Argentina</option>
+																	<option value="AM" data-kt-select2-country="assets/media/flags/armenia.svg">Armenia</option>
+																	<option value="AW" data-kt-select2-country="assets/media/flags/aruba.svg">Aruba</option>
+																	<option value="AU" data-kt-select2-country="assets/media/flags/australia.svg">Australia</option>
+																	<option value="AT" data-kt-select2-country="assets/media/flags/austria.svg">Austria</option>
+																	<option value="AZ" data-kt-select2-country="assets/media/flags/azerbaijan.svg">Azerbaijan</option>
+																	<option value="BS" data-kt-select2-country="assets/media/flags/bahamas.svg">Bahamas</option>
+																	<option value="BH" data-kt-select2-country="assets/media/flags/bahrain.svg">Bahrain</option>
+																	<option value="BD" data-kt-select2-country="assets/media/flags/bangladesh.svg">Bangladesh</option>
+																	<option value="BB" data-kt-select2-country="assets/media/flags/barbados.svg">Barbados</option>
+																	<option value="BY" data-kt-select2-country="assets/media/flags/belarus.svg">Belarus</option>
+																	<option value="BE" data-kt-select2-country="assets/media/flags/belgium.svg">Belgium</option>
+																	<option value="BZ" data-kt-select2-country="assets/media/flags/belize.svg">Belize</option>
+																	<option value="BJ" data-kt-select2-country="assets/media/flags/benin.svg">Benin</option>
+																	<option value="BM" data-kt-select2-country="assets/media/flags/bermuda.svg">Bermuda</option>
+																	<option value="BT" data-kt-select2-country="assets/media/flags/bhutan.svg">Bhutan</option>
+																	<option value="BO" data-kt-select2-country="assets/media/flags/bolivia.svg">Bolivia, Plurinational State of</option>
+																	<option value="BQ" data-kt-select2-country="assets/media/flags/bonaire.svg">Bonaire, Sint Eustatius and Saba</option>
+																	<option value="BA" data-kt-select2-country="assets/media/flags/bosnia-and-herzegovina.svg">Bosnia and Herzegovina</option>
+																	<option value="BW" data-kt-select2-country="assets/media/flags/botswana.svg">Botswana</option>
+																	<option value="BR" data-kt-select2-country="assets/media/flags/brazil.svg">Brazil</option>
+																	<option value="IO" data-kt-select2-country="assets/media/flags/british-indian-ocean-territory.svg">British Indian Ocean Territory</option>
+																	<option value="BN" data-kt-select2-country="assets/media/flags/brunei.svg">Brunei Darussalam</option>
+																	<option value="BG" data-kt-select2-country="assets/media/flags/bulgaria.svg">Bulgaria</option>
+																	<option value="BF" data-kt-select2-country="assets/media/flags/burkina-faso.svg">Burkina Faso</option>
+																	<option value="BI" data-kt-select2-country="assets/media/flags/burundi.svg">Burundi</option>
+																	<option value="KH" data-kt-select2-country="assets/media/flags/cambodia.svg">Cambodia</option>
+																	<option value="CM" data-kt-select2-country="assets/media/flags/cameroon.svg">Cameroon</option>
+																	<option value="CA" data-kt-select2-country="assets/media/flags/canada.svg">Canada</option>
+																	<option value="CV" data-kt-select2-country="assets/media/flags/cape-verde.svg">Cape Verde</option>
+																	<option value="KY" data-kt-select2-country="assets/media/flags/cayman-islands.svg">Cayman Islands</option>
+																	<option value="CF" data-kt-select2-country="assets/media/flags/central-african-republic.svg">Central African Republic</option>
+																	<option value="TD" data-kt-select2-country="assets/media/flags/chad.svg">Chad</option>
+																	<option value="CL" data-kt-select2-country="assets/media/flags/chile.svg">Chile</option>
+																	<option value="CN" data-kt-select2-country="assets/media/flags/china.svg">China</option>
+																	<option value="CX" data-kt-select2-country="assets/media/flags/christmas-island.svg">Christmas Island</option>
+																	<option value="CC" data-kt-select2-country="assets/media/flags/cocos-island.svg">Cocos (Keeling) Islands</option>
+																	<option value="CO" data-kt-select2-country="assets/media/flags/colombia.svg">Colombia</option>
+																	<option value="KM" data-kt-select2-country="assets/media/flags/comoros.svg">Comoros</option>
+																	<option value="CK" data-kt-select2-country="assets/media/flags/cook-islands.svg">Cook Islands</option>
+																	<option value="CR" data-kt-select2-country="assets/media/flags/costa-rica.svg">Costa Rica</option>
+																	<option value="CI" data-kt-select2-country="assets/media/flags/ivory-coast.svg">Côte d'Ivoire</option>
+																	<option value="HR" data-kt-select2-country="assets/media/flags/croatia.svg">Croatia</option>
+																	<option value="CU" data-kt-select2-country="assets/media/flags/cuba.svg">Cuba</option>
+																	<option value="CW" data-kt-select2-country="assets/media/flags/curacao.svg">Curaçao</option>
+																	<option value="CZ" data-kt-select2-country="assets/media/flags/czech-republic.svg">Czech Republic</option>
+																	<option value="DK" data-kt-select2-country="assets/media/flags/denmark.svg">Denmark</option>
+																	<option value="DJ" data-kt-select2-country="assets/media/flags/djibouti.svg">Djibouti</option>
+																	<option value="DM" data-kt-select2-country="assets/media/flags/dominica.svg">Dominica</option>
+																	<option value="DO" data-kt-select2-country="assets/media/flags/dominican-republic.svg">Dominican Republic</option>
+																	<option value="EC" data-kt-select2-country="assets/media/flags/ecuador.svg">Ecuador</option>
+																	<option value="EG" data-kt-select2-country="assets/media/flags/egypt.svg">Egypt</option>
+																	<option value="SV" data-kt-select2-country="assets/media/flags/el-salvador.svg">El Salvador</option>
+																	<option value="GQ" data-kt-select2-country="assets/media/flags/equatorial-guinea.svg">Equatorial Guinea</option>
+																	<option value="ER" data-kt-select2-country="assets/media/flags/eritrea.svg">Eritrea</option>
+																	<option value="EE" data-kt-select2-country="assets/media/flags/estonia.svg">Estonia</option>
+																	<option value="ET" data-kt-select2-country="assets/media/flags/ethiopia.svg">Ethiopia</option>
+																	<option value="FK" data-kt-select2-country="assets/media/flags/falkland-islands.svg">Falkland Islands (Malvinas)</option>
+																	<option value="FJ" data-kt-select2-country="assets/media/flags/fiji.svg">Fiji</option>
+																	<option value="FI" data-kt-select2-country="assets/media/flags/finland.svg">Finland</option>
+																	<option value="FR" data-kt-select2-country="assets/media/flags/france.svg">France</option>
+																	<option value="PF" data-kt-select2-country="assets/media/flags/french-polynesia.svg">French Polynesia</option>
+																	<option value="GA" data-kt-select2-country="assets/media/flags/gabon.svg">Gabon</option>
+																	<option value="GM" data-kt-select2-country="assets/media/flags/gambia.svg">Gambia</option>
+																	<option value="GE" data-kt-select2-country="assets/media/flags/georgia.svg">Georgia</option>
+																	<option value="DE" data-kt-select2-country="assets/media/flags/germany.svg">Germany</option>
+																	<option value="GH" data-kt-select2-country="assets/media/flags/ghana.svg">Ghana</option>
+																	<option value="GI" data-kt-select2-country="assets/media/flags/gibraltar.svg">Gibraltar</option>
+																	<option value="GR" data-kt-select2-country="assets/media/flags/greece.svg">Greece</option>
+																	<option value="GL" data-kt-select2-country="assets/media/flags/greenland.svg">Greenland</option>
+																	<option value="GD" data-kt-select2-country="assets/media/flags/grenada.svg">Grenada</option>
+																	<option value="GU" data-kt-select2-country="assets/media/flags/guam.svg">Guam</option>
+																	<option value="GT" data-kt-select2-country="assets/media/flags/guatemala.svg">Guatemala</option>
+																	<option value="GG" data-kt-select2-country="assets/media/flags/guernsey.svg">Guernsey</option>
+																	<option value="GN" data-kt-select2-country="assets/media/flags/guinea.svg">Guinea</option>
+																	<option value="GW" data-kt-select2-country="assets/media/flags/guinea-bissau.svg">Guinea-Bissau</option>
+																	<option value="HT" data-kt-select2-country="assets/media/flags/haiti.svg">Haiti</option>
+																	<option value="VA" data-kt-select2-country="assets/media/flags/vatican-city.svg">Holy See (Vatican City State)</option>
+																	<option value="HN" data-kt-select2-country="assets/media/flags/honduras.svg">Honduras</option>
+																	<option value="HK" data-kt-select2-country="assets/media/flags/hong-kong.svg">Hong Kong</option>
+																	<option value="HU" data-kt-select2-country="assets/media/flags/hungary.svg">Hungary</option>
+																	<option value="IS" data-kt-select2-country="assets/media/flags/iceland.svg">Iceland</option>
+																	<option value="IN" data-kt-select2-country="assets/media/flags/india.svg">India</option>
+																	<option value="ID" data-kt-select2-country="assets/media/flags/indonesia.svg">Indonesia</option>
+																	<option value="IR" data-kt-select2-country="assets/media/flags/iran.svg">Iran, Islamic Republic of</option>
+																	<option value="IQ" data-kt-select2-country="assets/media/flags/iraq.svg">Iraq</option>
+																	<option value="IE" data-kt-select2-country="assets/media/flags/ireland.svg">Ireland</option>
+																	<option value="IM" data-kt-select2-country="assets/media/flags/isle-of-man.svg">Isle of Man</option>
+																	<option value="IL" data-kt-select2-country="assets/media/flags/israel.svg">Israel</option>
+																	<option value="IT" data-kt-select2-country="assets/media/flags/italy.svg">Italy</option>
+																	<option value="JM" data-kt-select2-country="assets/media/flags/jamaica.svg">Jamaica</option>
+																	<option value="JP" data-kt-select2-country="assets/media/flags/japan.svg">Japan</option>
+																	<option value="JE" data-kt-select2-country="assets/media/flags/jersey.svg">Jersey</option>
+																	<option value="JO" data-kt-select2-country="assets/media/flags/jordan.svg">Jordan</option>
+																	<option value="KZ" data-kt-select2-country="assets/media/flags/kazakhstan.svg">Kazakhstan</option>
+																	<option value="KE" data-kt-select2-country="assets/media/flags/kenya.svg">Kenya</option>
+																	<option value="KI" data-kt-select2-country="assets/media/flags/kiribati.svg">Kiribati</option>
+																	<option value="KP" data-kt-select2-country="assets/media/flags/north-korea.svg">Korea, Democratic People's Republic of</option>
+																	<option value="KW" data-kt-select2-country="assets/media/flags/kuwait.svg">Kuwait</option>
+																	<option value="KG" data-kt-select2-country="assets/media/flags/kyrgyzstan.svg">Kyrgyzstan</option>
+																	<option value="LA" data-kt-select2-country="assets/media/flags/laos.svg">Lao People's Democratic Republic</option>
+																	<option value="LV" data-kt-select2-country="assets/media/flags/latvia.svg">Latvia</option>
+																	<option value="LB" data-kt-select2-country="assets/media/flags/lebanon.svg">Lebanon</option>
+																	<option value="LS" data-kt-select2-country="assets/media/flags/lesotho.svg">Lesotho</option>
+																	<option value="LR" data-kt-select2-country="assets/media/flags/liberia.svg">Liberia</option>
+																	<option value="LY" data-kt-select2-country="assets/media/flags/libya.svg">Libya</option>
+																	<option value="LI" data-kt-select2-country="assets/media/flags/liechtenstein.svg">Liechtenstein</option>
+																	<option value="LT" data-kt-select2-country="assets/media/flags/lithuania.svg">Lithuania</option>
+																	<option value="LU" data-kt-select2-country="assets/media/flags/luxembourg.svg">Luxembourg</option>
+																	<option value="MO" data-kt-select2-country="assets/media/flags/macao.svg">Macao</option>
+																	<option value="MG" data-kt-select2-country="assets/media/flags/madagascar.svg">Madagascar</option>
+																	<option value="MW" data-kt-select2-country="assets/media/flags/malawi.svg">Malawi</option>
+																	<option value="MY" data-kt-select2-country="assets/media/flags/malaysia.svg">Malaysia</option>
+																	<option value="MV" data-kt-select2-country="assets/media/flags/maldives.svg">Maldives</option>
+																	<option value="ML" data-kt-select2-country="assets/media/flags/mali.svg">Mali</option>
+																	<option value="MT" data-kt-select2-country="assets/media/flags/malta.svg">Malta</option>
+																	<option value="MH" data-kt-select2-country="assets/media/flags/marshall-island.svg">Marshall Islands</option>
+																	<option value="MQ" data-kt-select2-country="assets/media/flags/martinique.svg">Martinique</option>
+																	<option value="MR" data-kt-select2-country="assets/media/flags/mauritania.svg">Mauritania</option>
+																	<option value="MU" data-kt-select2-country="assets/media/flags/mauritius.svg">Mauritius</option>
+																	<option value="MX" data-kt-select2-country="assets/media/flags/mexico.svg">Mexico</option>
+																	<option value="FM" data-kt-select2-country="assets/media/flags/micronesia.svg">Micronesia, Federated States of</option>
+																	<option value="MD" data-kt-select2-country="assets/media/flags/moldova.svg">Moldova, Republic of</option>
+																	<option value="MC" data-kt-select2-country="assets/media/flags/monaco.svg">Monaco</option>
+																	<option value="MN" data-kt-select2-country="assets/media/flags/mongolia.svg">Mongolia</option>
+																	<option value="ME" data-kt-select2-country="assets/media/flags/montenegro.svg">Montenegro</option>
+																	<option value="MS" data-kt-select2-country="assets/media/flags/montserrat.svg">Montserrat</option>
+																	<option value="MA" data-kt-select2-country="assets/media/flags/morocco.svg">Morocco</option>
+																	<option value="MZ" data-kt-select2-country="assets/media/flags/mozambique.svg">Mozambique</option>
+																	<option value="MM" data-kt-select2-country="assets/media/flags/myanmar.svg">Myanmar</option>
+																	<option value="NA" data-kt-select2-country="assets/media/flags/namibia.svg">Namibia</option>
+																	<option value="NR" data-kt-select2-country="assets/media/flags/nauru.svg">Nauru</option>
+																	<option value="NP" data-kt-select2-country="assets/media/flags/nepal.svg">Nepal</option>
+																	<option value="NL" data-kt-select2-country="assets/media/flags/netherlands.svg">Netherlands</option>
+																	<option value="NZ" data-kt-select2-country="assets/media/flags/new-zealand.svg">New Zealand</option>
+																	<option value="NI" data-kt-select2-country="assets/media/flags/nicaragua.svg">Nicaragua</option>
+																	<option value="NE" data-kt-select2-country="assets/media/flags/niger.svg">Niger</option>
+																	<option value="NG" data-kt-select2-country="assets/media/flags/nigeria.svg">Nigeria</option>
+																	<option value="NU" data-kt-select2-country="assets/media/flags/niue.svg">Niue</option>
+																	<option value="NF" data-kt-select2-country="assets/media/flags/norfolk-island.svg">Norfolk Island</option>
+																	<option value="MP" data-kt-select2-country="assets/media/flags/northern-mariana-islands.svg">Northern Mariana Islands</option>
+																	<option value="NO" data-kt-select2-country="assets/media/flags/norway.svg">Norway</option>
+																	<option value="OM" data-kt-select2-country="assets/media/flags/oman.svg">Oman</option>
+																	<option value="PK" data-kt-select2-country="assets/media/flags/pakistan.svg">Pakistan</option>
+																	<option value="PW" data-kt-select2-country="assets/media/flags/palau.svg">Palau</option>
+																	<option value="PS" data-kt-select2-country="assets/media/flags/palestine.svg">Palestinian Territory, Occupied</option>
+																	<option value="PA" data-kt-select2-country="assets/media/flags/panama.svg">Panama</option>
+																	<option value="PG" data-kt-select2-country="assets/media/flags/papua-new-guinea.svg">Papua New Guinea</option>
+																	<option value="PY" data-kt-select2-country="assets/media/flags/paraguay.svg">Paraguay</option>
+																	<option value="PE" data-kt-select2-country="assets/media/flags/peru.svg">Peru</option>
+																	<option value="PH" data-kt-select2-country="assets/media/flags/philippines.svg">Philippines</option>
+																	<option value="PL" data-kt-select2-country="assets/media/flags/poland.svg">Poland</option>
+																	<option value="PT" data-kt-select2-country="assets/media/flags/portugal.svg">Portugal</option>
+																	<option value="PR" data-kt-select2-country="assets/media/flags/puerto-rico.svg">Puerto Rico</option>
+																	<option value="QA" data-kt-select2-country="assets/media/flags/qatar.svg">Qatar</option>
+																	<option value="RO" data-kt-select2-country="assets/media/flags/romania.svg">Romania</option>
+																	<option value="RU" data-kt-select2-country="assets/media/flags/russia.svg">Russian Federation</option>
+																	<option value="RW" data-kt-select2-country="assets/media/flags/rwanda.svg">Rwanda</option>
+																	<option value="BL" data-kt-select2-country="assets/media/flags/st-barts.svg">Saint Barthélemy</option>
+																	<option value="KN" data-kt-select2-country="assets/media/flags/saint-kitts-and-nevis.svg">Saint Kitts and Nevis</option>
+																	<option value="LC" data-kt-select2-country="assets/media/flags/st-lucia.svg">Saint Lucia</option>
+																	<option value="MF" data-kt-select2-country="assets/media/flags/sint-maarten.svg">Saint Martin (French part)</option>
+																	<option value="VC" data-kt-select2-country="assets/media/flags/st-vincent-and-the-grenadines.svg">Saint Vincent and the Grenadines</option>
+																	<option value="WS" data-kt-select2-country="assets/media/flags/samoa.svg">Samoa</option>
+																	<option value="SM" data-kt-select2-country="assets/media/flags/san-marino.svg">San Marino</option>
+																	<option value="ST" data-kt-select2-country="assets/media/flags/sao-tome-and-prince.svg">Sao Tome and Principe</option>
+																	<option value="SA" data-kt-select2-country="assets/media/flags/saudi-arabia.svg">Saudi Arabia</option>
+																	<option value="SN" data-kt-select2-country="assets/media/flags/senegal.svg">Senegal</option>
+																	<option value="RS" data-kt-select2-country="assets/media/flags/serbia.svg">Serbia</option>
+																	<option value="SC" data-kt-select2-country="assets/media/flags/seychelles.svg">Seychelles</option>
+																	<option value="SL" data-kt-select2-country="assets/media/flags/sierra-leone.svg">Sierra Leone</option>
+																	<option value="SG" data-kt-select2-country="assets/media/flags/singapore.svg">Singapore</option>
+																	<option value="SX" data-kt-select2-country="assets/media/flags/sint-maarten.svg">Sint Maarten (Dutch part)</option>
+																	<option value="SK" data-kt-select2-country="assets/media/flags/slovakia.svg">Slovakia</option>
+																	<option value="SI" data-kt-select2-country="assets/media/flags/slovenia.svg">Slovenia</option>
+																	<option value="SB" data-kt-select2-country="assets/media/flags/solomon-islands.svg">Solomon Islands</option>
+																	<option value="SO" data-kt-select2-country="assets/media/flags/somalia.svg">Somalia</option>
+																	<option value="ZA" data-kt-select2-country="assets/media/flags/south-africa.svg">South Africa</option>
+																	<option value="KR" data-kt-select2-country="assets/media/flags/south-korea.svg">South Korea</option>
+																	<option value="SS" data-kt-select2-country="assets/media/flags/south-sudan.svg">South Sudan</option>
+																	<option value="ES" data-kt-select2-country="assets/media/flags/spain.svg">Spain</option>
+																	<option value="LK" data-kt-select2-country="assets/media/flags/sri-lanka.svg">Sri Lanka</option>
+																	<option value="SD" data-kt-select2-country="assets/media/flags/sudan.svg">Sudan</option>
+																	<option value="SR" data-kt-select2-country="assets/media/flags/suriname.svg">Suriname</option>
+																	<option value="SZ" data-kt-select2-country="assets/media/flags/swaziland.svg">Swaziland</option>
+																	<option value="SE" data-kt-select2-country="assets/media/flags/sweden.svg">Sweden</option>
+																	<option value="CH" data-kt-select2-country="assets/media/flags/switzerland.svg">Switzerland</option>
+																	<option value="SY" data-kt-select2-country="assets/media/flags/syria.svg">Syrian Arab Republic</option>
+																	<option value="TW" data-kt-select2-country="assets/media/flags/taiwan.svg">Taiwan, Province of China</option>
+																	<option value="TJ" data-kt-select2-country="assets/media/flags/tajikistan.svg">Tajikistan</option>
+																	<option value="TZ" data-kt-select2-country="assets/media/flags/tanzania.svg">Tanzania, United Republic of</option>
+																	<option value="TH" data-kt-select2-country="assets/media/flags/thailand.svg">Thailand</option>
+																	<option value="TG" data-kt-select2-country="assets/media/flags/togo.svg">Togo</option>
+																	<option value="TK" data-kt-select2-country="assets/media/flags/tokelau.svg">Tokelau</option>
+																	<option value="TO" data-kt-select2-country="assets/media/flags/tonga.svg">Tonga</option>
+																	<option value="TT" data-kt-select2-country="assets/media/flags/trinidad-and-tobago.svg">Trinidad and Tobago</option>
+																	<option value="TN" data-kt-select2-country="assets/media/flags/tunisia.svg">Tunisia</option>
+																	<option value="TR" data-kt-select2-country="assets/media/flags/turkey.svg">Turkey</option>
+																	<option value="TM" data-kt-select2-country="assets/media/flags/turkmenistan.svg">Turkmenistan</option>
+																	<option value="TC" data-kt-select2-country="assets/media/flags/turks-and-caicos.svg">Turks and Caicos Islands</option>
+																	<option value="TV" data-kt-select2-country="assets/media/flags/tuvalu.svg">Tuvalu</option>
+																	<option value="UG" data-kt-select2-country="assets/media/flags/uganda.svg">Uganda</option>
+																	<option value="UA" data-kt-select2-country="assets/media/flags/ukraine.svg">Ukraine</option>
+																	<option value="AE" data-kt-select2-country="assets/media/flags/united-arab-emirates.svg">United Arab Emirates</option>
+																	<option value="GB" data-kt-select2-country="assets/media/flags/united-kingdom.svg">United Kingdom</option>
+																	<option value="US" data-kt-select2-country="assets/media/flags/united-states.svg">United States</option>
+																	<option value="UY" data-kt-select2-country="assets/media/flags/uruguay.svg">Uruguay</option>
+																	<option value="UZ" data-kt-select2-country="assets/media/flags/uzbekistan.svg">Uzbekistan</option>
+																	<option value="VU" data-kt-select2-country="assets/media/flags/vanuatu.svg">Vanuatu</option>
+																	<option value="VE" data-kt-select2-country="assets/media/flags/venezuela.svg">Venezuela, Bolivarian Republic of</option>
+																	<option value="VN" data-kt-select2-country="assets/media/flags/vietnam.svg">Vietnam</option>
+																	<option value="VI" data-kt-select2-country="assets/media/flags/virgin-islands.svg">Virgin Islands</option>
+																	<option value="YE" data-kt-select2-country="assets/media/flags/yemen.svg">Yemen</option>
+																	<option value="ZM" data-kt-select2-country="assets/media/flags/zambia.svg">Zambia</option>
+																	<option value="ZW" data-kt-select2-country="assets/media/flags/zimbabwe.svg">Zimbabwe</option>
+																</select>
+																<!--end::Select2-->
+															</div>
+														</div>
+														<!--end::Input group-->
+														<!--begin::Input group-->
+														<div class="row fv-row mb-7">
+															<div class="col-md-3 text-md-end">
+																<!--begin::Label-->
+																<label class="fs-6 fw-semibold form-label mt-3">
+																	<span class="required">Language</span>
+																</label>
+																<!--end::Label-->
+															</div>
+															<div class="col-md-9">
+																<div class="w-100">
+																	<!--begin::Select2-->
+																	<select class="form-select form-select-solid" name="localization_language" data-control="select2" data-placeholder="Select a language">
+																		<option></option>
+																		<option value="id">Bahasa Indonesia - Indonesian</option>
+																		<option value="msa">Bahasa Melayu - Malay</option>
+																		<option value="ca">Català - Catalan</option>
+																		<option value="cs">Čeština - Czech</option>
+																		<option value="da">Dansk - Danish</option>
+																		<option value="de">Deutsch - German</option>
+																		<option value="en">English</option>
+																		<option value="en-gb">English UK - British English</option>
+																		<option value="es">Español - Spanish</option>
+																		<option value="fil">Filipino</option>
+																		<option value="fr">Français - French</option>
+																		<option value="ga">Gaeilge - Irish (beta)</option>
+																		<option value="gl">Galego - Galician (beta)</option>
+																		<option value="hr">Hrvatski - Croatian</option>
+																		<option value="it">Italiano - Italian</option>
+																		<option value="hu">Magyar - Hungarian</option>
+																		<option value="nl">Nederlands - Dutch</option>
+																		<option value="no">Norsk - Norwegian</option>
+																		<option value="pl">Polski - Polish</option>
+																		<option value="pt">Português - Portuguese</option>
+																		<option value="ro">Română - Romanian</option>
+																		<option value="sk">Slovenčina - Slovak</option>
+																		<option value="fi">Suomi - Finnish</option>
+																		<option value="sv">Svenska - Swedish</option>
+																		<option value="vi">Tiếng Việt - Vietnamese</option>
+																		<option value="tr">Türkçe - Turkish</option>
+																		<option value="el">Ελληνικά - Greek</option>
+																		<option value="bg">Български език - Bulgarian</option>
+																		<option value="ru">Русский - Russian</option>
+																		<option value="sr">Српски - Serbian</option>
+																		<option value="uk">Українська мова - Ukrainian</option>
+																		<option value="he">עִבְרִית - Hebrew</option>
+																		<option value="ur">اردو - Urdu (beta)</option>
+																		<option value="ar">العربية - Arabic</option>
+																		<option value="fa">فارسی - Persian</option>
+																		<option value="mr">मराठी - Marathi</option>
+																		<option value="hi">हिन्दी - Hindi</option>
+																		<option value="bn">বাংলা - Bangla</option>
+																		<option value="gu">ગુજરાતી - Gujarati</option>
+																		<option value="ta">தமிழ் - Tamil</option>
+																		<option value="kn">ಕನ್ನಡ - Kannada</option>
+																		<option value="th">ภาษาไทย - Thai</option>
+																		<option value="ko">한국어 - Korean</option>
+																		<option value="ja">日本語 - Japanese</option>
+																		<option value="zh-cn">简体中文 - Simplified Chinese</option>
+																		<option value="zh-tw">繁體中文 - Traditional Chinese</option>
+																	</select>
+																	<!--end::Select2-->
+																</div>
+															</div>
+														</div>
+														<!--end::Input group-->
+														<!--begin::Input group-->
+														<div class="row fv-row mb-7">
+															<div class="col-md-3 text-md-end">
+																<!--begin::Label-->
+																<label class="fs-6 fw-semibold form-label mt-3">
+																	<span class="required">Currency</span>
+																</label>
+																<!--end::Label-->
+															</div>
+															<div class="col-md-9">
+																<div class="w-100">
+																	<!--begin::Select2-->
+																	<select class="form-select form-select-solid" name="localization_currency" data-control="select2" data-hide-search="true" data-placeholder="Select a currency">
+																		<option></option>
+																		<option value="USD">US Dollar</option>
+																		<option value="Euro">Euro</option>
+																		<option value="Pound">Pound</option>
+																		<option value="AUD">Australian Dollar</option>
+																		<option value="JPY">Japanese Yen</option>
+																		<option value="KRW">Korean Won</option>
+																	</select>
+																	<!--end::Select2-->
+																</div>
+															</div>
+														</div>
+														<!--end::Input group-->
+														<!--begin::Input group-->
+														<div class="row fv-row mb-7">
+															<div class="col-md-3 text-md-end">
+																<!--begin::Label-->
+																<label class="fs-6 fw-semibold form-label mt-3">
+																	<span>Length Class</span>
+																	<span class="ms-1" data-bs-toggle="tooltip" title="Set the unit measurement for length.">
+																		<i class="ki-duotone ki-information-5 text-gray-500 fs-6">
+																			<span class="path1"></span>
+																			<span class="path2"></span>
+																			<span class="path3"></span>
+																		</i>
+																	</span>
+																</label>
+																<!--end::Label-->
+															</div>
+															<div class="col-md-9">
+																<div class="w-100">
+																	<!--begin::Select2-->
+																	<select class="form-select form-select-solid" name="localization_currency" data-control="select2" data-hide-search="true" data-placeholder="Select a length class">
+																		<option></option>
+																		<option value="cm" selected="selected">Centimeter</option>
+																		<option value="mm">Milimeter</option>
+																		<option value="in">Inch</option>
+																	</select>
+																	<!--end::Select2-->
+																</div>
+															</div>
+														</div>
+														<!--end::Input group-->
+														<!--begin::Input group-->
+														<div class="row fv-row mb-7">
+															<div class="col-md-3 text-md-end">
+																<!--begin::Label-->
+																<label class="fs-6 fw-semibold form-label mt-3">
+																	<span>Weight Class</span>
+																	<span class="ms-1" data-bs-toggle="tooltip" title="Set the unit measurement for weight.">
+																		<i class="ki-duotone ki-information-5 text-gray-500 fs-6">
+																			<span class="path1"></span>
+																			<span class="path2"></span>
+																			<span class="path3"></span>
+																		</i>
+																	</span>
+																</label>
+																<!--end::Label-->
+															</div>
+															<div class="col-md-9">
+																<div class="w-100">
+																	<!--begin::Select2-->
+																	<select class="form-select form-select-solid" name="localization_currency" data-control="select2" data-hide-search="true" data-placeholder="Select a weight class">
+																		<option></option>
+																		<option value="kg" selected="selected">Kilogram</option>
+																		<option value="g">Gram</option>
+																		<option value="lb">Pound</option>
+																		<option value="oz">Ounce</option>
+																	</select>
+																	<!--end::Select2-->
+																</div>
+															</div>
+														</div>
+														<!--end::Input group-->
+														<!--begin::Action buttons-->
+														<div class="row py-5">
+															<div class="col-md-9 offset-md-3">
+																<div class="d-flex">
+																	<!--begin::Button-->
+																	<button type="reset" data-kt-ecommerce-settings-type="cancel" class="btn btn-light me-3">Cancel</button>
+																	<!--end::Button-->
+																	<!--begin::Button-->
+																	<button type="submit" data-kt-ecommerce-settings-type="submit" class="btn btn-primary">
+																		<span class="indicator-label">Save</span>
+																		<span class="indicator-progress">Please wait... 
+																		<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+																	</button>
+																	<!--end::Button-->
+																</div>
+															</div>
+														</div>
+														<!--end::Action buttons-->
+													</form>
+													<!--end::Form-->
+												</div>
+												<!--end:::Tab pane-->
+												<!--begin:::Tab pane-->
+												<div class="tab-pane fade" id="kt_ecommerce_settings_products" role="tabpanel">
+													<!--begin::Form-->
+													<form id="kt_ecommerce_settings_general_products" class="form" action="#">
+														<!--begin::Heading-->
+														<div class="row mb-7">
+															<div class="col-md-9 offset-md-3">
+																<h2>Cateogries Settings</h2>
+															</div>
+														</div>
+														<!--end::Heading-->
+														<!--begin::Input group-->
+														<div class="row fv-row mb-7">
+															<div class="col-md-3 text-md-end">
+																<!--begin::Label-->
+																<label class="fs-6 fw-semibold form-label mt-3">
+																	<span>Category Product Count</span>
+																	<span class="ms-1" data-bs-toggle="tooltip" title="Show the number of products inside the subcategories in the storefront header category menu. Be warned, this will cause an extreme performance hit for stores with a lot of subcategories!">
+																		<i class="ki-duotone ki-information-5 text-gray-500 fs-6">
+																			<span class="path1"></span>
+																			<span class="path2"></span>
+																			<span class="path3"></span>
+																		</i>
+																	</span>
+																</label>
+																<!--end::Label-->
+															</div>
+															<div class="col-md-9">
+																<div class="d-flex mt-3">
+																	<!--begin::Radio-->
+																	<div class="form-check form-check-custom form-check-solid me-5">
+																		<input class="form-check-input" type="radio" value="" name="category_product_count" id="category_product_count_yes" checked="checked" />
+																		<label class="form-check-label" for="category_product_count_yes">Yes</label>
+																	</div>
+																	<div class="form-check form-check-custom form-check-solid">
+																		<input class="form-check-input" type="radio" value="" name="category_product_count" id="category_product_count_no" />
+																		<label class="form-check-label" for="category_product_count_no">No</label>
+																	</div>
+																	<!--end::Radio-->
+																</div>
+															</div>
+														</div>
+														<!--end::Input group-->
+														<!--begin::Input group-->
+														<div class="row fv-row mb-16">
+															<div class="col-md-3 text-md-end">
+																<!--begin::Label-->
+																<label class="fs-6 fw-semibold form-label mt-3">
+																	<span class="required">Default Items Per Page</span>
+																	<span class="ms-1" data-bs-toggle="tooltip" title="Determines how many items are shown per page.">
+																		<i class="ki-duotone ki-information-5 text-gray-500 fs-6">
+																			<span class="path1"></span>
+																			<span class="path2"></span>
+																			<span class="path3"></span>
+																		</i>
+																	</span>
+																</label>
+																<!--end::Label-->
+															</div>
+															<div class="col-md-9">
+																<!--begin::Input-->
+																<input type="text" class="form-control form-control-solid" name="products_items_per_page" value="10" />
+																<!--end::Input-->
+															</div>
+														</div>
+														<!--end::Input group-->
+														<!--begin::Heading-->
+														<div class="row mb-7">
+															<div class="col-md-9 offset-md-3">
+																<h2>Reviews Settings</h2>
+															</div>
+														</div>
+														<!--end::Heading-->
+														<!--begin::Input group-->
+														<div class="row fv-row mb-7">
+															<div class="col-md-3 text-md-end">
+																<!--begin::Label-->
+																<label class="fs-6 fw-semibold form-label mt-3">
+																	<span>Allow Reviews</span>
+																	<span class="ms-1" data-bs-toggle="tooltip" title="Enable/disable review entries for registered customers.">
+																		<i class="ki-duotone ki-information-5 text-gray-500 fs-6">
+																			<span class="path1"></span>
+																			<span class="path2"></span>
+																			<span class="path3"></span>
+																		</i>
+																	</span>
+																</label>
+																<!--end::Label-->
+															</div>
+															<div class="col-md-9">
+																<div class="d-flex mt-3">
+																	<!--begin::Radio-->
+																	<div class="form-check form-check-custom form-check-solid me-5">
+																		<input class="form-check-input" type="radio" value="" name="allow_reviews" id="allow_reviews_yes" checked="checked" />
+																		<label class="form-check-label" for="allow_reviews_yes">Yes</label>
+																	</div>
+																	<div class="form-check form-check-custom form-check-solid">
+																		<input class="form-check-input" type="radio" value="" name="allow_reviews" id="allow_reviews_no" />
+																		<label class="form-check-label" for="allow_reviews_no">No</label>
+																	</div>
+																	<!--end::Radio-->
+																</div>
+															</div>
+														</div>
+														<!--end::Input group-->
+														<!--begin::Input group-->
+														<div class="row fv-row mb-16">
+															<div class="col-md-3 text-md-end">
+																<!--begin::Label-->
+																<label class="fs-6 fw-semibold form-label mt-3">
+																	<span>Allow Guest Reviews</span>
+																	<span class="ms-1" data-bs-toggle="tooltip" title="Enable/disable review entries for public guest customers">
+																		<i class="ki-duotone ki-information-5 text-gray-500 fs-6">
+																			<span class="path1"></span>
+																			<span class="path2"></span>
+																			<span class="path3"></span>
+																		</i>
+																	</span>
+																</label>
+																<!--end::Label-->
+															</div>
+															<div class="col-md-9">
+																<div class="d-flex mt-3">
+																	<!--begin::Radio-->
+																	<div class="form-check form-check-custom form-check-solid me-5">
+																		<input class="form-check-input" type="radio" value="" name="allow_guest_reviews" id="allow_guest_reviews_yes" />
+																		<label class="form-check-label" for="allow_guest_reviews_yes">Yes</label>
+																	</div>
+																	<div class="form-check form-check-custom form-check-solid">
+																		<input class="form-check-input" type="radio" value="" name="allow_guest_reviews" id="allow_guest_reviews_no" checked="checked" />
+																		<label class="form-check-label" for="allow_guest_reviews_no">No</label>
+																	</div>
+																	<!--end::Radio-->
+																</div>
+															</div>
+														</div>
+														<!--end::Input group-->
+														<!--begin::Heading-->
+														<div class="row mb-7">
+															<div class="col-md-9 offset-md-3">
+																<h2>Vouchers Settings</h2>
+															</div>
+														</div>
+														<!--end::Heading-->
+														<!--begin::Input group-->
+														<div class="row fv-row mb-7">
+															<div class="col-md-3 text-md-end">
+																<!--begin::Label-->
+																<label class="fs-6 fw-semibold form-label mt-3">
+																	<span class="required">Minimum Vouchers</span>
+																	<span class="ms-1" data-bs-toggle="tooltip" title="Minimum number of vouchers customers can attach to an order">
+																		<i class="ki-duotone ki-information-5 text-gray-500 fs-6">
+																			<span class="path1"></span>
+																			<span class="path2"></span>
+																			<span class="path3"></span>
+																		</i>
+																	</span>
+																</label>
+																<!--end::Label-->
+															</div>
+															<div class="col-md-9">
+																<!--begin::Input-->
+																<input type="text" class="form-control form-control-solid" name="products_min_voucher" value="1" />
+																<!--end::Input-->
+															</div>
+														</div>
+														<!--end::Input group-->
+														<!--begin::Input group-->
+														<div class="row fv-row mb-16">
+															<div class="col-md-3 text-md-end">
+																<!--begin::Label-->
+																<label class="fs-6 fw-semibold form-label mt-3">
+																	<span class="required">Maximum Vouchers</span>
+																	<span class="ms-1" data-bs-toggle="tooltip" title="Maximum number of vouchers customers can attach to an order">
+																		<i class="ki-duotone ki-information-5 text-gray-500 fs-6">
+																			<span class="path1"></span>
+																			<span class="path2"></span>
+																			<span class="path3"></span>
+																		</i>
+																	</span>
+																</label>
+																<!--end::Label-->
+															</div>
+															<div class="col-md-9">
+																<!--begin::Input-->
+																<input type="text" class="form-control form-control-solid" name="products_max_voucher" value="10" />
+																<!--end::Input-->
+															</div>
+														</div>
+														<!--end::Input group-->
+														<!--begin::Heading-->
+														<div class="row mb-7">
+															<div class="col-md-9 offset-md-3">
+																<h2>Tax Settings</h2>
+															</div>
+														</div>
+														<!--end::Heading-->
+														<!--begin::Input group-->
+														<div class="row fv-row mb-7">
+															<div class="col-md-3 text-md-end">
+																<!--begin::Label-->
+																<label class="fs-6 fw-semibold form-label mt-3">
+																	<span>Display Prices with Tax</span>
+																</label>
+																<!--end::Label-->
+															</div>
+															<div class="col-md-9">
+																<div class="d-flex mt-3">
+																	<!--begin::Radio-->
+																	<div class="form-check form-check-custom form-check-solid me-5">
+																		<input class="form-check-input" type="radio" value="" name="product_tax" id="product_tax_yes" checked="checked" />
+																		<label class="form-check-label" for="product_tax_yes">Yes</label>
+																	</div>
+																	<div class="form-check form-check-custom form-check-solid">
+																		<input class="form-check-input" type="radio" value="" name="product_tax" id="product_tax_no" />
+																		<label class="form-check-label" for="product_tax_no">No</label>
+																	</div>
+																	<!--end::Radio-->
+																</div>
+															</div>
+														</div>
+														<!--end::Input group-->
+														<!--begin::Input group-->
+														<div class="row fv-row mb-7">
+															<div class="col-md-3 text-md-end">
+																<!--begin::Label-->
+																<label class="fs-6 fw-semibold form-label mt-3">
+																	<span class="required">Default Tax Rate</span>
+																	<span class="ms-1" data-bs-toggle="tooltip" title="Determines the tax percentage (%) applied to orders">
+																		<i class="ki-duotone ki-information-5 text-gray-500 fs-6">
+																			<span class="path1"></span>
+																			<span class="path2"></span>
+																			<span class="path3"></span>
+																		</i>
+																	</span>
+																</label>
+																<!--end::Label-->
+															</div>
+															<div class="col-md-9">
+																<!--begin::Input-->
+																<input type="text" class="form-control form-control-solid" name="products_tax_rate" value="15%" />
+																<!--end::Input-->
+															</div>
+														</div>
+														<!--end::Input group-->
+														<!--begin::Action buttons-->
+														<div class="row py-5">
+															<div class="col-md-9 offset-md-3">
+																<div class="d-flex">
+																	<!--begin::Button-->
+																	<button type="reset" data-kt-ecommerce-settings-type="cancel" class="btn btn-light me-3">Cancel</button>
+																	<!--end::Button-->
+																	<!--begin::Button-->
+																	<button type="submit" data-kt-ecommerce-settings-type="submit" class="btn btn-primary">
+																		<span class="indicator-label">Save</span>
+																		<span class="indicator-progress">Please wait... 
+																		<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+																	</button>
+																	<!--end::Button-->
+																</div>
+															</div>
+														</div>
+														<!--end::Action buttons-->
+													</form>
+													<!--end::Form-->
+												</div>
+												<!--end:::Tab pane-->
+												<!--begin:::Tab pane-->
+												<div class="tab-pane fade" id="kt_ecommerce_settings_customers" role="tabpanel">
+													<!--begin::Form-->
+													<form id="kt_ecommerce_settings_general_customers" class="form" action="#">
+														<!--begin::Heading-->
+														<div class="row mb-7">
+															<div class="col-md-9 offset-md-3">
+																<h2>Customers Settings</h2>
+															</div>
+														</div>
+														<!--end::Heading-->
+														<!--begin::Input group-->
+														<div class="row fv-row mb-7">
+															<div class="col-md-3 text-md-end">
+																<!--begin::Label-->
+																<label class="fs-6 fw-semibold form-label mt-3">
+																	<span>Customers Online</span>
+																	<span class="ms-1" data-bs-toggle="tooltip" title="Enable/disable tracking customers online status.">
+																		<i class="ki-duotone ki-information-5 text-gray-500 fs-6">
+																			<span class="path1"></span>
+																			<span class="path2"></span>
+																			<span class="path3"></span>
+																		</i>
+																	</span>
+																</label>
+																<!--end::Label-->
+															</div>
+															<div class="col-md-9">
+																<div class="d-flex mt-3">
+																	<!--begin::Radio-->
+																	<div class="form-check form-check-custom form-check-solid me-5">
+																		<input class="form-check-input" type="radio" value="" name="customers_online" id="customers_online_yes" checked="checked" />
+																		<label class="form-check-label" for="customers_online_yes">Yes</label>
+																	</div>
+																	<div class="form-check form-check-custom form-check-solid">
+																		<input class="form-check-input" type="radio" value="" name="customers_online" id="customers_online_no" />
+																		<label class="form-check-label" for="customers_online_no">No</label>
+																	</div>
+																	<!--end::Radio-->
+																</div>
+															</div>
+														</div>
+														<!--end::Input group-->
+														<!--begin::Input group-->
+														<div class="row fv-row mb-7">
+															<div class="col-md-3 text-md-end">
+																<!--begin::Label-->
+																<label class="fs-6 fw-semibold form-label mt-3">
+																	<span>Customers Activity</span>
+																	<span class="ms-1" data-bs-toggle="tooltip" title="Enable/disable tracking customers activity.">
+																		<i class="ki-duotone ki-information-5 text-gray-500 fs-6">
+																			<span class="path1"></span>
+																			<span class="path2"></span>
+																			<span class="path3"></span>
+																		</i>
+																	</span>
+																</label>
+																<!--end::Label-->
+															</div>
+															<div class="col-md-9">
+																<div class="d-flex mt-3">
+																	<!--begin::Radio-->
+																	<div class="form-check form-check-custom form-check-solid me-5">
+																		<input class="form-check-input" type="radio" value="" name="customers_activity" id="customers_activity_yes" checked="checked" />
+																		<label class="form-check-label" for="customers_activity_yes">Yes</label>
+																	</div>
+																	<div class="form-check form-check-custom form-check-solid">
+																		<input class="form-check-input" type="radio" value="" name="customers_activity" id="customers_activity_no" />
+																		<label class="form-check-label" for="customers_activity_no">No</label>
+																	</div>
+																	<!--end::Radio-->
+																</div>
+															</div>
+														</div>
+														<!--end::Input group-->
+														<!--begin::Input group-->
+														<div class="row fv-row mb-7">
+															<div class="col-md-3 text-md-end">
+																<!--begin::Label-->
+																<label class="fs-6 fw-semibold form-label mt-3">
+																	<span>Customer Searches</span>
+																	<span class="ms-1" data-bs-toggle="tooltip" title="Enable/disable logging customers search keywords.">
+																		<i class="ki-duotone ki-information-5 text-gray-500 fs-6">
+																			<span class="path1"></span>
+																			<span class="path2"></span>
+																			<span class="path3"></span>
+																		</i>
+																	</span>
+																</label>
+																<!--end::Label-->
+															</div>
+															<div class="col-md-9">
+																<div class="d-flex mt-3">
+																	<!--begin::Radio-->
+																	<div class="form-check form-check-custom form-check-solid me-5">
+																		<input class="form-check-input" type="radio" value="" name="customers_searches" id="customers_searches_yes" checked="checked" />
+																		<label class="form-check-label" for="customers_searches_yes">Yes</label>
+																	</div>
+																	<div class="form-check form-check-custom form-check-solid">
+																		<input class="form-check-input" type="radio" value="" name="customers_searches" id="customers_searches_no" />
+																		<label class="form-check-label" for="customers_searches_no">No</label>
+																	</div>
+																	<!--end::Radio-->
+																</div>
+															</div>
+														</div>
+														<!--end::Input group-->
+														<!--begin::Input group-->
+														<div class="row fv-row mb-7">
+															<div class="col-md-3 text-md-end">
+																<!--begin::Label-->
+																<label class="fs-6 fw-semibold form-label mt-3">
+																	<span>Allow Guest Checkout</span>
+																	<span class="ms-1" data-bs-toggle="tooltip" title="Enable/disable guest customers to checkout.">
+																		<i class="ki-duotone ki-information-5 text-gray-500 fs-6">
+																			<span class="path1"></span>
+																			<span class="path2"></span>
+																			<span class="path3"></span>
+																		</i>
+																	</span>
+																</label>
+																<!--end::Label-->
+															</div>
+															<div class="col-md-9">
+																<div class="d-flex mt-3">
+																	<!--begin::Radio-->
+																	<div class="form-check form-check-custom form-check-solid me-5">
+																		<input class="form-check-input" type="radio" value="" name="customers_guest_checkout" id="customers_guest_checkout_yes" />
+																		<label class="form-check-label" for="customers_guest_checkout_yes">Yes</label>
+																	</div>
+																	<div class="form-check form-check-custom form-check-solid">
+																		<input class="form-check-input" type="radio" value="" name="customers_guest_checkout" id="customers_guest_checkout_no" checked="checked" />
+																		<label class="form-check-label" for="customers_guest_checkout_no">No</label>
+																	</div>
+																	<!--end::Radio-->
+																</div>
+															</div>
+														</div>
+														<!--end::Input group-->
+														<!--begin::Input group-->
+														<div class="row fv-row mb-7">
+															<div class="col-md-3 text-md-end">
+																<!--begin::Label-->
+																<label class="fs-6 fw-semibold form-label mt-3">
+																	<span>Login Display Prices</span>
+																	<span class="ms-1" data-bs-toggle="tooltip" title="Only show prices when customers log in.">
+																		<i class="ki-duotone ki-information-5 text-gray-500 fs-6">
+																			<span class="path1"></span>
+																			<span class="path2"></span>
+																			<span class="path3"></span>
+																		</i>
+																	</span>
+																</label>
+																<!--end::Label-->
+															</div>
+															<div class="col-md-9">
+																<div class="d-flex mt-3">
+																	<!--begin::Radio-->
+																	<div class="form-check form-check-custom form-check-solid me-5">
+																		<input class="form-check-input" type="radio" value="" name="customers_login_prices" id="customers_login_prices_yes" />
+																		<label class="form-check-label" for="customers_login_prices_yes">Yes</label>
+																	</div>
+																	<div class="form-check form-check-custom form-check-solid">
+																		<input class="form-check-input" type="radio" value="" name="customers_login_prices" id="customers_login_prices_no" checked="checked" />
+																		<label class="form-check-label" for="customers_login_prices_no">No</label>
+																	</div>
+																	<!--end::Radio-->
+																</div>
+															</div>
+														</div>
+														<!--end::Input group-->
+														<!--begin::Input group-->
+														<div class="row fv-row mb-7">
+															<div class="col-md-3 text-md-end">
+																<!--begin::Label-->
+																<label class="fs-6 fw-semibold form-label mt-3">
+																	<span class="required">Max Login Attempts</span>
+																	<span class="ms-1" data-bs-toggle="tooltip" title="Set the max number of login attempts before the customer account is locked for 1 hour.">
+																		<i class="ki-duotone ki-information-5 text-gray-500 fs-6">
+																			<span class="path1"></span>
+																			<span class="path2"></span>
+																			<span class="path3"></span>
+																		</i>
+																	</span>
+																</label>
+																<!--end::Label-->
+															</div>
+															<div class="col-md-9">
+																<!--begin::Input-->
+																<input type="text" class="form-control form-control-solid" name="customer_login_attempts" value="" />
+																<!--end::Input-->
+															</div>
+														</div>
+														<!--end::Input group-->
+														<!--begin::Action buttons-->
+														<div class="row py-5">
+															<div class="col-md-9 offset-md-3">
+																<div class="d-flex">
+																	<!--begin::Button-->
+																	<button type="reset" data-kt-ecommerce-settings-type="cancel" class="btn btn-light me-3">Cancel</button>
+																	<!--end::Button-->
+																	<!--begin::Button-->
+																	<button type="submit" data-kt-ecommerce-settings-type="submit" class="btn btn-primary">
+																		<span class="indicator-label">Save</span>
+																		<span class="indicator-progress">Please wait... 
+																		<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+																	</button>
+																	<!--end::Button-->
+																</div>
+															</div>
+														</div>
+														<!--end::Action buttons-->
+													</form>
+													<!--end::Form-->
+												</div>
+												<!--end:::Tab pane-->
+											</div>
+											<!--end:::Tab content-->
+										</div>
+										<!--end::Card body-->
+									</div>
+									<!--end::Card-->
+								</div>
+								<!--end::Content container-->
+							</div>
+							<!--end::Content-->
+						</div>
+						<!--end::Content wrapper-->
+<?php include("common/footer.php") ?> 		

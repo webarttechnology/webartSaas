@@ -19,11 +19,22 @@ class Controller {
         $this->metaDescription = '';
     }
 
-    public function view($view, $data = []) 
+    // public function view($view, $data = []) 
+    // {
+    //     $instance = new self();
+    //     $instance->_view = $view;
+    //     $instance->_data = $data;
+
+    //     return $instance;
+    // }
+
+    public function view($view, $data = [], $title = '', $metaDescription = '') 
     {
         $instance = new self();
         $instance->_view = $view;
         $instance->_data = $data;
+        $instance->title = $title; // Set the title
+        $instance->metaDescription = $metaDescription; // Set the meta description
 
         return $instance;
     }
@@ -50,22 +61,13 @@ class Controller {
     {
         if( !$this->_render && $this->_view != '' )
         {
-            /*
-            ob_start();
-            $metaDescription = $this->metaDescription;
-            $title = $this->title;
-            extract($this->_data);
-            $content = file_get_contents("../app/views/$this->_view.php");
-            $content = str_replace('{{', '<?php echo ', $content);
-            $content = str_replace('}}', ' ?>', $content);
-            eval(' ?>' . $content . '<?php ');
-            echo ob_get_clean(); */
-
             
+
             ob_start();
         
             $metaDescription = $this->metaDescription;
-            $title = $this->title;
+            $title =  $this->title;
+
             extract($this->_data);
     
             $viewPath = BASE_PATH . "/app/views/$this->_view.php";

@@ -18,7 +18,9 @@ class HomeController extends Controller
 
       $data['themeInfo'] = $optionM->getActive();
 
-      $this->view('themes/'. trim( $data['themeInfo']->value) . '/' . 'index', $data);
+      $title = option('business_name');
+
+      $this->view('themes/'. trim( $data['themeInfo']->value) . '/' . 'index', $data, $title);
    }
    
    public function about()
@@ -28,7 +30,9 @@ class HomeController extends Controller
 
       $data['themeInfo'] = $optionM->getActive();
 
-      $this->view('themes/'. trim( $data['themeInfo']->value) . '/' . 'about', $data);
+      $title = 'About';
+
+      $this->view('themes/'. trim( $data['themeInfo']->value) . '/' . 'about', $data, $title);
    }
    public function contact_us()
    {
@@ -36,6 +40,8 @@ class HomeController extends Controller
       $optionM = new Option();
 
       $data['themeInfo'] = $optionM->getActive();
+
+      $title = 'Contact Us';
 
       $this->view('themes/'. trim( $data['themeInfo']->value) . '/' . 'contact-us', $data);
    }
@@ -46,7 +52,9 @@ class HomeController extends Controller
 
       $data['themeInfo'] = $optionM->getActive();
 
-      $this->view('themes/'. trim( $data['themeInfo']->value) . '/' . 'checkout', $data);
+      $title = 'Checkout';
+
+      $this->view('themes/'. trim( $data['themeInfo']->value) . '/' . 'checkout', $data, $title);
    }
    public function faq()
    {
@@ -55,7 +63,9 @@ class HomeController extends Controller
 
       $data['themeInfo'] = $optionM->getActive();
 
-      $this->view('themes/'. trim( $data['themeInfo']->value) . '/' . 'faq', $data);
+      $title = 'FAQ';
+
+      $this->view('themes/'. trim( $data['themeInfo']->value) . '/' . 'faq', $data, $title);
    }
    public function cart()
    {
@@ -64,7 +74,9 @@ class HomeController extends Controller
 
       $data['themeInfo'] = $optionM->getActive();
 
-      $this->view('themes/'. trim( $data['themeInfo']->value) . '/' . 'cart', $data);
+      $title = 'Cart';
+
+      $this->view('themes/'. trim( $data['themeInfo']->value) . '/' . 'cart', $data, $title);
    }
    public function gallery()
    {
@@ -72,8 +84,8 @@ class HomeController extends Controller
       $optionM = new Option();
 
       $data['themeInfo'] = $optionM->getActive();
-
-      $this->view('themes/'. trim( $data['themeInfo']->value) . '/' . 'gallery', $data);
+      $title = 'Gallery';
+      $this->view('themes/'. trim( $data['themeInfo']->value) . '/' . 'gallery', $data, $title);
    }
    public function register()
    {
@@ -81,8 +93,8 @@ class HomeController extends Controller
       $optionM = new Option();
 
       $data['themeInfo'] = $optionM->getActive();
-
-      $this->view('themes/'. trim( $data['themeInfo']->value) . '/' . 'login-resgister', $data);
+      $title = 'Register';
+      $this->view('themes/'. trim( $data['themeInfo']->value) . '/' . 'login-resgister', $data, $title);
    }
    public function my_account()
    {
@@ -90,8 +102,8 @@ class HomeController extends Controller
       $optionM = new Option();
 
       $data['themeInfo'] = $optionM->getActive();
-
-      $this->view('themes/'. trim( $data['themeInfo']->value) . '/' . 'my-account', $data);
+      $title = 'My Account';
+      $this->view('themes/'. trim( $data['themeInfo']->value) . '/' . 'my-account', $data, $title);
    }
    public function shop_detail()
    {
@@ -99,8 +111,8 @@ class HomeController extends Controller
       $optionM = new Option();
 
       $data['themeInfo'] = $optionM->getActive();
-
-      $this->view('themes/'. trim( $data['themeInfo']->value) . '/' . 'shop-detail', $data);
+      $title = 'Shop Details';
+      $this->view('themes/'. trim( $data['themeInfo']->value) . '/' . 'shop-detail', $data, $title);
    }
    public function shop()
    {
@@ -108,8 +120,8 @@ class HomeController extends Controller
       $optionM = new Option();
 
       $data['themeInfo'] = $optionM->getActive();
-
-      $this->view('themes/'. trim( $data['themeInfo']->value) . '/' . 'shop', $data);
+      $title = 'Shop';
+      $this->view('themes/'. trim( $data['themeInfo']->value) . '/' . 'shop', $data, $title);
    }
    public function terms()
    {
@@ -117,8 +129,8 @@ class HomeController extends Controller
       $optionM = new Option();
 
       $data['themeInfo'] = $optionM->getActive();
-
-      $this->view('themes/'. trim( $data['themeInfo']->value) . '/' . 'terms-condition', $data);
+      $title = 'About';
+      $this->view('themes/'. trim( $data['themeInfo']->value) . '/' . 'terms-condition', $data, $title);
    }
    public function track_order()
    {
@@ -126,8 +138,8 @@ class HomeController extends Controller
       $optionM = new Option();
 
       $data['themeInfo'] = $optionM->getActive();
-
-      $this->view('themes/'. trim( $data['themeInfo']->value) . '/' . 'track-order', $data);
+      $title = 'Track Order';
+      $this->view('themes/'. trim( $data['themeInfo']->value) . '/' . 'track-order', $data, $title);
    }
    public function wishlist()
    {
@@ -135,8 +147,8 @@ class HomeController extends Controller
       $optionM = new Option();
 
       $data['themeInfo'] = $optionM->getActive();
-
-      $this->view('themes/'. trim( $data['themeInfo']->value) . '/' . 'wishlist', $data);
+      $title = 'Wishlist';
+      $this->view('themes/'. trim( $data['themeInfo']->value) . '/' . 'wishlist', $data, $title);
    }
 
    public function blog()
@@ -145,8 +157,8 @@ class HomeController extends Controller
       $optionM = new Option();
 
       $data['themeInfo'] = $optionM->getActive();
-
-      $this->view('themes/'. trim( $data['themeInfo']->value) . '/' . 'blog', $data);
+      $title = 'Blog';
+      $this->view('themes/'. trim( $data['themeInfo']->value) . '/' . 'blog', $data, $title);
    }
 
    
@@ -156,8 +168,8 @@ class HomeController extends Controller
       $optionM = new Option();
 
       $data['themeInfo'] = $optionM->getActive();
-
-      $this->view('themes/'. trim( $data['themeInfo']->value) . '/' . 'blog-single', $data);
+      $title = 'Blog Single';
+      $this->view('themes/'. trim( $data['themeInfo']->value) . '/' . 'blog-single', $data, $title);
    }
    
 

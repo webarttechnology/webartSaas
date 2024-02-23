@@ -11,285 +11,568 @@ use App\Models\Country;
 use App\Models\Category;
 use App\Models\Currency;
 use App\Models\Location;
+use App\Models\User;
+use Core\Hash;
+use Core\Mail;
 
-class AdminController extends Controller {
+class AdminController extends Controller
+{
 
 
 
    public function login()
    {
 
-      if(isset($_SESSION['Auth_Admin'])){
+      if (isset($_SESSION['Auth_Admin'])) {
          $url = url('/dw-admin/dashboard');
-         header('location: '.$url);
+         header('location: ' . $url);
          exit();
-     }
+      }
 
       $this->view('admin/login');
-
    }
 
-     public function Admin_Login_Action()
-     {
+   public function reset_password()
+   {
+
+      $this->view('admin/reset-password');
+   }
+
+   public function new_password()
+   {
+
+      $this->view('admin/new-password');
+   }
+   public function sign_up()
+   {
+
+      $this->view('admin/sign-up');
+   }
+   public function coming_soon()
+   {
+
+      $this->view('admin/coming-soon');
+   }
+
+
+
+
+
+   public function Admin_Login_Action()
+   {
 
 
       try {
 
          $request  = new Request;
 
+         // fire($request->all());
+
          $rules = [
-               'user'         => ['required'],
-               'password'     => ['required'],
+            'user'         => ['required'],
+            'password'     => ['required'],
          ];
-         
+
          $validator  =  Validation::make($request->all(), $rules);
-         
+
          if ($validator->fails()) {
-               $errors = $validator->errors();
-               return responseJson(['status' => 'errors', 'message' => $errors]);
+            $errors = $validator->errors();
+            return responseJson(['status' => 'errors', 'message' => $errors]);
          }
 
 
-           
-            if($_SERVER['HTTP_HOST'] == 'domain.test'){
-               ////// Local
-               $url = 'http://saas.test/api/login-action';
-            }else{
-               ///// Live 
-               $url = 'https://trixcart.com/api/login-action';
-            }
-            
 
-            // Data to be sent in the POST request
-            $postData = array(
-               'user'         => $request->get('user'),
-               'password'     => $request->get('password'),
-               'url'          =>  $request->get('url')
-            );
+         if ($_SERVER['HTTP_HOST'] == 'domain.test') {
+            ////// Local
+            $url = 'http://saas.test/api/login-action';
+         } else {
+            ///// Live 
+            $url = 'https://prototype.trixcart.com/api/login-action';
+         }
 
 
-            $ch = curl_init();
+         // Data to be sent in the POST request
+         $postData = array(
+            'user'         => $request->get('user'),
+            'password'     => $request->get('password'),
+            'url'          => $request->get('url')
+         );
 
-            curl_setopt($ch, CURLOPT_URL, $url); 
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); 
-            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-            curl_setopt($ch, CURLOPT_POST, true);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($postData));
 
-            // Execute cURL request
-            $response = curl_exec($ch);
+         $ch = curl_init();
 
-            if($response == false){
-               return responseJson(['status' => 'error', 'message' => 'Api not working']);
-            }
+         curl_setopt($ch, CURLOPT_URL, $url);
+         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+         curl_setopt($ch, CURLOPT_POST, true);
+         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($postData));
 
-            if(json_decode($response)->status == 'error'){
-               return responseJson(['status' => 'error', 'message' => 'Incorrect Credentials']);
-            }elseif(json_decode($response)->status == 'errors'){
-               return responseJson(['status' => 'error', 'message' => 'Incorrect Credentials']);
-            }
+         // Execute cURL request
+         $response = curl_exec($ch);
 
-            //fire( json_decode($response)->url);
+         if ($response == false) {
+            return responseJson(['status' => 'error', 'message' => 'Api not working']);
+         }
 
-            $_SESSION['Auth_Admin_Id'] = json_decode($response)->user_id;
-            $_SESSION['Auth_Admin']    = true;
+         // fire($response);
 
-            return responseJson(['status' => 'success', 'message' => 'Login Successful', 'url'=> json_decode($response)->url ]);
+         if (json_decode($response)->status == 'error') {
+            return responseJson(['status' => 'error', 'message' => 'Incorrect Credentials']);
+         } elseif (json_decode($response)->status == 'errors') {
+            return responseJson(['status' => 'error', 'message' => 'Incorrect Credentials']);
+         }
 
+         //fire( json_decode($response)->url);
+
+         $_SESSION['Auth_Admin_Id'] = json_decode($response)->user_id;
+         $_SESSION['Auth_Admin']    = true;
+
+         return responseJson(['status' => 'success', 'message' => 'Login Successful', 'url' => json_decode($response)->url]);
       } catch (\Throwable $th) {
          return responseJson(['status' => 'error', 'message' => 'Server error please try again']);
       }
-       
-     }
+   }
 
 
-     public function logout()
-     {
+   public function logout()
+   {
 
-       if(isset($_SESSION['Auth_Admin'])){
+      if (isset($_SESSION['Auth_Admin'])) {
 
          $_SESSION = array();
 
          session_destroy();
 
          $url = url('/dw-admin');
-      
-         header("Location: ".$url); 
+
+         header("Location: " . $url);
+
          exit();
-       }
-       
-     }
-
-  
-     public function dashboard()
-     {
+      }
+   }
 
 
-      // $source        = PUBLIC_PATH.'user/images/theme.jpg';
-      // $destination   = PUBLIC_PATH.'img/theme12.jpg';
-      // // fire($source);
-      // $img = new ImageTools($source);
-      // // $img->resize(200, 200)
-      // $img->compress(90)
-      // ->save($destination);
-      // fire('o');
-  
-        $this->view('admin/dashboard');
-  
-     }
-  
-     public function product()
-     {
-        $this->view('admin/product');
-     }
-  
-     public function add_product()
-     {
-        $this->view('admin/add-product');
-     }
-
-     public function add_product_category()
-     {
-        $category = new Category;
-        $data['category']  = $category->getCategory();
-        $this->view('admin/add-product-category',  $data);
-     }
-  
-
-  
-     public function single_product()
-     {
-        $this->view('admin/single-product');
-     }
-  
-     public function order_list()
-     {
-        $this->view('admin/order-list');
-     }
-  
-     public function order_details()
-     {
-        $this->view('admin/order-details');
-     }
-  
-     public function customer_list()
-     {
-        $this->view('admin/customer-list');
-     }
-  
-     public function customer_details()
-     {
-        $this->view('admin/customer-details');
-     }
-  
-     public function order_history()
-     {
-        $this->view('admin/order-history');
-     }
-  
-     public function theme()
-     {
-        $dir = PUBLIC_PATH.'themes';
-  
-        $optionM = new Option();
-  
-        $data['themes']  = storeThemes($dir);
-        
-        $data['themeInfo'] = $optionM->getActive();
-  
-        // fire($data['themes']);
-  
-        $this->view('admin/theme', $data);
-     }
-  
-     public function theme_details($name)
-     {
-  
-        $dir = PUBLIC_PATH.'themes';
-        $optionM = new Option();
-  
-        if(detaiThemes(storeThemes($dir), $name) == ''){
-           header('location: '.url('/dw-admin/theme'));
-           exit;
-        }
-  
-        $file_path  = PUBLIC_PATH.'themes/'.$name.'/description.txt';
-  
-        if(file_exists($file_path) == false){
-           header('location: '.url('/dw-admin/theme'));
-           exit;  
-        }
-  
-        $data['description'] = file_get_contents($file_path);
-  
-        $data['patternThemes']       = '/Theme Name:\s*(.+)/';
-        $data['patternAuthor']       = '/Author:\s*(.+)/';
-        $data['patternDescription']  = '/Description:\s*(.+)/';
-        $data['patternVersion']      = '/Version:\s*(.+)/';
-        $data['patternTags']         = '/Tags:\s*(.+)/';
-        $data['patternUrl']          = '/Url:\s*(.+)/';
-        $data['screenshot']          = $name.'/'.basename(storeThemes($dir)[$name]);
-        $data['themeInfo'] = $optionM->getActive();
-  
-        $this->view('admin/theme-details', $data);
-        
-     }
-  
-  
-     public function theme_upload()
-     {
-  
-           $rules = [
-              'theme'       => ['file'],
-           ];
-        
-           $validator  =  Validation::make($_FILES, $rules);
-     
-           if ($validator->fails()) {
-                 $errors = $validator->errors();
-                 return responseJson(['status' => 'errors', 'message' => $errors]);
-           }
-  
-           $request  = new Request;
-  
-           $request->move('theme', PUBLIC_PATH.'themes/');
-  
-           $success =  $request->unzipTheme(PUBLIC_PATH.'themes/'.$request->getFileName('theme'), PUBLIC_PATH.'themes/');
-  
-           if( $success == 'Successfull'){
-              return responseJson(['status' => 'success', 'message' => 'Theme successfully install']);
-           }else{
-              return responseJson(['status' => 'error', 'message' => $success ]);
-           }
-     }
-  
-     
-     public function active_theme()
-     {
-        
-        $request  = new Request;
-  
-        $option   = new Option;
-  
-        $option->makeActive(trim($request->get('theme')));
-  
-        return responseJson(['status' => 'success', 'message' => 'Theme Active successfully']);
-  
-     }
+   public function dashboard()
+   {
 
 
-     public function settings()
-     {
-        $locations = new Location;
-        $country = new Country;
-        $currency = new Currency;
-        $data['location'] = $locations->getLocationData($_SESSION['Auth_Admin_Id']);
-        $data['countryType']  = $country->getCountryType();
-        $data['currency']  = $currency->getCurrency();
-        $this->view('admin/settings',  $data);
-     }
-     
+
+      $title = 'Dashboard';
+
+      $this->view('admin/dashboard', [], $title);
+   }
+
+   public function product()
+   {
+      $title = 'Product';
+      $this->view('admin/products',  [], $title);
+   }
+
+   public function add_product()
+   {
+      $title = 'Add Product';
+      $this->view('admin/add-product',  [], $title);
+   }
+
+   public function edit_product()
+   {
+      $title = 'Edit Product';
+      $this->view('admin/edit-product',  [], $title);
+   }
 
 
+   public function categories()
+   {
+      $category = new Category;
+      $data['category']  = $category->getCategory();
+      $title = 'All Category';
+      $this->view('admin/categories',  $data);
+   }
+
+
+
+
+   public function add_category()
+   {
+      $category = new Category;
+      $data['category']  = $category->getCategory();
+      $title = 'Add  Category';
+      $this->view('admin/add-category',  $data);
+   }
+
+   public function edit_category()
+   {
+      $category = new Category;
+      $data['category']  = $category->getCategory();
+      $title = 'Edit  Category';
+      $this->view('admin/edit-category',  $data);
+   }
+
+
+
+   public function single_product()
+   {
+      $title = 'Product Details';
+      $this->view('admin/single-product',  [], $title);
+   }
+
+   public function order_list()
+   {
+      $title = 'Order List';
+      $this->view('admin/order-list',  [], $title);
+   }
+
+   public function order_details()
+   {
+      $title = 'Order Details';
+      $this->view('admin/order-details',  [], $title);
+   }
+
+   public function add_order()
+   {
+      $title = 'Add Order';
+      $this->view('admin/add-order',  [], $title);
+   }
+
+   public function edit_order()
+   {
+      $title = 'Edit Order';
+      $this->view('admin/edit-order',  [], $title);
+   }
+
+
+   public function invoice()
+   {
+      $title = 'Edit Order';
+      $this->view('admin/invoice',  [], $title);
+   }
+
+   public function create_invoice()
+   {
+      $title = 'Edit Order';
+      $this->view('admin/create-invoice',  [], $title);
+   }
+
+   public function getting_started()
+   {
+      $title = 'Getting started';
+      $this->view('admin/getting-started',  [], $title);
+   }
+
+   public function customer_list()
+   {
+      $title = 'Customer List';
+      $this->view('admin/customer-list',  [], $title);
+   }
+
+   public function customer_details()
+   {
+      $title = 'Customer History';
+      $this->view('admin/customer-details',  [], $title);
+   }
+
+   public function order_history()
+   {
+
+      $title = 'Order History';
+
+      $this->view('admin/order-history',  [], $title);
+   }
+
+   public function theme()
+   {
+      $dir = PUBLIC_PATH . 'themes';
+
+      $optionM = new Option();
+
+      $data['themes']  = storeThemes($dir);
+
+      $data['themeInfo'] = $optionM->getActive();
+
+      $title = 'Themes';
+
+      $this->view('admin/theme', $data, $title);
+   }
+   public function theme_store()
+   {
+      $dir = PUBLIC_PATH . 'themes';
+
+      $optionM = new Option();
+
+      $data['themes']  = storeThemes($dir);
+
+      $data['themeInfo'] = $optionM->getActive();
+
+      $title = 'Add Themes';
+
+      $this->view('admin/theme-store', $data, $title);
+   }
+
+
+
+   public function theme_details($name)
+   {
+
+      $dir = PUBLIC_PATH . 'themes';
+      $optionM = new Option();
+
+      if (detaiThemes(storeThemes($dir), $name) == '') {
+         header('location: ' . url('/dw-admin/theme'));
+         exit;
+      }
+
+      $file_path  = PUBLIC_PATH . 'themes/' . $name . '/description.txt';
+
+      if (file_exists($file_path) == false) {
+         header('location: ' . url('/dw-admin/theme'));
+         exit;
+      }
+
+      $data['description'] = file_get_contents($file_path);
+
+      $data['patternThemes']       = '/Theme Name:\s*(.+)/';
+      $data['patternAuthor']       = '/Author:\s*(.+)/';
+      $data['patternDescription']  = '/Description:\s*(.+)/';
+      $data['patternVersion']      = '/Version:\s*(.+)/';
+      $data['patternTags']         = '/Tags:\s*(.+)/';
+      $data['patternUrl']          = '/Url:\s*(.+)/';
+      $data['screenshot']          = $name . '/' . basename(storeThemes($dir)[$name]);
+      $data['themeInfo'] = $optionM->getActive();
+
+      $title = 'Theme Details';
+
+      $this->view('admin/theme-details', $data,  $title);
+   }
+
+
+   public function theme_upload()
+   {
+
+      $rules = [
+         'theme'       => ['file'],
+      ];
+
+      $validator  =  Validation::make($_FILES, $rules);
+
+      if ($validator->fails()) {
+         $errors = $validator->errors();
+         return responseJson(['status' => 'errors', 'message' => $errors]);
+      }
+
+      $request  = new Request;
+
+      $request->move('theme', PUBLIC_PATH . 'themes/');
+
+      $success =  $request->unzipTheme(PUBLIC_PATH . 'themes/' . $request->getFileName('theme'), PUBLIC_PATH . 'themes/');
+
+      if ($success == 'Successfull') {
+         return responseJson(['status' => 'success', 'message' => 'Theme successfully install']);
+      } else {
+         return responseJson(['status' => 'error', 'message' => $success]);
+      }
+   }
+
+
+   public function active_theme()
+   {
+
+      $request  = new Request;
+
+      $option   = new Option;
+
+      $option->makeActive(trim($request->get('theme')));
+
+      return responseJson(['status' => 'success', 'message' => 'Theme Active successfully']);
+   }
+
+
+   public function settings()
+   {
+      $locations = new Location;
+      $country = new Country;
+      $currency = new Currency;
+      //   $data['location'] = $locations->getLocationData($_SESSION['Auth_Admin_Id']);
+      $data['countryType']  = $country->getCountryType();
+      $data['currency']  = $currency->getCurrency();
+      $title = 'Setting';
+      $this->view('admin/settings',  $data,  $title);
+   }
+
+
+   public function forgotPassword()
+   {
+      $this->view('admin/reset-password');
+   }
+
+   public function sendResetLinkEmail()
+   {
+      try {
+
+         $request = new Request;
+
+         $rules = [
+            'email' => ['required'],
+         ];
+
+
+         $validator = Validation::make($request->all(), $rules);
+
+         if ($validator->fails()) {
+            $errors = $validator->errors();
+            return responseJson(['status' => 'errors', 'message' => $errors]);
+         }
+
+
+         if ($_SERVER['HTTP_HOST'] == 'domain.test') {
+            ////// Local
+            $url = 'http://saas.test/api/password/email';
+         } else {
+            ///// Live
+            $url = 'https://prototype.trixcart.com/api/password/email';
+         }
+
+         // Data to be sent in the POST request
+         $postData = array(
+            'email' => $request->get('email'),
+            'url'   => $request->get('url'),
+         );
+
+
+
+         $ch = curl_init();
+
+         curl_setopt($ch, CURLOPT_URL, $url);
+         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+         curl_setopt($ch, CURLOPT_POST, true);
+         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($postData));
+
+         // Execute cURL request
+         $response = curl_exec($ch);
+         // fire($response);
+
+
+         if ($response == false) {
+            return responseJson(['status' => 'error', 'message' => 'Api not working']);
+         }
+
+         if (json_decode($response)->status == 'error') {
+            return responseJson(['status' => 'error', 'message' => 'Email address is not exist']);
+         }
+
+
+         return responseJson(['status' => 'success', 'message' => 'Link sent is Successfull to your email', 'url' => "/dw-admin"]);
+      } catch (\Throwable $th) {
+         return responseJson(['status' => 'error', 'message' => 'Server error please try again']);
+      }
+   }
+
+   public function showResetForm($token, $id)
+   {
+
+      if ($_SERVER['HTTP_HOST'] == 'domain.test') {
+         ////// Local
+         $url = 'http://saas.test/api/valid-user';
+      } else {
+         ///// Live
+         $url = 'https://prototype.trixcart.com/api/valid-user';
+      }
+
+      // Data to be sent in the POST request
+      $postData = array(
+         'token' => $token,
+         'id'    => $id,
+      );
+
+      $ch = curl_init();
+
+      curl_setopt($ch, CURLOPT_URL, $url);
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+      curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+      curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+      curl_setopt($ch, CURLOPT_POST, true);
+      curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($postData));
+
+      // Execute cURL request
+      $response = curl_exec($ch);
+
+      // fire( json_decode($response)->data );
+
+      if (json_decode($response)->data == false) {
+         $url = url('/dw-admin');
+         header('location: ' . $url);
+         exit();
+      }
+
+      $data['data'] = [
+         'email' => json_decode($response)->data->email,
+      ];
+
+
+      $this->view('admin/new-password', $data);
+   }
+
+   public function resetPassword()
+   {
+      try {
+
+         $request = new Request;
+
+         $rules = [
+            'password' => ['required'],
+            'confirm-password' => ['required'],
+         ];
+
+         $validator = Validation::make($request->all(), $rules);
+
+         if ($validator->fails()) {
+            $errors = $validator->errors();
+            return responseJson(['status' => 'errors', 'message' => $errors]);
+         }
+
+
+         if ($_SERVER['HTTP_HOST'] == 'domain.test') {
+            ////// Local
+            $url = 'http://saas.test/api/password/reset';
+         } else {
+            ///// Live
+            $url = 'https://prototype.trixcart.com/api/password/reset';
+         }
+
+
+         // Data to be sent in the POST request
+         $postData = array(
+            'password' => $request->get('password'),
+            'confirm-password' => $request->get('confirm-password'),
+            'email' => $request->get('email'),
+         );
+
+
+         $ch = curl_init();
+
+         curl_setopt($ch, CURLOPT_URL, $url);
+         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+         curl_setopt($ch, CURLOPT_POST, true);
+         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($postData));
+
+         // Execute cURL request
+         $response = curl_exec($ch);
+
+         if ($response == false) {
+            return responseJson(['status' => 'error', 'message' => 'Api not working']);
+         }
+
+         if (json_decode($response)->status == 'error') {
+            return responseJson(['status' => 'error', 'message' => 'Server error please try again']);
+         }
+
+         return responseJson(['status' => 'success', 'message' => 'Password Reset Successfully', 'url' => "/dw-admin"]);
+      } catch (\Throwable $th) {
+         return responseJson(['status' => 'error', 'message' => 'Server error please try again']);
+      }
+   }
 }

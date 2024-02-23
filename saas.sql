@@ -50342,6 +50342,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `password` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `user_name` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `domain` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `remember_token` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)

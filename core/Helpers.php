@@ -1,5 +1,8 @@
 <?php
 
+use Core\Database;
+
+
 
 /**
  * The "fire" function in PHP is used to display the value and type of a variable in a formatted manner
@@ -182,7 +185,36 @@ function detaiThemes($themes, $name){
             break; // Stop looping once the key is found
         }
     }
+
     return $theme;
 }
 
+
+function option($key){
+    $db = Database::connect();
+    $query = $db->prepare("SELECT * FROM `options` WHERE `name` = :key");
+    $query->bindValue(':key', $key);
+    $query->execute();
+    return $query->fetch(PDO::FETCH_OBJ)->value ?? null;
+}
+
+function fullUrl(){
+    $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http";
+    $host = $_SERVER['HTTP_HOST'];
+    $requestUri = $_SERVER['REQUEST_URI'];
+    
+    $fullUrl = $protocol . "://" . $host . $requestUri;
+    
+    return $fullUrl;
+}
+    
+    
+function urisegments(){
+    $url = fullUrl();
+    // Parse the URL to get the path
+    $path = parse_url($url, PHP_URL_PATH);
+    // Explode the path to get individual segments
+    $segments = explode('/', $path);
+    return $segments;
+}
 

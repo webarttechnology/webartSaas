@@ -35,7 +35,7 @@ $(document).ready(function () {
         loadCities(stateId, '#store_city');
     });
 
-    getlocations();
+    // getlocations();
 
     const csrf_token = $('meta[name="csrf-token"]').attr('content');
 

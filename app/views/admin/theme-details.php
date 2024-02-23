@@ -1,7 +1,7 @@
 <?php
-include 'common/header.php';
-include 'common/navbar.php';
-include 'common/sidebar.php';
+	include 'common/header.php';
+	include 'common/navber.php';
+	include 'common/sidebar.php';
 ?>
 
 <?php
@@ -49,152 +49,94 @@ include 'common/sidebar.php';
             }
 
             ?>
-<!-- content part start -->
-<section class="main_content">
-    <div class="container-fluid">
-        <div class="row">
-            <!-- page title part -->
-            <div class="col-sm-6">
-                <h4>Edit Theme</h4>
-            </div>
-            <div class="col-sm-6 ">
-            <?php if ($activeText) : ?>
-                <small class="badge bg-success float-end">Active Theme</small>
-            <?php endif ?>
-            </div>
-            <!-- page body part -->
-            <div class="col-sm-6 col-md-5 mt-3">
-                <img src="<?= url('themes/' . $screenshot . '') ?>" alt="" class="w-100 mb-3">
-                <center>
-                    <?php if ($activeText == '') : ?>
+
+<!--begin::Main-->
+<div class="app-main flex-column flex-row-fluid" id="kt_app_main">
+	<!--begin::Content wrapper-->
+	<div class="d-flex flex-column flex-column-fluid">
+		<!--begin::Toolbar-->
+		<div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
+			<!--begin::Toolbar container-->
+			<div id="kt_app_toolbar_container" class="app-container container-xxl d-flex flex-stack">
+				<!--begin::Page title-->
+				<div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
+					<!--begin::Title-->
+					<h1 class="page-heading d-flex text-gray-900 fw-bold fs-3 flex-column justify-content-center my-0">Edit Theme
+					</h1>
+					<!--end::Title-->
+					<!--begin::Breadcrumb-->
+					<ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
+						<!--begin::Item-->
+						<li class="breadcrumb-item text-muted">
+							<a href="<?=  url('/dw-admin/dashboard') ?>" class="text-muted text-hover-primary">Home</a>
+						</li>
+						<!--end::Item-->
+						<!--begin::Item-->
+						<li class="breadcrumb-item">
+							<span class="bullet bg-gray-500 w-5px h-2px"></span>
+						</li>
+						<!--end::Item-->
+						<!--begin::Item-->
+						<li class="breadcrumb-item text-muted">Edit Theme</li>
+						<!--end::Item-->
+					</ul>
+					<!--end::Breadcrumb-->
+				</div>
+				<!--end::Page title-->
+				<!--begin::Actions-->
+				<div class="d-flex align-items-center gap-2 gap-lg-3">
+					<!--begin::Primary button-->
+					<a href="<?php echo $url ?>" target="_blank" class="btn btn-sm fw-bold btn-primary">Live Preview</a>
+					<!--end::Primary button-->
+					<!--begin::Primary button-->
+					<a href="#" class="btn btn-sm fw-bold btn-dark">Customize</a>
+					<!--end::Primary button-->
+					<!--begin::Primary button-->
+					<?php if ($activeText) : ?>
+					 <a class="btn btn-sm fw-bold btn-success">Active</a>
+            		<?php endif ?>
+					<!--end::Primary button-->
+				</div>
+				<!--end::Actions-->
+			</div>
+			<!--end::Toolbar container-->
+		</div>
+		<!--end::Toolbar-->
+		<!--begin::Content-->
+		<div id="kt_app_content" class="app-content flex-column-fluid">
+			<!--begin::Content container-->
+			<div id="kt_app_content_container" class="app-container container-xxl">
+				<!--begin::Products-->
+				<!-- page body part -->
+                <div class="row">
+               
+                <div class="col-sm-6 col-md-5 mt-3">
+                    <img src="<?= url('themes/' . $screenshot . '') ?>" alt="" class="w-100 mb-3">
+                    <center>
+					<?php if ($activeText == '') : ?>
                         <span><a href="#" class="btn btn-success theme-active" data-type="themedetails" data-theme="<?php echo $newtheme_name; ?>">Active</a></span>
                     <?php endif ?>
-                    <span><a href="#" class="btn btn-danger">Delete</a></span>
-                    <span><a href="<?php echo $url ?>" target="_blank" class="btn btn-info">Live Preview</a></span>
-                </center>
-            </div>
-            <div class="col-sm-6 col-md-7 mt-3">
+
+                        <span><a href="#" class="btn btn-danger">Delete</a></span>
+                    </center>
+                </div>
+                <div class="col-sm-6 col-md-7 mt-3">
                 <div class="panel_body m-0">
-
                     <h3><?php echo $theme_name ?></h3>
-                    <small>By: <a href="#" class="text-secondary"><?php echo $auther_name ?></a></small>
+                    <small>By: <a href="#"><?php echo $auther_name ?></a></small>
                     <hr class="mb-3 mt-3">
-                    <p><?php echo $desc ?></p>
-                    <hr class="mb-3 mt-3">
+					<p><?php echo $desc ?></p>
+					<hr class="mb-3 mt-3">
                     <strong>Tags:</strong>
-                    <p class="mt-3"><?php echo $tags ?></p>
-                </div>
+					<p class="mt-3"><?php echo $tags ?></p>
+                </div>  
+                </div>    
             </div>
-        </div>
-    </div>
-</section>
-<!-- content part end -->
-
-
-<!-- The Modal -->
-<div class="modal" id="myModal">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-
-            <!-- Modal body -->
-            <div class="modal-body">
-                <button type="button" class="btn-close text-end" data-bs-dismiss="modal"></button>
-                <h4 class="modal-title text-center">Send Email</h4>
-                <form action="">
-                    <div class="row mt-3">
-                        <div class="form-floating mb-3 col-md-12">
-                            <input type="text" class="form-control" id="float_to" placeholder="">
-                            <label for="float_to">Email To</label>
-                        </div>
-                        <div class="form-floating mb-3 col-md-12">
-                            <input type="text" class="form-control" id="float_form" placeholder="">
-                            <label for="float_form">Email From</label>
-                        </div>
-                        <div class="form-floating mb-3 col-sm-12">
-                            <textarea class="form-control" id="floatingDescription" style="height: 100px"></textarea>
-                            <label for="floatingDescription">Message</label>
-                        </div>
-                        <div class="form-floating col-12 text-center">
-                            <input type="button" value="Send Mail" class="btn btn-secondary">
-                        </div>
-                    </div>
-                </form>
-            </div>
-
-        </div>
-    </div>
-</div>
-
-
-<div class="templateCustomizer">
-    <div class="topbox">
-        <span class="customizerBtn"><i class="fa-solid fa-gear"></i></span>
-        <span class="closePanel"><i class="fa-solid fa-xmark"></i></span>
-        <h5>Template Customizer</h5>
-        <p>Customize and preview in real time</p>
-    </div>
-    <hr>
-    <div class="box">
-        <p><strong>Color Customizer</strong></p>
-        <ul>
-            <li>
-                <div data-setting="radio">
-                    <input type="radio" value="theme-color-blue" class="btn-check" name="theme_color" id="theme-color-1" data-colors="{&quot;primary&quot;: &quot;#00C3F9&quot;, &quot;info&quot;: &quot;#573BFF&quot;}">
-                    <label class="btn btn-border d-block bg-transparent" for="theme-color-1" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Theme-1" aria-label="Theme-1">
-                        <svg class="customizer-btn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="26" height="26">
-                            <circle cx="12" cy="12" r="10" fill="#00C3F9"></circle>
-                            <path d="M2,12 a1,1 1 1,0 20,0" fill="#573BFF"></path>
-                        </svg>
-                    </label>
-                </div>
-            </li>
-            <li>
-                <div data-setting="radio">
-                    <input type="radio" value="theme-color-gray" class="btn-check" name="theme_color" id="theme-color-2" data-colors="{&quot;primary&quot;: &quot;#91969E&quot;, &quot;info&quot;: &quot;#FD8D00&quot;}">
-                    <label class="btn btn-border d-block bg-transparent" for="theme-color-2" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Theme-2" aria-label="Theme-2">
-                        <svg class="customizer-btn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="26" height="26">
-                            <circle cx="12" cy="12" r="10" fill="#91969E"></circle>
-                            <path d="M2,12 a1,1 1 1,0 20,0" fill="#FD8D00"></path>
-                        </svg>
-                    </label>
-                </div>
-            </li>
-            <li>
-                <div data-setting="radio">
-                    <input type="radio" value="theme-color-red" class="btn-check" name="theme_color" id="theme-color-3" data-colors="{&quot;primary&quot;: &quot;#DB5363&quot;, &quot;info&quot;: &quot;#366AF0&quot;}">
-                    <label class="btn btn-border d-block bg-transparent" for="theme-color-3" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Theme-3" aria-label="Theme-3" aria-describedby="tooltip777762">
-                        <svg class="customizer-btn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="26" height="26">
-                            <circle cx="12" cy="12" r="10" fill="#DB5363"></circle>
-                            <path d="M2,12 a1,1 1 1,0 20,0" fill="#366AF0"></path>
-                        </svg>
-                    </label>
-                </div>
-            </li>
-        </ul>
-    </div>
-    <div class="box">
-        <p><strong>Font</strong></p>
-        <div class="row">
-            <div class="form-floating mb-3 col-12">
-                <select class="form-select" id="c" aria-label="Floating label">
-                    <option value="1">Option One</option>
-                    <option value="2">Option Two</option>
-                    <option value="3">Option Three</option>
-                </select>
-                <label for="floatingBfont">Body Font</label>
-            </div>
-            <div class="form-floating mb-3 col-12">
-                <select class="form-select" id="floatingHfont" aria-label="Floating label">
-                    <option value="1">Option One</option>
-                    <option value="2">Option Two</option>
-                    <option value="3">Option Three</option>
-                </select>
-                <label for="floatingHfont">Heading Font</label>
-            </div>
-        </div>
-    </div>
-</div>
-
-<?php
-include 'common/footer.php';
-?>
+				<!--end::Products-->
+			</div>
+			<!--end::Content container-->
+		</div>
+		<!--end::Content-->
+	</div>
+	<!--end::Content wrapper-->
+	<?php include("common/footer.php") ?> 							

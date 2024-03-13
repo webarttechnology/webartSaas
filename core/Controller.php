@@ -19,33 +19,17 @@ class Controller {
         $this->metaDescription = '';
     }
 
-    // public function view($view, $data = []) 
-    // {
-    //     $instance = new self();
-    //     $instance->_view = $view;
-    //     $instance->_data = $data;
-
-    //     return $instance;
-    // }
-
-    public function view($view, $data = [], $title = '', $metaDescription = '') 
+    public function view($view, $data = []) 
     {
         $instance = new self();
         $instance->_view = $view;
         $instance->_data = $data;
-        $instance->title = $title; // Set the title
-        $instance->metaDescription = $metaDescription; // Set the meta description
 
         return $instance;
     }
 
     public function render()
     {
-        if (!is_array($this->_data)) {
-            $this->_data = [];
-        }
-
-
         $this->_render = true;
 
         ob_start();
@@ -54,20 +38,29 @@ class Controller {
 
         include BASE_PATH . "/app/views/$this->_view.php";
 
-        echo ob_get_clean();
+        return ob_get_clean();
     }
 
     public function __destruct()
     {
         if( !$this->_render && $this->_view != '' )
         {
-            
+            /*
+            ob_start();
+            $metaDescription = $this->metaDescription;
+            $title = $this->title;
+            extract($this->_data);
+            $content = file_get_contents("../app/views/$this->_view.php");
+            $content = str_replace('{{', '<?php echo ', $content);
+            $content = str_replace('}}', ' ?>', $content);
+            eval(' ?>' . $content . '<?php ');
+            echo ob_get_clean(); */
 
+            
             ob_start();
         
             $metaDescription = $this->metaDescription;
-            $title =  $this->title;
-
+            $title = $this->title;
             extract($this->_data);
     
             $viewPath = BASE_PATH . "/app/views/$this->_view.php";

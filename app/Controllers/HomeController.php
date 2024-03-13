@@ -2,10 +2,16 @@
 
 namespace App\Controllers;
 
-use App\Models\Option;
+use Core\Mail;
 use Core\Request;
+use App\Models\Cart;
+use App\Models\User;
 use Core\Controller;
 use Core\Validation;
+use App\Models\Option;
+use App\Models\Product;
+use App\Models\Category;
+use App\Models\Country;
 
 class HomeController extends Controller
 {
@@ -19,10 +25,15 @@ class HomeController extends Controller
       $data['themeInfo'] = $optionM->getActive();
 
       $title = option('business_name');
+      $category = new Category;
+      $data['allcategory'] = $category->getRandomCategory();
 
-      $this->view('themes/'. trim( $data['themeInfo']->value) . '/' . 'index', $data, $title);
+      $product = new Product;
+      $data['product'] = $product->getCategoryProductAll();
+
+      $this->view('themes/' . trim($data['themeInfo']->value) . '/' . 'index', $data, $title);
    }
-   
+
    public function about()
    {
 
@@ -32,7 +43,7 @@ class HomeController extends Controller
 
       $title = 'About';
 
-      $this->view('themes/'. trim( $data['themeInfo']->value) . '/' . 'about', $data, $title);
+      $this->view('themes/' . trim($data['themeInfo']->value) . '/' . 'about', $data, $title);
    }
    public function contact_us()
    {
@@ -43,10 +54,16 @@ class HomeController extends Controller
 
       $title = 'Contact Us';
 
-      $this->view('themes/'. trim( $data['themeInfo']->value) . '/' . 'contact-us', $data);
+      $this->view('themes/' . trim($data['themeInfo']->value) . '/' . 'contact-us', $data);
    }
    public function checkout()
    {
+
+      if(!isset($_SESSION['user_id'])){
+         $url = url('/');
+         header('location: '.$url);
+         exit();
+      }
 
       $optionM = new Option();
 
@@ -54,7 +71,15 @@ class HomeController extends Controller
 
       $title = 'Checkout';
 
-      $this->view('themes/'. trim( $data['themeInfo']->value) . '/' . 'checkout', $data, $title);
+      $cart = new Cart;
+      $data['cart'] = $cart->getCart();
+
+      $country   = new Country;
+      $data['country'] = $country->getCountryType();
+
+      // fire($data['country']);
+
+      $this->view('themes/' . trim($data['themeInfo']->value) . '/' . 'checkout', $data, $title);
    }
    public function faq()
    {
@@ -65,7 +90,7 @@ class HomeController extends Controller
 
       $title = 'FAQ';
 
-      $this->view('themes/'. trim( $data['themeInfo']->value) . '/' . 'faq', $data, $title);
+      $this->view('themes/' . trim($data['themeInfo']->value) . '/' . 'faq', $data, $title);
    }
    public function cart()
    {
@@ -75,9 +100,41 @@ class HomeController extends Controller
       $data['themeInfo'] = $optionM->getActive();
 
       $title = 'Cart';
+      $cart = new Cart;
+      $data['cart'] = $cart->getCart();
 
-      $this->view('themes/'. trim( $data['themeInfo']->value) . '/' . 'cart', $data, $title);
+      $this->view('themes/' . trim($data['themeInfo']->value) . '/' . 'cart', $data, $title);
    }
+
+
+   public function getCart()
+   {
+
+      try {
+         $cart   = new Cart;
+
+         $allCart = $cart->getCart();
+
+         if (count($allCart) > 0) {
+            return responseJson(['status' => 'success', 'data' => $allCart]);
+         }
+         return responseJson(['status' => 'error', 'message' => 'No Record Found']);
+      } catch (\Throwable $th) {
+         return responseJson(['status' => 'error', 'message' => $th]);
+      }
+   }
+
+   public function cartData()
+   {
+       $optionM = new Option();
+       $data['themeInfo'] = $optionM->getActive();
+       $title = 'Cart';
+       $carts = new Cart;
+       $data['cart'] = $carts->getCart();
+       $data = $this->view('themes/' . trim($data['themeInfo']->value) . '/' . 'getCart', $data, $title)->render();
+       return responseJson(['status' => 'success', 'data' => $data]);
+   }
+
    public function gallery()
    {
 
@@ -85,7 +142,7 @@ class HomeController extends Controller
 
       $data['themeInfo'] = $optionM->getActive();
       $title = 'Gallery';
-      $this->view('themes/'. trim( $data['themeInfo']->value) . '/' . 'gallery', $data, $title);
+      $this->view('themes/' . trim($data['themeInfo']->value) . '/' . 'gallery', $data, $title);
    }
    public function register()
    {
@@ -94,7 +151,7 @@ class HomeController extends Controller
 
       $data['themeInfo'] = $optionM->getActive();
       $title = 'Register';
-      $this->view('themes/'. trim( $data['themeInfo']->value) . '/' . 'login-resgister', $data, $title);
+      $this->view('themes/' . trim($data['themeInfo']->value) . '/' . 'login-resgister', $data, $title);
    }
    public function my_account()
    {
@@ -103,26 +160,35 @@ class HomeController extends Controller
 
       $data['themeInfo'] = $optionM->getActive();
       $title = 'My Account';
-      $this->view('themes/'. trim( $data['themeInfo']->value) . '/' . 'my-account', $data, $title);
+      $this->view('themes/' . trim($data['themeInfo']->value) . '/' . 'my-account', $data, $title);
    }
-   public function shop_detail()
+   public function shop_detail($prod_name, $id)
    {
 
       $optionM = new Option();
 
       $data['themeInfo'] = $optionM->getActive();
+      $product = new Product;
+      $data['product'] = $product->getProductByID($id);
+      $data['featured_product'] = $product->getFeaturedProduct(  $data['product']->id, $data['product']->category_id);
+      $data['product_media'] = $product->getProductMediaByProdid($id);
+      $data['product_color'] = $product->getProductColor($id);
+      $data['product_size'] = $product->getProductSize($id);
       $title = 'Shop Details';
-      $this->view('themes/'. trim( $data['themeInfo']->value) . '/' . 'shop-detail', $data, $title);
+      $this->view('themes/' . trim($data['themeInfo']->value) . '/' . 'shop-detail', $data, $title);
    }
    public function shop()
    {
 
       $optionM = new Option();
 
+      $product = new Product;
+      $data['product'] = $product->getProductAll();
       $data['themeInfo'] = $optionM->getActive();
       $title = 'Shop';
-      $this->view('themes/'. trim( $data['themeInfo']->value) . '/' . 'shop', $data, $title);
+      $this->view('themes/' . trim($data['themeInfo']->value) . '/' . 'shop', $data, $title);
    }
+   
    public function terms()
    {
 
@@ -130,7 +196,7 @@ class HomeController extends Controller
 
       $data['themeInfo'] = $optionM->getActive();
       $title = 'About';
-      $this->view('themes/'. trim( $data['themeInfo']->value) . '/' . 'terms-condition', $data, $title);
+      $this->view('themes/' . trim($data['themeInfo']->value) . '/' . 'terms-condition', $data, $title);
    }
    public function track_order()
    {
@@ -139,7 +205,7 @@ class HomeController extends Controller
 
       $data['themeInfo'] = $optionM->getActive();
       $title = 'Track Order';
-      $this->view('themes/'. trim( $data['themeInfo']->value) . '/' . 'track-order', $data, $title);
+      $this->view('themes/' . trim($data['themeInfo']->value) . '/' . 'track-order', $data, $title);
    }
    public function wishlist()
    {
@@ -148,7 +214,7 @@ class HomeController extends Controller
 
       $data['themeInfo'] = $optionM->getActive();
       $title = 'Wishlist';
-      $this->view('themes/'. trim( $data['themeInfo']->value) . '/' . 'wishlist', $data, $title);
+      $this->view('themes/' . trim($data['themeInfo']->value) . '/' . 'wishlist', $data, $title);
    }
 
    public function blog()
@@ -158,10 +224,10 @@ class HomeController extends Controller
 
       $data['themeInfo'] = $optionM->getActive();
       $title = 'Blog';
-      $this->view('themes/'. trim( $data['themeInfo']->value) . '/' . 'blog', $data, $title);
+      $this->view('themes/' . trim($data['themeInfo']->value) . '/' . 'blog', $data, $title);
    }
 
-   
+
    public function blog_single()
    {
 
@@ -169,21 +235,109 @@ class HomeController extends Controller
 
       $data['themeInfo'] = $optionM->getActive();
       $title = 'Blog Single';
-      $this->view('themes/'. trim( $data['themeInfo']->value) . '/' . 'blog-single', $data, $title);
+      $this->view('themes/' . trim($data['themeInfo']->value) . '/' . 'blog-single', $data, $title);
    }
-   
-
-
-
-   
 
 
 
 
+   public function registerAccount()
+   {
+
+      try {
+
+         $request = new Request;
+         // fire($request->all());
+
+         $rules = [
+            'email' => ['required'],
+         ];
+         $validator = Validation::make($request->all(), $rules);
+
+         if ($validator->fails()) {
+            $errors = $validator->errors();
+            return responseJson(['status' => 'errors', 'message' => $errors]);
+         }
+
+         $user = new User;
+         $cart = new Cart;
+
+         $check = $user->checkUser($request->get('email'));
+         if ($check == false) {
+            $user_data = [
+               'email' => $request->get('email'),
+            ];
+
+            $new_user = $user->create($user_data);
+            $_SESSION['user_id'] = $new_user->id;
+            $msg = 'Your acount succesfully created';
+         } else {
+            $_SESSION['user_id'] = $check['id'];
+            $msg = 'Sign In Successfully';
+         }
+
+         $uuid = $_SESSION['unique_id'];
+         $checkcart = $cart->checkCart($uuid);      
+         if( $checkcart){
+             $updatecart = $cart->addToCart( $_SESSION['user_id'] , $uuid);
+         }
+
+         unset($_SESSION['unique_id']);
+
+         $urls = fullUrl();
+         $parsed_url = parse_url($urls);
+         $base_url = $parsed_url['scheme'] . '://' . $parsed_url['host'] . '/';
+        
+         $url = $base_url;
+
+         return responseJson(['status' => 'success', 'message' => 'Your acount succesfully created', 'url' => $url]);
+      } catch (\Throwable $th) {
+         return responseJson(['status' => 'error', 'message' => 'Server error please try again']);
+      }
+   }
 
 
- 
 
 
-   
+
+   public function sendOtp()
+   {
+
+      try {
+
+         $request = new Request;
+
+         $otp = rand(1000, 9999);
+
+         $data['data'] = [
+            'otp' => $otp,
+            'email' => $request->get('email'),
+         ];
+
+
+         $otp_template = $this->view('emails/otp_send_mail', $data)->render();
+
+         Mail::send($request->get('email'), 'Your otp for verification', $otp_template);
+
+         return responseJson(['status' => 'success', 'message' => 'OTP sent is Successfull to your email' . $otp, 'otp' => base64_encode($otp)]);
+      } catch (\Throwable $th) {
+         return responseJson(['status' => 'error', 'message' => 'OTP sent is fail to your email']);
+      }
+   }
+
+   public function logout()
+   {
+
+      if (isset($_SESSION['user_id'])) {
+
+         $_SESSION = array();
+
+         session_destroy();
+
+         $url = url('/');
+
+         header("Location: " . $url);
+         exit();
+      }
+   }
 }

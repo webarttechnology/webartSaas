@@ -5,6 +5,7 @@
 // Import the necessary classes
 
 use App\Middleware\AuthMiddleware;
+use App\Middleware\UserAuthMiddleware;
 
 // Define your routes
 $routes = [
@@ -21,13 +22,28 @@ $routes = [
         '/gallery'                  => ['HomeController@gallery'],
         '/register'                 => ['HomeController@register'],
         '/my-account'               => ['HomeController@my_account'],
-        '/shop-detail'              => ['HomeController@shop_detail'],
+        '/shop-detail/{prod_name}/{id}'              => ['HomeController@shop_detail'],
         '/shop'                     => ['HomeController@shop'],
         '/terms'                    => ['HomeController@terms'],
         '/track-order'              => ['HomeController@track_order'],
         '/wishlist'                 => ['HomeController@wishlist'],
         '/blog'                     => ['HomeController@blog'],
         '/blog-single'              => ['HomeController@blog_single'],
+
+        ///// Tushar Nayak ///
+
+        '/get-cart'                 => ['HomeController@getCart'],
+        '/cart-data'                => ['HomeController@cartData'],
+
+        '/logout'         => [
+            'HomeController@logout', [
+                'middleware' => [
+                    [UserAuthMiddleware::class, 'index']
+                ]
+            ]
+        ],
+
+
 
         
 
@@ -57,7 +73,7 @@ $routes = [
             ]
             ]
         ], 
-        '/dw-admin/edit-product'      => ['AdminController@edit_product',[
+        '/dw-admin/edit-product/{id}'      => ['AdminController@edit_product',[
             'middleware' => [
                 [AuthMiddleware::class, 'index']
             ]
@@ -76,7 +92,13 @@ $routes = [
             ]
             ]
         ],
-        '/dw-admin/edit-category'   => ['AdminController@edit_category',[
+        '/dw-admin/edit-category/{id}'   => ['AdminController@edit_category',[
+            'middleware' => [
+                [AuthMiddleware::class, 'index']
+            ]
+            ]
+        ],
+        '/dw-admin/add-variation'   => ['AdminController@add_variation',[
             'middleware' => [
                 [AuthMiddleware::class, 'index']
             ]
@@ -195,26 +217,74 @@ $routes = [
             ]
         ],  
         
+        '/dw-admin/vendor'           => ['AdminController@vendor',[
+            'middleware' => [
+                [AuthMiddleware::class, 'index']
+            ]
+            ]
+        ],  
+
+        '/dw-admin/vendor-store-list/{id}'           => ['AdminController@vendor_store_list',[
+            'middleware' => [
+                [AuthMiddleware::class, 'index']
+            ]
+            ]
+        ],  
+
+        '/dw-admin/vendor-store/{id}'           => ['AdminController@vendor_store',[
+            'middleware' => [
+                [AuthMiddleware::class, 'index']
+            ]
+            ]
+        ],  
+
+        '/dw-admin/vendor-product-details/{id}'           => ['AdminController@vendor_product_details',[
+            'middleware' => [
+                [AuthMiddleware::class, 'index']
+            ]
+            ]
+        ],
+        
         
         '/dw-admin/reset-password'                        => ['AdminController@forgotPassword'],
         '/dw-admin/password/resetdata/{token}/{id}'       => ['AdminController@showResetForm'],
 
+
     ],
 
     'POST' => [
-        '/dw-admin/admin-login-action'   => ['AdminController@Admin_Login_Action'],
-        '/dw-admin/theme-upload'         => ['AdminController@theme_upload'],
-        '/dw-admin/active-theme'         => ['AdminController@active_theme'],
-        '/dw-admin/save-location'    => ['SettingsController@save_location'],
-        '/dw-admin/make-default'    => ['SettingsController@make_defaultlocation'],
-        '/dw-admin/delete-location'    => ['SettingsController@delete_location'],
-        '/dw-admin/get-states'    => ['SettingsController@getStates'],
-        '/dw-admin/get-city'    => ['SettingsController@getCities'],
-        '/dw-admin/save-store'    => ['SettingsController@save_store'],
-        '/dw-admin/save-category'    => ['CategoryController@save_category'],
-        '/dw-admin/get-category'    => ['CategoryController@getCategory'],
-        '/dw-admin/password/email'     => ['AdminController@sendresetLinkemail'],
-        '/dw-admin/password/reset'     => ['AdminController@resetPassword'],
+        '/dw-admin/admin-login-action'  => ['AdminController@Admin_Login_Action'],
+        '/dw-admin/theme-upload'        => ['AdminController@theme_upload'],
+        '/dw-admin/active-theme'        => ['AdminController@active_theme'],
+        '/dw-admin/save-location'       => ['SettingsController@save_location'],
+        '/dw-admin/make-default'        => ['SettingsController@make_defaultlocation'],
+        '/dw-admin/delete-location'     => ['SettingsController@delete_location'],
+        '/dw-admin/get-states'          => ['SettingsController@getStates'],
+        '/dw-admin/get-city'            => ['SettingsController@getCities'],
+        '/dw-admin/save-store'          => ['SettingsController@save_store'],
+        '/dw-admin/save-category'       => ['CategoryController@save_category'],
+        '/dw-admin/get-category'        => ['CategoryController@getCategory'],
+        '/dw-admin/password/email'      => ['AdminController@sendresetLinkemail'],
+        '/dw-admin/password/reset'      => ['AdminController@resetPassword'],
+        '/dw-admin/update-category'     => ['CategoryController@update_category'],
+        '/dw-admin/get-category-name'   => ['CategoryController@get_category_name'],
+        '/dw-admin/list-all-category'   => ['CategoryController@list_all_category'],
+        '/dw-admin/save-settings'       => ['SettingsController@save_settings'],
+        '/dw-admin/store-product'       => ['ProductController@store_product'],
+        '/dw-admin/upload-product-img'  => ['ProductController@upload_product_img'],
+        '/dw-admin/update-product'      => ['ProductController@update_product'],
+
+
+        ///////// User /////
+
+        ///// Tushar Nayak ///
+        '/register-account'             => ['HomeController@registerAccount'],
+        '/send-otp'                     => ['HomeController@sendOtp'],
+        '/dw-admin/remove-media-file'   => ['ProductController@remove_media_file'],
+
+        ///Manage Cart
+        '/manage-cart'                  => ['CartController@manageCart'],
+        '/get-country'                  => ['CheckoutController@get_country'],
     ],
 
 

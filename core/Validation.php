@@ -102,7 +102,8 @@ class Validation
     protected function validateFile($field, $value, $parameters)
     {
         // Check if the value is a valid file upload
-        if (!isset($value['tmp_name']) || !is_uploaded_file($value['tmp_name'])) {
+        
+        if (!isset($_FILES[$field]['tmp_name']) || !is_uploaded_file($_FILES[$field]['tmp_name'])) {
             $this->addError($field, "The $field field is required.");
         }
     }
@@ -110,8 +111,10 @@ class Validation
     protected function validateFileType($field, $value, $parameters)
     {
         $allowedExtensions = $parameters;
+
+        // fire($_FILES[$field]);
     
-        $fileExtension = strtolower(pathinfo($value['name'], PATHINFO_EXTENSION));
+        $fileExtension = strtolower(pathinfo($_FILES[$field]['name'], PATHINFO_EXTENSION));
     
         if (!in_array($fileExtension, $allowedExtensions)) {
             $this->addError($field, "The $field must be a file of type: " . implode(', ', $allowedExtensions));
@@ -122,8 +125,8 @@ class Validation
     {
         $maxFileSize = $parameters[0]; // in bytes
 
-        if ($value['size'] > $maxFileSize) {
-            $this->addError($field, "The $field may not be greater than " . $maxFileSize / 1024 . " KB.");
+        if ($_FILES[$field]['size'] > $maxFileSize * 1024) {
+            $this->addError($field, "The $field may not be greater than " . $maxFileSize . " KB.");
         }
     }
 

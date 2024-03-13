@@ -1,6 +1,8 @@
 <?php
 
+use App\Models\Cart;
 use Core\Database;
+use App\Models\Option;
 
 
 
@@ -218,3 +220,54 @@ function urisegments(){
     return $segments;
 }
 
+
+function getOptions($key)
+{
+    $options = new Option;
+    $data = $options->getKeyValue($key);
+    return $data->value;
+}
+
+
+function cjCurl($type, $id = null){
+
+    if($type  == 'category'){
+        $url = 'https://developers.cjdropshipping.com/api2.0/v1/product/getCategory';
+    }else if($type  == 'product-list'){
+        $url = 'https://developers.cjdropshipping.com/api2.0/v1/product/list?categoryId='.$id.'';
+    }else if($type  == 'product-details'){
+        $url = 'https://developers.cjdropshipping.com/api2.0/v1/product/query?pid='.$id.'';
+    }else if($type  == 'product-reviews'){
+        $url = 'https://developers.cjdropshipping.com/api2.0/v1/product/comments?pid='.$id.'';
+    }
+
+    $accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxNTIzNCIsInR5cGUiOiJBQ0NFU1NfVE9LRU4iLCJzdWIiOiJicUxvYnFRMGxtTm55UXB4UFdMWnlnWjlSSUE2VHpzZUV0R1cxbW9KcXFwb3IxZlkxbytIcSttV0hhUFM0Nk9mWmRBR0c0YS9MWDBzSnBrcDVWTVp6WHBtVlFtQkg5a01FTE01VkkvQ0pSMVZQUFJLZ2RKcmFvMWZWWERtdm41R2lRQlJUb2VuZnNMbkFpNWFIMENlSjNzU1dTc3RqTG1rUzlYZU1nOUhWZTd1VzZML3U4ZXF5WjJnM2lqSk1JdVV4dWVzK2ZVUS9wejhZYzhUNWhrMkpnY3VXOW5NbnZLMCtPYnExa1E4QTNLbzNOVWF3VGRaVlc3QlZjdXZrM1dRNXZnejRBbHNaR0NvVmZKUmk5dXhneTkraE5HYlVMSmVkWmxlaWZURTNvRXliN2ZwT1FWNG9uOXRCYTR2Q0I4SCJ9.FDeFxTMVXuvefbKE0id9de96stg_N-zh34LTDqoP4qk';
+
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+        'CJ-Access-Token: ' . $accessToken
+    ));
+
+    $response = curl_exec($ch);
+
+    if ($response === false) {
+        fire(curl_error($ch));
+    } 
+
+    curl_close($ch);
+    
+    return $response;
+}
+
+
+function CartCount()
+{
+  
+    $cart =  new Cart;
+
+    $result = $cart->getCart();
+
+    return $result['cartCount'];
+
+}

@@ -1,36 +1,48 @@
 $(document).ready(function () {
-    function ToasterSuccess($msg) {
-        $.fn.toaster({
-            message: $msg,
-            position: 'top-right',
-            type: 'success',
-        });
-    }
 
-    function ToasterError($msg) {
-        $.fn.toaster({
-            message: $msg,
-            position: 'top-right',
-            type: 'error',
-        });
-    }
+    // function ToasterSuccess($msg) {
+    //     $.fn.toaster({
+    //         message: $msg,
+    //         position: 'top-right',
+    //         type: 'success',
+    //     });
+    // }
 
-    $('#country').change(function() {
+    // function ToasterError($msg) {
+    //     $.fn.toaster({
+    //         message: $msg,
+    //         position: 'top-right',
+    //         type: 'error',
+    //     });
+    // }
+
+    $("#kt_ecommerce_add_shipping_method").repeater({
+        initEmpty: !1,
+        defaultValues: { "text-input": "foo" },
+        show: function () {
+            $(this).slideDown();
+        },
+        hide: function (e) {
+            $(this).slideUp(e);
+        },
+    });
+
+    $('#country').change(function () {
         var countryId = $(this).val();
         loadStates(countryId, '#state');
     });
 
-    $('#state').change(function() {
+    $('#state').change(function () {
         var stateId = $(this).val();
         loadCities(stateId, '#city');
     });
 
-    $('#store_country').change(function() {
+    $('#store_country').change(function () {
         var countryId = $(this).val();
         loadStates(countryId, '#store_state');
     });
 
-    $('#store_state').change(function() {
+    $('#store_state').change(function () {
         var stateId = $(this).val();
         loadCities(stateId, '#store_city');
     });
@@ -53,7 +65,7 @@ $(document).ready(function () {
         });
 
         if (!isValid) {
-            ToasterError("Please fill in all fields.");
+            // ToasterError("Please fill in all fields.");
             return;
         }
         $.ajax({
@@ -76,14 +88,13 @@ $(document).ready(function () {
             success: function (response) {
                 // ToasterSuccess(data.message);
 
-
                 if (response.status === 'success') {
-                    ToasterSuccess(response.message);
+                    // ToasterSuccess(response.message);
                     setTimeout(function () {
                         // location.reload();
-                      $(".location").val(""); 
-                      $("select.location").val("");
-                      getlocations();
+                        $(".location").val("");
+                        $("select.location").val("");
+                        getlocations();
                     }, 2000);
                 } else if (response.status === 'errors') {
                     var errorMessage = "";
@@ -99,7 +110,7 @@ $(document).ready(function () {
                             errorMessage += errors[field] + "\n";
                         }
                     });
-                    ToasterError(errorMessage);
+                    // ToasterError(errorMessage);
                 }
             },
             error: function (xhr, status, error) {
@@ -156,12 +167,12 @@ $(document).ready(function () {
 
 
                 if (response.status === 'success') {
-                    ToasterSuccess(response.message);
+                    // ToasterSuccess(response.message);
                     setTimeout(function () {
                         // location.reload();
-                      $(".store").val(""); 
-                      $("select.store").val("");
-                      getlocations();
+                        $(".store").val("");
+                        $("select.store").val("");
+                        getlocations();
                     }, 2000);
                 } else if (response.status === 'errors') {
                     var errorMessage = "";
@@ -177,7 +188,7 @@ $(document).ready(function () {
                             errorMessage += errors[field] + "\n";
                         }
                     });
-                    ToasterError(errorMessage);
+                    // ToasterError(errorMessage);
                 }
             },
             error: function (xhr, status, error) {
@@ -185,135 +196,58 @@ $(document).ready(function () {
             }
         });
     });
-    
+
+
+
+    $(document).on("submit", ".save-general", function (e) {
+        e.preventDefault();
+
+        var url = $(this).attr('action');
+        var method = $(this).attr('method');
+        var data = new FormData($(this)[0]);
+        $.ajax({
+            url: url,
+            type: method,
+            data: data,
+            contentType: false,
+            processData: false,
+            dataType: 'json',
+            beforeSend: function () {
+                $(this).prop("disabled", true);
+            },
+            success: function (data) {
+                $(this).prop("disabled", false);
+
+                if (data.status == 'success') {
+
+                    Swal.fire({ text: data.message, icon: "success", buttonsStyling: !1, confirmButtonText: "Ok, got it!", customClass: { confirmButton: "btn btn-primary" } });
+                    // ToasterSuccess(data.message);
+
+                    setTimeout(() => {
+                        location.reload();
+                    }, 1000);
+                } else if (data.status == 'errors') {
+
+                    var ErrorMessage = '';
+
+                    $.each(data.message, function (keys, value) {
+                        ErrorMessage += value[0] + "</br>";
+                    });
+
+                    // console.log(ErrorMessage);
+
+                    Swal.fire({ html: ErrorMessage, icon: "error", buttonsStyling: !1, confirmButtonText: "Ok, got it!", customClass: { confirmButton: "btn btn-primary" } });
+
+                }
+            },
+        });
+    });
 
 });
 
-function ToasterSuccess($msg) {
-    $.fn.toaster({
-        message: $msg,
-        position: 'top-right',
-        type: 'success',
-    });
-}
-
-function ToasterError($msg) {
-    $.fn.toaster({
-        message: $msg,
-        position: 'top-right',
-        type: 'error',
-    });
-}
-
-var csrfToken = $('meta[name="csrf-token"]').attr('content');
-
-
-$(document).on("click", ".make-default", function (e) {
-    e.preventDefault();
-
-    var $thisBtn = $(this);
-
-    $.ajax({
-        url: "/dw-admin/make-default",
-        method: 'POST',
-        data: {
-            id: $(this).data('id'),
-            csrf_token: csrfToken
-        },
-        success: function (response) {
-            console.log(response);
-            if (response.status === 'success') {
-                ToasterSuccess(response.message);
-
-                $('.make-btn').removeClass('bg-light').addClass('make-default  btn btn-sm btn-primary').text('Make Default');
-                $thisBtn.removeClass('make-default btn btn-sm btn-primary').addClass('bg-light').text('Default');
-
-                // Hide delete button for the current item
-                // $thisBtn.closest('.box').find('.delete-location').remove();
-                getlocations();
-                 
-            }
-        },
-    });
+document.addEventListener('DOMContentLoaded', function() {
+    var input = document.querySelector('input[name=meta_keywords]');
+    new Tagify(input);
 });
-
-$(document).on("click", ".delete-location", function (e) {
-    e.preventDefault();
-    var $thisBtn = $(this);
-
-    $.ajax({
-        url: "/dw-admin/delete-location",
-        method: 'POST',
-        data: {
-            id: $(this).data('id'),
-            csrf_token: csrfToken
-        },
-        success: function (response) {
-            console.log(response);
-            if (response.status === 'success') {
-                ToasterSuccess(response.message);
-                $thisBtn.closest('.box').remove();
-                getlocations();
-            }
-        },
-        error: function (xhr, status, error) {
-            // Handle error
-            console.error(xhr.responseText);
-        }
-    });
-});
-
-
-function getlocations() {
-    $.ajax({
-        url: "/dw-admin/location-data",
-        method: 'GET',
-        success: function (response) {
-
-            console.log(response);
-            
-            $('.location-data').html('');
-            $('.location-data').html(response);
-        },
-    });
-}
-
-
-function loadStates(countryId, stateSelectId) {
-    $.ajax({
-        url: '/dw-admin/get-states',
-        type: 'post',
-        data: { country_id: countryId,
-            csrf_token: csrfToken },
-            success: function(response) {
-                var states = response;
-                var options = '<option value="">Select State</option>';
-                states.forEach(function(state) {
-                    options += '<option value="' + state.id + '">' + state.name + '</option>';
-                });
-                $(stateSelectId).html(options);
-                $(stateSelectId).trigger('change');
-            }
-    });
-}
-
-function loadCities(stateId, citySelectId) {
-    $.ajax({
-        url: '/dw-admin/get-city',
-        type: 'post',
-        data: { state_id: stateId,
-            csrf_token: csrfToken },
-        success: function(response) {
-            var cities = response;
-            var options = '<option value="">Select City</option>';
-            cities.forEach(function(city) {
-                options += '<option value="' + city.id + '">' + city.name + '</option>';
-            });
-            $(citySelectId).html(options);
-            $(citySelectId).trigger('change');
-        }
-    });
-}
-
 
 

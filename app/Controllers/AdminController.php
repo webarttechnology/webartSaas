@@ -3,21 +3,18 @@
 namespace App\Controllers;
 
 use Core\Request;
+use App\Models\User;
 use Core\Controller;
-use Core\ImageTools;
 use Core\Validation;
 use App\Models\Option;
 use App\Models\Country;
+use App\Models\Product;
 use App\Models\Category;
 use App\Models\Currency;
-use App\Models\Location;
-use App\Models\User;
-use Core\Hash;
-use Core\Mail;
+
 
 class AdminController extends Controller
 {
-
 
 
    public function login()
@@ -34,23 +31,20 @@ class AdminController extends Controller
 
    public function reset_password()
    {
-
       $this->view('admin/reset-password');
    }
 
    public function new_password()
    {
-
       $this->view('admin/new-password');
    }
    public function sign_up()
    {
-
       $this->view('admin/sign-up');
    }
+
    public function coming_soon()
    {
-
       $this->view('admin/coming-soon');
    }
 
@@ -84,7 +78,7 @@ class AdminController extends Controller
 
          if ($_SERVER['HTTP_HOST'] == 'domain.test') {
             ////// Local
-            $url = 'http://saas.test/api/login-action';
+            $url = 'http://newtrixcart.test/api/login-action';
          } else {
             ///// Live 
             $url = 'https://prototype.trixcart.com/api/login-action';
@@ -115,20 +109,22 @@ class AdminController extends Controller
             return responseJson(['status' => 'error', 'message' => 'Api not working']);
          }
 
-         // fire($response);
-
          if (json_decode($response)->status == 'error') {
             return responseJson(['status' => 'error', 'message' => 'Incorrect Credentials']);
          } elseif (json_decode($response)->status == 'errors') {
             return responseJson(['status' => 'error', 'message' => 'Incorrect Credentials']);
          }
 
-         //fire( json_decode($response)->url);
+         $url  = json_decode($response)->url;
+
+         if($url == null){
+            return responseJson(['status' => 'error', 'message' => 'Api not working']);
+         }
 
          $_SESSION['Auth_Admin_Id'] = json_decode($response)->user_id;
          $_SESSION['Auth_Admin']    = true;
 
-         return responseJson(['status' => 'success', 'message' => 'Login Successful', 'url' => json_decode($response)->url]);
+         return responseJson(['status' => 'success', 'message' => 'Login Successful', 'url' =>  $url]);
       } catch (\Throwable $th) {
          return responseJson(['status' => 'error', 'message' => 'Server error please try again']);
       }
@@ -155,9 +151,6 @@ class AdminController extends Controller
 
    public function dashboard()
    {
-
-
-
       $title = 'Dashboard';
 
       $this->view('admin/dashboard', [], $title);
@@ -165,29 +158,70 @@ class AdminController extends Controller
 
    public function product()
    {
+      $product = new Product;
+      $data['product'] = $product->getProductAll();
       $title = 'Product';
-      $this->view('admin/products',  [], $title);
+      $this->view('admin/products',  $data, $title);
    }
 
    public function add_product()
    {
+
+      $category = new Category;
+
+
+      $data['categories'] = $category->getCategory();
+
       $title = 'Add Product';
-      $this->view('admin/add-product',  [], $title);
+      
+      $this->view('admin/add-product',  $data, $title);
+      
    }
 
-   public function edit_product()
+
+   
+
+   public function edit_product($id)
    {
       $title = 'Edit Product';
-      $this->view('admin/edit-product',  [], $title);
+      $product  = new Product;
+      $category = new Category;
+
+      $data['product']  = $product->getProduct($id);
+
+      if($data['product'] == null){
+         $url = url('/dw-admin/product');
+         header('location: ' . $url);
+         exit();
+      }
+
+      foreach ($product->getProductCategory($id) as $value) {
+         $categoryData = $category->getparentCategory($value->category_id);
+         $words = explode(", ", $categoryData);
+         $reversed_words[] = [
+            'id'              => $value->id,
+            'category_id'     => $value->category_id,
+            'reversed_words'  => array_reverse($words)
+        ];
+      }
+
+      $data['category']          =  $reversed_words;
+      $data['productMedia']      = $product->getProductMedia($id);
+      $data['productVeriation']  = $product->getProductVeriation($id);
+
+      //fire($data['productVeriation']);
+
+      $this->view('admin/edit-product', $data, $title);
    }
 
 
    public function categories()
    {
       $category = new Category;
-      $data['category']  = $category->getCategory();
+      $data['allcategory'] = $category->getAllCategory();
+      // fire( $data['category']);
       $title = 'All Category';
-      $this->view('admin/categories',  $data);
+      $this->view('admin/categories', $data);
    }
 
 
@@ -196,21 +230,29 @@ class AdminController extends Controller
    public function add_category()
    {
       $category = new Category;
-      $data['category']  = $category->getCategory();
-      $title = 'Add  Category';
-      $this->view('admin/add-category',  $data);
+      $data['categories'] = $category->getCategory();
+      $title = 'Add Category';
+      $this->view('admin/add-category', $data);
    }
 
-   public function edit_category()
+   public function edit_category($id)
    {
       $category = new Category;
-      $data['category']  = $category->getCategory();
-      $title = 'Edit  Category';
-      $this->view('admin/edit-category',  $data);
+      $data['categories'] = $category->getCategoryAll();
+      $data['category']   = $category->getCategoryById($id);
+      // fire($data['category']);
+      $title = 'Edit Category';
+      $this->view('admin/edit-category', $data);
    }
 
-
-
+   
+   public function add_variation()
+   {
+      $category = new Category;
+      $data['categories'] = $category->getCategory();
+      $title = 'Add Variation';
+      $this->view('admin/add-variation', $data);
+   }
    public function single_product()
    {
       $title = 'Product Details';
@@ -262,8 +304,11 @@ class AdminController extends Controller
 
    public function customer_list()
    {
-      $title = 'Customer List';
-      $this->view('admin/customer-list',  [], $title);
+   $title = 'Customer List';
+   $user = new User;
+   $data['alluser'] = $user->getAllData();
+   // fire($data['alluser']);
+   $this->view('admin/customer-list', $data, $title);
    }
 
    public function customer_details()
@@ -274,9 +319,7 @@ class AdminController extends Controller
 
    public function order_history()
    {
-
       $title = 'Order History';
-
       $this->view('admin/order-history',  [], $title);
    }
 
@@ -389,17 +432,62 @@ class AdminController extends Controller
 
    public function settings()
    {
-      $locations = new Location;
+   
       $country = new Country;
       $currency = new Currency;
-      //   $data['location'] = $locations->getLocationData($_SESSION['Auth_Admin_Id']);
-      $data['countryType']  = $country->getCountryType();
-      $data['currency']  = $currency->getCurrency();
+      $options = new Option;
+      $data['countryType'] = $country->getCountryType();
+      $data['currency'] = $currency->getCurrency();
+      // fire(getOptions("meta_title"));
       $title = 'Setting';
-      $this->view('admin/settings',  $data,  $title);
+
+      // fire(json_decode(getOptions("shipping_method"))[0]->shipping_name);
+
+      $this->view('admin/settings', $data, $title);
    }
 
+   public function vendor()
+   {
 
+      $data['cjVendorCategory'] = json_decode(cjCurl('category'))->data;
+
+      // fire($data['cjVendorCategory'] );
+
+      $this->view('admin/vendor', $data);
+   }
+
+   public function vendor_store_list()
+   {
+     
+      $this->view('admin/vendor-store-list');
+   }
+   
+   public function vendor_store($id)
+   {
+
+      $data['cjVendorProduct'] = json_decode(cjCurl('product-list', $id))->data;
+      $data['cjVendorCategory'] = json_decode(cjCurl('category'))->data;
+      $data['id'] = $id;
+      
+
+      // fire($data['cjVendorProduct']);
+
+      $this->view('admin/vendor-store', $data);
+   }
+
+   public function vendor_product_details($id)
+   {
+
+      $data['cjVendorProduct'] = json_decode(cjCurl('product-details', $id))->data;
+     
+      $data['id'] = $id;
+      
+      // fire($data['cjVendorProduct']);
+
+      $this->view('admin/vendor-product-details', $data);
+   }
+   
+   
    public function forgotPassword()
    {
       $this->view('admin/reset-password');

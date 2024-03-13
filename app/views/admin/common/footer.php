@@ -3980,8 +3980,12 @@
 	<script>var hostUrl = "assets/";</script>
 	<!--begin::Global Javascript Bundle(mandatory for all pages)-->
 	<script src="<?= url('/admin/') ?>/assets/plugins/global/plugins.bundle.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/easyzoom@2.5.2/dist/easyzoom.js"></script>
 	<script src="<?= url('/admin/') ?>/assets/js/scripts.bundle.js"></script>
 	<!--end::Global Javascript Bundle-->
+
+	<script src="<?= url('/admin/') ?>/assets/vendor/swiper/swiper-bundle.min.js"></script>
+
 	<!--begin::Vendors Javascript(used for this page only)-->
 	<script src="<?= url('/admin/') ?>/assets/plugins/custom/datatables/datatables.bundle.js"></script>
 	<script src="<?= url('/admin/') ?>/assets/plugins/custom/vis-timeline/vis-timeline.bundle.js"></script>
@@ -4011,6 +4015,9 @@
 	<script src="<?= url('/admin/') ?>/assets/js/custom/utilities/modals/create-app.js"></script>
 	<script src="<?= url('/admin/') ?>/assets/js/custom/utilities/modals/users-search.js"></script>
 	<script src="<?= url('/admin/') ?>/js/theme.js"></script>
+	<script src="<?php echo url('admin/js/settings.js') ?>"></script>
+	<script src="<?php echo url('admin/js/category.js') ?>"></script>
+	<script src="<?php echo url('admin/js/product.js') ?>"></script>
 	<!--end::Custom Javascript-->
 	<!--end::Javascript-->
 </body>

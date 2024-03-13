@@ -107,6 +107,9 @@
     <script src="<?= url('themes/' . $themeInfo->value) ?>/js/form-validator.min.js"></script>
     <script src="<?= url('themes/' . $themeInfo->value) ?>/js/contact-form-script.js"></script>
     <script src="<?= url('themes/' . $themeInfo->value) ?>/js/custom.js"></script>
+    <script src="<?php echo url('global/login.js') ?>"></script>
+    <script src="<?php echo url('global/cart.js') ?>"></script>
+    <script src="<?php echo url('global/checkout.js') ?>"></script>
 </body>
 
 </html>

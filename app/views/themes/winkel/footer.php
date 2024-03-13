@@ -91,6 +91,7 @@
   <script src="<?= url('themes/'. $themeInfo->value)?>/https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="<?= url('themes/'. $themeInfo->value)?>/js/google-map.js"></script>
   <script src="<?= url('themes/'. $themeInfo->value)?>/js/main.js"></script>
+  <script src="<?php echo url('global/login.js') ?>"></script>
   <script>
 		$(document).ready(function(){
 

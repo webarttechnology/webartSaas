@@ -100,6 +100,7 @@
     <script src="<?= url('themes/'. $themeInfo->value)?>/js/waypoints/waypoints.min.js"></script>
     <script src="<?= url('themes/'. $themeInfo->value)?>/js/counterup/counterup.min.js"></script>
     <script src="<?= url('themes/'. $themeInfo->value)?>/js/main.js"></script>
+    <script src="<?php echo url('global/login.js') ?>"></script>
 </body>
 
 </html>

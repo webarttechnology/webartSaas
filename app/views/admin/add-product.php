@@ -73,7 +73,7 @@ include 'common/sidebar.php';
 													<!--end::Label-->
 													<!--begin::Input-->
 													<div>
-														<select class="form-select form-select-solid" multiple="multiple" data-kt-select2="true" data-close-on-select="false" data-placeholder="Select option" data-dropdown-parent="#kt_menu_65a121412b4ac" data-allow-clear="true">
+														<select class="form-select form-select-solid"  data-kt-select2="true" data-close-on-select="false" data-placeholder="Select option" data-dropdown-parent="#kt_menu_65a121412b4ac" data-allow-clear="true">
 															<option></option>
 															<option value="1">Approved</option>
 															<option value="2">Pending</option>
@@ -148,8 +148,13 @@ include 'common/sidebar.php';
 							<!--begin::Content container-->
 							<div id="kt_app_content_container" class="app-container container-xxl">
 								<!--begin::Form-->
-								<form id="kt_ecommerce_add_product_form" class="form d-flex flex-column flex-lg-row" data-kt-redirect="<?=  url('/dw-admin/product') ?>">
+								<form id="kt_ecommerce_add_product_form" action="<?= url('/dw-admin/store-product') ?>" method="POST" enctype="multipart/form-data" class="form d-flex flex-column flex-lg-row" data-kt-redirect="<?=  url('/dw-admin/product') ?>">
 									<!--begin::Aside column-->
+
+									<?= csrf_field(); ?>
+
+									<div id="media_file"></div>
+
 									<div class="d-flex flex-column gap-7 gap-lg-10 w-100 w-lg-300px mb-7 me-lg-10">
 										<!--begin::Thumbnail settings-->
 										<div class="card card-flush py-4">
@@ -228,11 +233,11 @@ include 'common/sidebar.php';
 											<!--begin::Card body-->
 											<div class="card-body pt-0">
 												<!--begin::Select2-->
-												<select class="form-select mb-2" data-control="select2" data-hide-search="true" data-placeholder="Select an option" id="kt_ecommerce_add_product_status_select">
+												<select class="form-select mb-2" name="status" data-control="select2" data-hide-search="true" data-placeholder="Select an option" id="kt_ecommerce_add_product_status_select">
 													<option></option>
 													<option value="published" selected="selected">Published</option>
 													<option value="draft">Draft</option>
-													<option value="scheduled">Scheduled</option>
+													<!-- <option value="scheduled">Scheduled</option> -->
 													<option value="inactive">Inactive</option>
 												</select>
 												<!--end::Select2-->
@@ -262,32 +267,29 @@ include 'common/sidebar.php';
 											<!--end::Card header-->
 											<!--begin::Card body-->
 											<div class="card-body pt-0">
+											   <a href="#" class="btn btn-light-primary btn-sm mb-5 show-cate-choose-modal">
+													<i class="ki-duotone ki-plus fs-2"></i>Choose category
+											    </a>
+
+												<div class="category-step"></div>
+												
 												<!--begin::Input group-->
 												<!--begin::Label-->
-												<label class="form-label">Categories</label>
+												<!-- <label class="form-label">Categories</label> -->
 												<!--end::Label-->
 												<!--begin::Select2-->
-												<select class="form-select mb-2" data-control="select2" data-placeholder="Select an option" data-allow-clear="true" multiple="multiple">
-													<option></option>
-													<option value="Computers">Computers</option>
-													<option value="Watches">Watches</option>
-													<option value="Headphones">Headphones</option>
-													<option value="Footwear">Footwear</option>
-													<option value="Cameras">Cameras</option>
-													<option value="Shirts">Shirts</option>
-													<option value="Household">Household</option>
-													<option value="Handbags">Handbags</option>
-													<option value="Wines">Wines</option>
-													<option value="Sandals">Sandals</option>
-												</select>
+												<!-- <select class="form-select mb-2" data-control="select2" data-placeholder="Select an option" data-allow-clear="true" multiple="multiple">
+												
+												</select> -->
 												<!--end::Select2-->
 												<!--begin::Description-->
-												<div class="text-muted fs-7 mb-7">Add product to a category.</div>
+												<div class="text-muted fs-7 mb-7 mt-5">Add product to a category.</div>
 												<!--end::Description-->
 												<!--end::Input group-->
 												<!--begin::Button-->
 												<a href="<?=  url('/dw-admin/add-category') ?>" class="btn btn-light-primary btn-sm mb-10">
-												<i class="ki-duotone ki-plus fs-2"></i>Create new category</a>
+													<i class="ki-duotone ki-plus fs-2"></i>Create new category
+											    </a>
 												<!--end::Button-->
 												<!--begin::Input group-->
 												<!--begin::Label-->
@@ -305,40 +307,28 @@ include 'common/sidebar.php';
 										</div>
 										<!--end::Category & tags-->
 										<!--begin::Weekly sales-->
-										<div class="card card-flush py-4">
-											<!--begin::Card header-->
+
+										<!-- <div class="card card-flush py-4">
 											<div class="card-header">
-												<!--begin::Card title-->
 												<div class="card-title">
 													<h2>Weekly Sales</h2>
 												</div>
-												<!--end::Card title-->
 											</div>
-											<!--end::Card header-->
-											<!--begin::Card body-->
 											<div class="card-body pt-0">
 												<span class="text-muted">No data available. Sales data will begin capturing once product has been published.</span>
 											</div>
-											<!--end::Card body-->
-										</div>
+										</div> -->
+
 										<!--end::Weekly sales-->
 										<!--begin::Template settings-->
-										<div class="card card-flush py-4">
-											<!--begin::Card header-->
+										<!-- <div class="card card-flush py-4">
 											<div class="card-header">
-												<!--begin::Card title-->
 												<div class="card-title">
 													<h2>Product Template</h2>
 												</div>
-												<!--end::Card title-->
 											</div>
-											<!--end::Card header-->
-											<!--begin::Card body-->
 											<div class="card-body pt-0">
-												<!--begin::Select store template-->
 												<label for="kt_ecommerce_add_product_store_template" class="form-label">Select a product template</label>
-												<!--end::Select store template-->
-												<!--begin::Select2-->
 												<select class="form-select mb-2" data-control="select2" data-hide-search="true" data-placeholder="Select an option" id="kt_ecommerce_add_product_store_template">
 													<option></option>
 													<option value="default" selected="selected">Default template</option>
@@ -346,13 +336,9 @@ include 'common/sidebar.php';
 													<option value="office">Office stationary</option>
 													<option value="fashion">Fashion</option>
 												</select>
-												<!--end::Select2-->
-												<!--begin::Description-->
 												<div class="text-muted fs-7">Assign a template from your current theme to define how a single product is displayed.</div>
-												<!--end::Description-->
 											</div>
-											<!--end::Card body-->
-										</div>
+										</div> -->
 										<!--end::Template settings-->
 									</div>
 									<!--end::Aside column-->
@@ -597,9 +583,9 @@ include 'common/sidebar.php';
 																	<!--begin::Select2-->
 																	<select class="form-select mb-2" name="tax" data-control="select2" data-hide-search="true" data-placeholder="Select an option">
 																		<option></option>
-																		<option value="0">Tax Free</option>
-																		<option value="1">Taxable Goods</option>
-																		<option value="2">Downloadable Product</option>
+																		<option value="Tax Free">Tax Free</option>
+																		<option value="Taxable Goods">Taxable Goods</option>
+																		<option value="Downloadable Product">Downloadable Product</option>
 																	</select>
 																	<!--end::Select2-->
 																	<!--begin::Description-->
@@ -613,7 +599,7 @@ include 'common/sidebar.php';
 																	<label class="form-label">VAT Amount (%)</label>
 																	<!--end::Label-->
 																	<!--begin::Input-->
-																	<input type="text" class="form-control mb-2" value="" />
+																	<input type="text" name="vat_amount" class="form-control mb-2" value="" />
 																	<!--end::Input-->
 																	<!--begin::Description-->
 																	<div class="text-muted fs-7">Set the product VAT about.</div>
@@ -677,7 +663,7 @@ include 'common/sidebar.php';
 																<!--begin::Input-->
 																<div class="d-flex gap-3">
 																	<input type="number" name="shelf" class="form-control mb-2" placeholder="On shelf" value="" />
-																	<input type="number" name="warehouse" class="form-control mb-2" placeholder="In warehouse" />
+																	<!-- <input type="number" name="warehouse" class="form-control mb-2" placeholder="In warehouse" /> -->
 																</div>
 																<!--end::Input-->
 																<!--begin::Description-->
@@ -692,7 +678,7 @@ include 'common/sidebar.php';
 																<!--end::Label-->
 																<!--begin::Input-->
 																<div class="form-check form-check-custom form-check-solid mb-2">
-																	<input class="form-check-input" type="checkbox" value="" />
+																	<input class="form-check-input" name="allow_backorders" type="checkbox" value="yes" />
 																	<label class="form-check-label">Yes</label>
 																</div>
 																<!--end::Input-->
@@ -780,7 +766,7 @@ include 'common/sidebar.php';
 															<div class="fv-row">
 																<!--begin::Input-->
 																<div class="form-check form-check-custom form-check-solid mb-2">
-																	<input class="form-check-input" type="checkbox" id="kt_ecommerce_add_product_shipping_checkbox" value="1" />
+																	<input class="form-check-input" name="shipping" type="checkbox" id="kt_ecommerce_add_product_shipping_checkbox" value="1" />
 																	<label class="form-check-label">This is a physical product</label>
 																</div>
 																<!--end::Input-->
@@ -813,7 +799,7 @@ include 'common/sidebar.php';
 																	<div class="d-flex flex-wrap flex-sm-nowrap gap-3">
 																		<input type="number" name="width" class="form-control mb-2" placeholder="Width (w)" value="" />
 																		<input type="number" name="height" class="form-control mb-2" placeholder="Height (h)" value="" />
-																		<input type="number" name="length" class="form-control mb-2" placeholder="Lengtn (l)" value="" />
+																		<input type="number" name="length" class="form-control mb-2" placeholder="Length (l)" value="" />
 																	</div>
 																	<!--end::Input-->
 																	<!--begin::Description-->
@@ -909,4 +895,79 @@ include 'common/sidebar.php';
 						<!--end::Content-->
 					</div>
 					<!--end::Content wrapper-->
+
+
+
+					             <!--begin::Modals-->
+									<!--begin::Modal - Customers - Add-->
+									<div class="modal fade" id="kt_modal_add_category" tabindex="-1" aria-hidden="true">
+										<!--begin::Modal dialog-->
+										<div class="modal-dialog modal-dialog-centered mw-650px">
+											<!--begin::Modal content-->
+											<div class="modal-content">
+												<!--begin::Form-->
+												<form class="form get-category-name" action="<?= url('dw-admin/get-category-name') ?>" method="POST" id="kt_modal_add_category_form" data-kt-redirect=""<?= url('/dw-admin/add-product') ?>">
+												   <?= csrf_field() ?>	
+												<!--begin::Modal header-->
+													<div class="modal-header" id="kt_modal_add_category_header">
+														<!--begin::Modal title-->
+														<h2 class="fw-bold">Choose Category</h2>
+														<!--end::Modal title-->
+														<!--begin::Close-->
+														<div id="kt_modal_add_category_close" data-bs-dismiss="modal" class="btn btn-icon btn-sm btn-active-icon-primary">
+															<i class="ki-duotone ki-cross fs-1">
+																<span class="path1"></span>
+																<span class="path2"></span>
+															</i>
+														</div>
+														<!--end::Close-->
+													</div>
+													<!--end::Modal header-->
+													<!--begin::Modal body-->
+													<div class="modal-body py-10 px-lg-17">
+														<!--begin::Scroll-->
+														<div class="scroll-y me-n7 pe-7" id="kt_modal_add_category_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_category_header" data-kt-scroll-wrappers="#kt_modal_add_category_scroll" data-kt-scroll-offset="300px">
+														</div>
+														<!--end::Scroll-->
+
+
+														<div class="mb-10 fv-row add-all-category">
+															<!--begin::Label-->
+															<label class="form-label">Choose category</label>
+															<!--end::Label-->
+															<!--begin::Input-->
+															<select class="form-control sub_category mb-3" name="sub_category[]" id="sub_category">
+																<option value="">Choose Category</option>
+																<?php foreach ($categories as $item) : ?>
+																	<option value="<?php echo $item->id ?>"><?php echo $item->name ?></option>
+																<?php endforeach ?>
+															</select>
+															<!--end::Input-->
+														</div>
+
+													</div>
+													<!--end::Modal body-->
+													<!--begin::Modal footer-->
+													<div class="modal-footer flex-center">
+														<!--begin::Button-->
+														<button type="reset" id="kt_modal_add_category_cancel" data-bs-dismiss="modal" class="btn btn-light me-3">Discard</button>
+														<!--end::Button-->
+														<!--begin::Button-->
+														<button type="submit" id="kt_modal_add_category_submit" class="btn btn-primary">
+															<span class="indicator-label">Add</span>
+															<span class="indicator-progress">Please wait... 
+															<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+														</button>
+														<!--end::Button-->
+													</div>
+													<!--end::Modal footer-->
+												</form>
+												<!--end::Form-->
+											</div>
+										</div>
+									</div>
+									<!--end::Modal - Customers - Add-->
+									<!--end::Modals-->
+
+
 					<?php include("common/footer.php") ?> 

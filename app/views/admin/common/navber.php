@@ -19,8 +19,7 @@
 					<!--begin::Mobile logo-->
 					<div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0">
 						<a href="<?= url('/dw-admin/dashboard'); ?>" class="d-lg-none">
-							 <img alt="Logo" src="<?= url('/admin/') ?>/assets/media/logos/default-small.svg" class="h-30px" />
-							Trixcart
+						<img alt="Logo" src="<?= url('/admin/') ?>/assets/media/logos/logo.png" class="h-30px" />
 						</a>
 					</div>
 					<!--end::Mobile logo-->

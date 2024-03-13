@@ -25,6 +25,29 @@ class Option {
         $query->execute();
         return true;
     }
+
+    public function saveSettings($settings) {
+        foreach ($settings as $key => $value) {
+        $query = $this->db->prepare("UPDATE `options` SET `value` = :value WHERE `name` = :key");
+        $query->bindValue(':value', $value);
+        $query->bindValue(':key', $key);
+        $query->execute();
+        }
+        return true;
+        }
+        
+        public function getOptionData() {
+        $query = $this->db->query("SELECT * FROM `options`");
+        return $query->fetchAll(PDO::FETCH_OBJ);
+        }
+        
+        public function getKeyValue($key)
+        {
+        $query = $this->db->prepare("SELECT * FROM `options` WHERE `name` = :key");
+        $query->bindValue(':key', $key);
+        $query->execute();
+        return $query->fetch(PDO::FETCH_OBJ);
+        }
     
 }
 

@@ -4,7 +4,7 @@
 	<div class="app-sidebar-logo px-6" id="kt_app_sidebar_logo">
 		<!--begin::Logo image-->
 		<a href="<?= url('/dw-admin/dashboard'); ?>" style="color:#fff; font-weight:bold; font-size:25px">
-			Trixcart
+		   <img alt="Logo" src="<?= url('/admin/') ?>/assets/media/logos/logo.png" class="h-30px" />
 		</a>
 		<!--end::Logo image-->
 		<!--begin::Sidebar toggle-->
@@ -46,7 +46,7 @@
 					</div>
 					<!--end:Menu item-->
 					<!--begin:Menu item-->
-					<div data-kt-menu-trigger="click" class="menu-item menu-accordion <?php echo in_array(urisegments()[2], ['product', 'add-product', 'categories', 'add-category','edit-product']) ? 'hover show' : '' ?>">
+					<div data-kt-menu-trigger="click" class="menu-item menu-accordion <?php echo in_array(urisegments()[2], ['product', 'add-product', 'categories', 'add-category','edit-product', 'add-variation']) ? 'hover show' : '' ?>">
 						<!--begin:Menu link-->
 						<span class="menu-link">
 							<span class="menu-icon"><i class="ki-duotone ki-abstract-26 fs-2"><span class="path1"></span><span class="path2"></span></i></span>
@@ -121,6 +121,18 @@
 								<!--end:Menu link-->
 							</div>
 							<!--end:Menu item-->
+
+							<!--begin:Menu item-->
+							<!-- <div class="menu-item <?php echo urisegments()[2] == 'add-variation' ? 'hover show' : ''  ?>">
+								<a class="menu-link" href="<?= url('/dw-admin/add-variation') ?>">
+									<span class="menu-bullet">
+										<span class="bullet bullet-dot"></span>
+									</span>
+									<span class="menu-title">Add Variation</span>
+								</a>
+							</div> -->
+							<!--end:Menu item-->
+
 							<!--begin:Menu item-->
 
 							<!--end:Menu item-->
@@ -272,6 +284,17 @@
 						<a class="menu-link" href="<?= url('/dw-admin/theme') ?>">
 							<span class="menu-icon"><i class="ki-duotone ki-element-7 fs-2"><span class="path1"></span><span class="path2"></span></i></span>
 							<span class="menu-title">Themes</span>
+						</a>
+						<!--end:Menu link-->
+					</div>
+					<!--end:Menu item-->
+
+					<!--begin:Menu item-->
+					<div class="menu-item  <?php echo in_array(urisegments()[2], ['vendor', 'vendor-store-list','vendor-store']) ? 'hover show' : '' ?>">
+						<!--begin:Menu link-->
+						<a class="menu-link" href="<?= url('/dw-admin/vendor') ?>">
+						<span class="menu-icon"><i class="ki-duotone ki-bank fs-2"><span class="path1"></span><span class="path2"></span></i></span>
+							<span class="menu-title">Vendors</span>
 						</a>
 						<!--end:Menu link-->
 					</div>

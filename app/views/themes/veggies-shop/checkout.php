@@ -19,7 +19,7 @@
     <!-- Start Cart  -->
     <div class="cart-box-main">
         <div class="container">
-            <div class="row new-account-login">
+            <!-- <div class="row new-account-login">
                 <div class="col-sm-6 col-lg-6 mb-3">
                     <div class="title-left">
                         <h3>Account Login</h3>
@@ -60,7 +60,7 @@
                         <button type="submit" class="btn hvr-hover">Register</button>
                     </form>
                 </div>
-            </div>
+            </div> -->
             <div class="row">
                 <div class="col-sm-6 col-lg-6 mb-3">
                     <div class="checkout-address">
@@ -70,120 +70,120 @@
                         <form class="needs-validation" novalidate>
                             <div class="row">
                                 <div class="col-md-6 mb-3">
-                                    <label for="firstName">First name *</label>
-                                    <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+                                    <label for="billing_first_name">First name *</label>
+                                    <input type="text" name="billing_first_name" class="form-control" id="billing_first_name" placeholder="" value="" required>
                                     <div class="invalid-feedback"> Valid first name is required. </div>
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label for="lastName">Last name *</label>
-                                    <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
+                                    <label for="billing_last_name">Last name *</label>
+                                    <input type="text" name="billing_last_name" class="form-control" id="billing_last_name" placeholder="" value="" required>
                                     <div class="invalid-feedback"> Valid last name is required. </div>
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <label for="username">Username *</label>
-                                <div class="input-group">
-                                    <input type="text" class="form-control" id="username" placeholder="" required>
-                                    <div class="invalid-feedback" style="width: 100%;"> Your username is required. </div>
-                                </div>
-                            </div>
-                            <div class="mb-3">
                                 <label for="email">Email Address *</label>
-                                <input type="email" class="form-control" id="email" placeholder="">
+                                <input type="email" name="billing_email" class="form-control" id="billing_email" placeholder="">
                                 <div class="invalid-feedback"> Please enter a valid email address for shipping updates. </div>
                             </div>
                             <div class="mb-3">
-                                <label for="address">Address *</label>
-                                <input type="text" class="form-control" id="address" placeholder="" required>
+                                <label for="billing_address">Address *</label>
+                                <input type="text" name="billing_address" class="form-control" id="billing_address" placeholder="" required>
                                 <div class="invalid-feedback"> Please enter your shipping address. </div>
                             </div>
                             <div class="mb-3">
-                                <label for="address2">Address 2 *</label>
-                                <input type="text" class="form-control" id="address2" placeholder=""> </div>
+                                <label for="billing_address2">Address 2 *</label>
+                                <input type="text" name="billing_address2" class="form-control" id="billing_address2" placeholder=""> </div>
                             <div class="row">
                                 <div class="col-md-5 mb-3">
-                                    <label for="country">Country *</label>
-                                    <select class="wide w-100" id="country">
+                                    <label for="billing_country">Country *</label>
+                                    <select class="wide w-100"  name="billing_country"  id="billing_country" data-type="billing">
 									<option value="Choose..." data-display="Select">Choose...</option>
-									<option value="United States">United States</option>
+                                    <?php  foreach($country as $item): ?>
+                                        <option value="<?php echo $item->id ?>"><?php echo $item->name ?></option>
+                                    <?php  endforeach ?>
 								</select>
                                     <div class="invalid-feedback"> Please select a valid country. </div>
                                 </div>
                                 <div class="col-md-4 mb-3">
-                                    <label for="state">State *</label>
-                                    <select class="wide w-100" id="state">
+                                    <label for="billing_state">State *</label>
+                                    <select class="wide w-100" name="billing_state"  id="billing_state">
 									<option data-display="Select">Choose...</option>
-									<option>California</option>
 								</select>
                                     <div class="invalid-feedback"> Please provide a valid state. </div>
                                 </div>
                                 <div class="col-md-3 mb-3">
-                                    <label for="zip">Zip *</label>
-                                    <input type="text" class="form-control" id="zip" placeholder="" required>
+                                    <label for="billing_zip">Zip *</label>
+                                    <input type="text" name="billing_zip"  class="form-control" id="billing_zip" placeholder="" required>
                                     <div class="invalid-feedback"> Zip code required. </div>
                                 </div>
                             </div>
                             <hr class="mb-4">
                             <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="same-address">
+                                <input type="checkbox" class="custom-control-input" id="same-address" checked>
                                 <label class="custom-control-label" for="same-address">Shipping address is the same as my billing address</label>
                             </div>
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input" id="save-info">
-                                <label class="custom-control-label" for="save-info">Save this information for next time</label>
-                            </div>
-                            <hr class="mb-4">
-                            <div class="title"> <span>Payment</span> </div>
-                            <div class="d-block my-3">
-                                <div class="custom-control custom-radio">
-                                    <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked required>
-                                    <label class="custom-control-label" for="credit">Credit card</label>
-                                </div>
-                                <div class="custom-control custom-radio">
-                                    <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required>
-                                    <label class="custom-control-label" for="debit">Debit card</label>
-                                </div>
-                                <div class="custom-control custom-radio">
-                                    <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input" required>
-                                    <label class="custom-control-label" for="paypal">Paypal</label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="cc-name">Name on card</label>
-                                    <input type="text" class="form-control" id="cc-name" placeholder="" required> <small class="text-muted">Full name as displayed on card</small>
-                                    <div class="invalid-feedback"> Name on card is required </div>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="cc-number">Credit card number</label>
-                                    <input type="text" class="form-control" id="cc-number" placeholder="" required>
-                                    <div class="invalid-feedback"> Credit card number is required </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-3 mb-3">
-                                    <label for="cc-expiration">Expiration</label>
-                                    <input type="text" class="form-control" id="cc-expiration" placeholder="" required>
-                                    <div class="invalid-feedback"> Expiration date required </div>
-                                </div>
-                                <div class="col-md-3 mb-3">
-                                    <label for="cc-expiration">CVV</label>
-                                    <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
-                                    <div class="invalid-feedback"> Security code required </div>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <div class="payment-icon">
-                                        <ul>
-                                            <li><img class="img-fluid" src="<?= url('themes/'. $themeInfo->value)?>/images/payment-icon/1.png" alt=""></li>
-                                            <li><img class="img-fluid" src="<?= url('themes/'. $themeInfo->value)?>/images/payment-icon/2.png" alt=""></li>
-                                            <li><img class="img-fluid" src="<?= url('themes/'. $themeInfo->value)?>/images/payment-icon/3.png" alt=""></li>
-                                            <li><img class="img-fluid" src="<?= url('themes/'. $themeInfo->value)?>/images/payment-icon/5.png" alt=""></li>
-                                            <li><img class="img-fluid" src="<?= url('themes/'. $themeInfo->value)?>/images/payment-icon/7.png" alt=""></li>
-                                        </ul>
-                                    </div>
-                                </div>
+                                <!-- <label class="custom-control-label" for="save-info">Save this information for next time</label> -->
                             </div>
                             <hr class="mb-1"> </form>
+                    </div>
+
+                    <div class="shipping-address-section mt-4 d-none">
+                        <div class="title-left">
+                            <h3>Shipping address</h3>
+                        </div>
+                        <form class="needs-validation" novalidate>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="shopping_first_name">First name *</label>
+                                    <input type="text" name="shopping_first_name" class="form-control" id="shopping_first_name" placeholder="" value="" required>
+                                    <div class="invalid-feedback"> Valid first name is required. </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="shopping_last_name">Last name *</label>
+                                    <input type="text" name="shopping_last_name" class="form-control" id="shopping_last_name" placeholder="" value="" required>
+                                    <div class="invalid-feedback"> Valid last name is required. </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="shopping_email">Email Address *</label>
+                                <input type="email" name="shopping_email" class="form-control" id="shopping_email" placeholder="">
+                                <div class="invalid-feedback"> Please enter a valid email address for shipping updates. </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="shopping_address">Address *</label>
+                                <input type="text" name="shopping_address" class="form-control" id="shopping_address" placeholder="" required>
+                                <div class="invalid-feedback"> Please enter your shipping address. </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="shopping_address2">Address 2 *</label>
+                                <input type="text" name="shopping_address2" class="form-control" id="shopping_address2" placeholder=""> </div>
+                            <div class="row">
+                                <div class="col-md-5 mb-3">
+                                    <label for="shopping_country">Country *</label>
+                                    <select class="wide w-100"  name="shopping_country"  id="shopping_country" data-type="shopping">
+									<option value="Choose..." data-display="Select">Choose...</option>
+                                    <?php  foreach($country as $item): ?>
+                                        <option value="<?php echo $item->id ?>"><?php echo $item->name ?></option>
+                                    <?php  endforeach ?>
+								</select>
+                                    <div class="invalid-feedback"> Please select a valid country. </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="shopping_state">State *</label>
+                                    <select class="wide w-100" name="shopping_state"  id="shopping_state">
+									<option data-display="Select">Choose...</option>
+								</select>
+                                    <div class="invalid-feedback"> Please provide a valid state. </div>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label for="shopping_zip">Zip *</label>
+                                    <input type="text" name="shopping_zip"  class="form-control" id="shopping_zip" placeholder="" required>
+                                    <div class="invalid-feedback"> Zip code required. </div>
+                                </div>
+                            </div>
+                            <hr class="mb-4">
                     </div>
                 </div>
                 <div class="col-sm-6 col-lg-6 mb-3">
@@ -194,17 +194,14 @@
                                     <h3>Shipping Method</h3>
                                 </div>
                                 <div class="mb-4">
+                                <?php  foreach(json_decode(getOptions("shipping_method")) as $item): ?>
                                     <div class="custom-control custom-radio">
-                                        <input id="shippingOption1" name="shipping-option" class="custom-control-input" checked="checked" type="radio">
-                                        <label class="custom-control-label" for="shippingOption1">Standard Delivery</label> <span class="float-right font-weight-bold">FREE</span> </div>
-                                    <div class="ml-4 mb-2 small">(3-7 business days)</div>
-                                    <div class="custom-control custom-radio">
-                                        <input id="shippingOption2" name="shipping-option" class="custom-control-input" type="radio">
-                                        <label class="custom-control-label" for="shippingOption2">Express Delivery</label> <span class="float-right font-weight-bold">$10.00</span> </div>
-                                    <div class="ml-4 mb-2 small">(2-4 business days)</div>
-                                    <div class="custom-control custom-radio">
-                                        <input id="shippingOption3" name="shipping-option" class="custom-control-input" type="radio">
-                                        <label class="custom-control-label" for="shippingOption3">Next Business day</label> <span class="float-right font-weight-bold">$20.00</span> </div>
+                                        <input id="shippingOption<?php echo $item->shipping_name; ?>" name="shipping-option" class="custom-control-input"  type="radio">
+                                        <label class="custom-control-label" for="shippingOption<?php echo $item->shipping_name; ?>"><?php echo $item->shipping_name; ?></label> 
+                                        <span class="float-right font-weight-bold"><?php echo $item->shipping_charge; ?></span> 
+                                    </div>
+                                    <!-- <div class="ml-4 mb-2 small">(3-7 business days)</div> -->
+                                <?php  endforeach ?>
                                 </div>
                             </div>
                         </div>
@@ -214,21 +211,13 @@
                                     <h3>Shopping cart</h3>
                                 </div>
                                 <div class="rounded p-2 bg-light">
-                                    <div class="media mb-2 border-bottom">
-                                        <div class="media-body"> <a href="detail.html"> Lorem ipsum dolor sit amet</a>
-                                            <div class="small text-muted">Price: $80.00 <span class="mx-2">|</span> Qty: 1 <span class="mx-2">|</span> Subtotal: $80.00</div>
+                                    <?php foreach($cart['cartItems'] as $item): ?>
+                                        <div class="media mb-2 border-bottom">
+                                            <div class="media-body"> <a href="<?= url('/shop-detail/'. strtolower(str_replace(' ', '-', $item->name)).'/'. $item->id) ?>"><?php echo $item->name ?></a>
+                                                <div class="small text-muted">Price: $<?php echo number_format($item->base_price) ?> <span class="mx-2">|</span> Qty: <?php echo $item->quantity ?> <span class="mx-2">|</span> Subtotal: $<?php echo number_format($item->base_price * $item->quantity) ?></div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="media mb-2 border-bottom">
-                                        <div class="media-body"> <a href="detail.html"> Lorem ipsum dolor sit amet</a>
-                                            <div class="small text-muted">Price: $60.00 <span class="mx-2">|</span> Qty: 1 <span class="mx-2">|</span> Subtotal: $60.00</div>
-                                        </div>
-                                    </div>
-                                    <div class="media mb-2">
-                                        <div class="media-body"> <a href="detail.html"> Lorem ipsum dolor sit amet</a>
-                                            <div class="small text-muted">Price: $40.00 <span class="mx-2">|</span> Qty: 1 <span class="mx-2">|</span> Subtotal: $40.00</div>
-                                        </div>
-                                    </div>
+                                    <?php endforeach ?>
                                 </div>
                             </div>
                         </div>
@@ -244,20 +233,20 @@
                                 <hr class="my-1">
                                 <div class="d-flex">
                                     <h4>Sub Total</h4>
-                                    <div class="ml-auto font-weight-bold"> $ 440 </div>
+                                    <div class="ml-auto font-weight-bold"> $ <?php echo number_format($cart['grandTotal']) ?> </div>
                                 </div>
                                 <div class="d-flex">
                                     <h4>Discount</h4>
-                                    <div class="ml-auto font-weight-bold"> $ 40 </div>
+                                    <div class="ml-auto font-weight-bold"> $ 0 </div>
                                 </div>
                                 <hr class="my-1">
                                 <div class="d-flex">
                                     <h4>Coupon Discount</h4>
-                                    <div class="ml-auto font-weight-bold"> $ 10 </div>
+                                    <div class="ml-auto font-weight-bold"> $ 0 </div>
                                 </div>
                                 <div class="d-flex">
                                     <h4>Tax</h4>
-                                    <div class="ml-auto font-weight-bold"> $ 2 </div>
+                                    <div class="ml-auto font-weight-bold"> $ 0 </div>
                                 </div>
                                 <div class="d-flex">
                                     <h4>Shipping Cost</h4>
@@ -266,11 +255,13 @@
                                 <hr>
                                 <div class="d-flex gr-total">
                                     <h5>Grand Total</h5>
-                                    <div class="ml-auto h5"> $ 388 </div>
+                                    <div class="ml-auto h5"> $ <?php echo number_format($cart['grandTotal']) ?> </div>
                                 </div>
                                 <hr> </div>
                         </div>
-                        <div class="col-12 d-flex shopping-box"> <a href="checkout.html" class="ml-auto btn hvr-hover">Place Order</a> </div>
+                        <div class="col-12 d-flex shopping-box"> 
+                            <a href="#" class="ml-auto btn hvr-hover">Place Order</a> 
+                        </div>
                     </div>
                 </div>
             </div>

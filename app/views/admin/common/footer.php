@@ -4018,6 +4018,7 @@
 	<script src="<?php echo url('admin/js/settings.js') ?>"></script>
 	<script src="<?php echo url('admin/js/category.js') ?>"></script>
 	<script src="<?php echo url('admin/js/product.js') ?>"></script>
+	<script src="<?php echo url('admin/js/coupon.js') ?>"></script>
 	<!--end::Custom Javascript-->
 	<!--end::Javascript-->
 </body>

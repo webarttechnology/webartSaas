@@ -120,9 +120,9 @@
             <div class="col-lg-6 col-sm-6">
                 <div class="coupon-box">
                     <div class="input-group input-group-sm">
-                        <input class="form-control" placeholder="Enter your coupon code" aria-label="Coupon code" type="text">
+                        <input class="form-control" placeholder="Enter your coupon code" name="coupon_code" id="coupon_code" aria-label="Coupon code" type="text">
                         <div class="input-group-append">
-                            <button class="btn btn-theme" type="button">Apply Coupon</button>
+                            <button class="btn btn-theme couponbtn" type="button">Apply Coupon</button>
                         </div>
                     </div>
                 </div>
@@ -150,7 +150,7 @@
                     <hr class="my-1">
                     <div class="d-flex">
                         <h4>Coupon Discount</h4>
-                        <div class="ml-auto font-weight-bold coupon"> $ 0 </div>
+                        <div class="ml-auto font-weight-bold couponfield"> $ 0 </div>
                     </div>
                     <div class="d-flex">
                         <h4>Tax</h4>

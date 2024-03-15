@@ -311,6 +311,17 @@
 						<!--end:Menu link-->
 					</div>
 					<!--end:Menu item-->
+
+					<!--begin:Menu item-->
+					<div class="menu-item <?php echo urisegments()[2] == 'coupon' ? 'hover show' : '' ?>">
+						<!--begin:Menu link-->
+						<a class="menu-link" href="<?= url('/dw-admin/coupon') ?>">
+							<span class="menu-icon"><i class="ki-duotone ki-abstract-13 fs-2"><span class="path1"></span><span class="path2"></span></i></span>
+							<span class="menu-title">Coupon</span>
+						</a>
+						<!--end:Menu link-->
+					</div>
+					<!--end:Menu item-->
 				</div>
 				<!--end::Menu-->
 			</div>

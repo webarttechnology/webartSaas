@@ -250,6 +250,26 @@ $routes = [
         '/dw-admin/password/resetdata/{token}/{id}'       => ['AdminController@showResetForm'],
 
 
+        '/dw-admin/coupon'         => ['CouponController@coupon',[
+            'middleware' => [
+                [AuthMiddleware::class, 'index']
+            ]
+            ]
+        ],  
+        '/dw-admin/add-coupon'         => ['CouponController@addCoupon',[
+            'middleware' => [
+                [AuthMiddleware::class, 'index']
+            ]
+            ]
+        ],  
+
+        '/dw-admin/edit-coupon/{id}'      => ['CouponController@edit_coupon',[
+            'middleware' => [
+                [AuthMiddleware::class, 'index']
+            ]
+            ]
+        ], 
+
     ],
 
     'POST' => [
@@ -285,6 +305,12 @@ $routes = [
         ///Manage Cart
         '/manage-cart'                  => ['CartController@manageCart'],
         '/get-country'                  => ['CheckoutController@get_country'],
+
+        '/dw-admin/save-coupon'         => ['CouponController@save_coupon'],
+        '/dw-admin/delete-coupon'       => ['CouponController@delete_coupon'],
+
+        '/get-coupon'                 => ['HomeController@getCoupon'],
+
     ],
 
 

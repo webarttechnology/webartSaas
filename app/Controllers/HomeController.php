@@ -8,10 +8,11 @@ use App\Models\Cart;
 use App\Models\User;
 use Core\Controller;
 use Core\Validation;
+use App\Models\Coupon;
 use App\Models\Option;
+use App\Models\Country;
 use App\Models\Product;
 use App\Models\Category;
-use App\Models\Country;
 
 class HomeController extends Controller
 {
@@ -123,6 +124,57 @@ class HomeController extends Controller
          return responseJson(['status' => 'error', 'message' => $th]);
       }
    }
+
+   public function getCoupon()
+   {
+
+      try {
+         $request = new Request;
+
+         $rules = [
+            'coupon_code'           => ['required'],
+        ];
+
+
+        $validator  =  Validation::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            $errors = $validator->errors();
+            return responseJson(['status' => 'errors', 'message' => "please enter coupon code"]);
+        }
+         $cart   = new Cart;
+         $allCart = $cart->getCart();
+         $coupon   = new Coupon;
+         $coupons = $coupon->getCouponByName($request->get('coupon_code'));
+         if ($coupons) {
+            if($allCart['grandTotal'] >= $coupons->minimum_amount){
+               if($coupons->type =="Percentage"){
+                  $totalprice = $allCart['grandTotal'] * $coupons->amount / 100;
+                  if($coupons->maximum_discount_amount <= $totalprice){
+                        $discount = $coupons->maximum_discount_amount;
+                  }else{
+                        $discount = $totalprice;
+                  }
+               }else{
+                  $discount = $coupons->amount;
+               }
+               $data =[
+                  'id'           => $coupons->id,
+                  'code'         => $coupons->coupon_name,
+                  'discount'     => $discount,
+                  'grand_total'     => $allCart['grandTotal'] - $discount,
+               ];
+               return responseJson(['status' => 'success','message'=>'Coupon is Applied', 'data' => $data]);
+            }else{
+               return responseJson(['status' => 'error', 'message' =>'Minimium $' .$coupons->minimum_amount . ' is required']);
+            }
+         }
+         return responseJson(['status' => 'error', 'message' => 'Coupon does not exist']);
+      } catch (\Throwable $th) {
+         return responseJson(['status' => 'error', 'message' => $th]);
+      }
+   }
+
 
    public function cartData()
    {

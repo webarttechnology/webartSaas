@@ -6,6 +6,7 @@ use Core\Request;
 use App\Models\User;
 use Core\Controller;
 use Core\Validation;
+use App\Models\Coupon;
 use App\Models\Option;
 use App\Models\Country;
 use App\Models\Product;
@@ -76,9 +77,9 @@ class AdminController extends Controller
 
 
 
-         if ($_SERVER['HTTP_HOST'] == 'domain.test') {
+         if ($_SERVER['HTTP_HOST'] == 'webartsaas.test') {
             ////// Local
-            $url = 'http://newtrixcart.test/api/login-action';
+            $url = 'http://saas.test/api/login-action';
          } else {
             ///// Live 
             $url = 'https://prototype.trixcart.com/api/login-action';
@@ -512,7 +513,7 @@ class AdminController extends Controller
          }
 
 
-         if ($_SERVER['HTTP_HOST'] == 'domain.test') {
+         if ($_SERVER['HTTP_HOST'] == 'webartsaas.test') {
             ////// Local
             $url = 'http://saas.test/api/password/email';
          } else {
@@ -560,7 +561,7 @@ class AdminController extends Controller
    public function showResetForm($token, $id)
    {
 
-      if ($_SERVER['HTTP_HOST'] == 'domain.test') {
+      if ($_SERVER['HTTP_HOST'] == 'webartsaas.test') {
          ////// Local
          $url = 'http://saas.test/api/valid-user';
       } else {
@@ -621,7 +622,7 @@ class AdminController extends Controller
          }
 
 
-         if ($_SERVER['HTTP_HOST'] == 'domain.test') {
+         if ($_SERVER['HTTP_HOST'] == 'webartsaas.test') {
             ////// Local
             $url = 'http://saas.test/api/password/reset';
          } else {
@@ -663,4 +664,6 @@ class AdminController extends Controller
          return responseJson(['status' => 'error', 'message' => 'Server error please try again']);
       }
    }
+
+ 
 }

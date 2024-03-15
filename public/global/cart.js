@@ -109,4 +109,32 @@ $(document).ready(function () {
         getcartdata(); // Call the getcartdata() function
     });
 
+
+    $(document).on("click", ".couponbtn", function (e) {
+        e.preventDefault();
+        var couponcode = $("#coupon_code").val();
+        // alert(couponcode);
+        $.ajax({
+            url: '/get-coupon',
+            method: 'POST',
+            data: {
+                coupon_code: couponcode,
+                csrf_token: csrf_token
+            },
+            success: function (response) {
+                if (response.status === 'success') {
+                    $('.grand_total').text('$ ' + response.data.grand_total.toFixed(2));
+                    $('.couponfield').text('$ ' + response.data.discount);
+
+                    $('body').append('<div id="trixcarttoaster" class="toaster-success" style="font-size: 17px; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background-color: #333; color: #fff; padding: 15px 25px; border-radius: 4px; display: none; z-index: 999;"></div>');
+                    $('#trixcarttoaster').text(response.message).fadeIn().delay(5000).fadeOut();
+                } else{
+                    $('body').append('<div id="trixcarttoaster" class="toaster-error" style="font-size: 17px; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background-color: #bb1010; color: #fff; padding: 15px 25px; border-radius: 4px; display: none; z-index: 999;"></div>');
+                    $('#trixcarttoaster').text(response.message).fadeIn().delay(5000).fadeOut();
+                }
+            },
+
+        });
+    });
+
 });

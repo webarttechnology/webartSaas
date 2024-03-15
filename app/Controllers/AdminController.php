@@ -240,8 +240,8 @@ class AdminController extends Controller
       $category = new Category;
       $data['categories'] = $category->getCategoryAll();
       $data['category']   = $category->getCategoryById($id);
-      // fire($data['category']);
       $title = 'Edit Category';
+      // fire($data['category']);
       $this->view('admin/edit-category', $data);
    }
 
@@ -253,6 +253,7 @@ class AdminController extends Controller
       $title = 'Add Variation';
       $this->view('admin/add-variation', $data);
    }
+
    public function single_product()
    {
       $title = 'Product Details';
@@ -283,7 +284,6 @@ class AdminController extends Controller
       $this->view('admin/edit-order',  [], $title);
    }
 
-
    public function invoice()
    {
       $title = 'Edit Order';
@@ -304,11 +304,11 @@ class AdminController extends Controller
 
    public function customer_list()
    {
-   $title = 'Customer List';
-   $user = new User;
-   $data['alluser'] = $user->getAllData();
-   // fire($data['alluser']);
-   $this->view('admin/customer-list', $data, $title);
+      $title = 'Customer List';
+      $user = new User;
+      $data['alluser'] = $user->getAllData();
+      // fire($data['alluser']);
+      $this->view('admin/customer-list', $data, $title);
    }
 
    public function customer_details()
@@ -337,6 +337,7 @@ class AdminController extends Controller
 
       $this->view('admin/theme', $data, $title);
    }
+
    public function theme_store()
    {
       $dir = PUBLIC_PATH . 'themes';
@@ -351,7 +352,6 @@ class AdminController extends Controller
 
       $this->view('admin/theme-store', $data, $title);
    }
-
 
 
    public function theme_details($name)
@@ -414,6 +414,7 @@ class AdminController extends Controller
       } else {
          return responseJson(['status' => 'error', 'message' => $success]);
       }
+
    }
 
 
@@ -427,6 +428,7 @@ class AdminController extends Controller
       $option->makeActive(trim($request->get('theme')));
 
       return responseJson(['status' => 'success', 'message' => 'Theme Active successfully']);
+
    }
 
 
@@ -442,7 +444,6 @@ class AdminController extends Controller
       $title = 'Setting';
 
       // fire(json_decode(getOptions("shipping_method"))[0]->shipping_name);
-
       $this->view('admin/settings', $data, $title);
    }
 
@@ -469,21 +470,16 @@ class AdminController extends Controller
       $data['cjVendorCategory'] = json_decode(cjCurl('category'))->data;
       $data['id'] = $id;
       
-
       // fire($data['cjVendorProduct']);
-
       $this->view('admin/vendor-store', $data);
+
    }
 
    public function vendor_product_details($id)
    {
-
       $data['cjVendorProduct'] = json_decode(cjCurl('product-details', $id))->data;
-     
       $data['id'] = $id;
-      
       // fire($data['cjVendorProduct']);
-
       $this->view('admin/vendor-product-details', $data);
    }
    
@@ -604,13 +600,14 @@ class AdminController extends Controller
 
    public function resetPassword()
    {
+
       try {
 
          $request = new Request;
 
          $rules = [
-            'password' => ['required'],
-            'confirm-password' => ['required'],
+            'password'           => ['required'],
+            'confirm-password'   => ['required'],
          ];
 
          $validator = Validation::make($request->all(), $rules);
@@ -659,8 +656,10 @@ class AdminController extends Controller
          }
 
          return responseJson(['status' => 'success', 'message' => 'Password Reset Successfully', 'url' => "/dw-admin"]);
+      
       } catch (\Throwable $th) {
          return responseJson(['status' => 'error', 'message' => 'Server error please try again']);
+
       }
    }
 }

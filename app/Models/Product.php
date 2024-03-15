@@ -56,7 +56,7 @@ class Product
         }
 
         $setValues = rtrim($setValues, ', ');
-
+        
         $query = $this->db->prepare("UPDATE products SET $setValues WHERE id = :id");
 
         $query->bindValue(':id', $id);

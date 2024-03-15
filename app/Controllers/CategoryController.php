@@ -15,17 +15,15 @@ class CategoryController extends Controller
 
     public function save_category()
     {
+
         try {
 
-
             $request = new Request;
+
             $rules = [
                 'category' => ['required'],
                 // 'cat_image' => ['required'],
             ];
-
-            // fire( $request->getFile('avatar'));
-            // fire( $sub_category[$last_sub_category_index]);
 
             $validator = Validation::make($request->all(), $rules);
 
@@ -49,6 +47,7 @@ class CategoryController extends Controller
                 $imageUrl = $baseUrl . 'uploads/category/' . $filename;
                 $category_data['image'] = $imageUrl;
                 $subcategory_data['image'] = $imageUrl;
+
             }
 
             $category_data = [
@@ -90,6 +89,7 @@ class CategoryController extends Controller
         } catch (\Throwable $th) {
             return responseJson(['status' => 'errors', 'message' => $th]);
         }
+
     }
 
     public function getCategory()
@@ -98,17 +98,17 @@ class CategoryController extends Controller
         $id = intval($request->get('id'));
         $category = new Category;
         $data['subcategory'] = $category->getSubCategory($id);
-        // $data = $this->view('admin/subcategory', $data)->render();
-        // return $data;
         return responseJson(['status' => 'success', 'data' => $data]);
     }
 
     public function update_category()
     {
+
+
         try {
+
             $request = new Request;
-            // fire($request->all());
-            // fire( $request->getFile('avatar'));
+
             $rules = [
                 'category' => ['required'],
             ];
@@ -167,8 +167,11 @@ class CategoryController extends Controller
             $update_category = new Category;
             $update = $update_category->updateCategoryById($request->get('category_id'), $category_data);
             return responseJson(['status' => 'success', 'message' => 'Category Updated Successfully']);
+
         } catch (\Throwable $th) {
+
             return responseJson(['status' => 'errors', 'message' => $th]);
+
         }
     }
 
@@ -184,6 +187,7 @@ class CategoryController extends Controller
             if(count($allCat) > 0){
                 return responseJson(['status' => 'success', 'data' => $allCat]);
             }
+
             return responseJson(['status' => 'error', 'message' => 'No Record Found']);
 
         } catch (\Throwable $th) {
@@ -199,10 +203,15 @@ class CategoryController extends Controller
 
             $request    = new Request;
             $category   = new Category;
+
             $allCat = $category->getCategoryByWhereIn($request->get('sub_category'));
+
             if(count($allCat) > 0){
+
                 return responseJson(['status' => 'success', 'data' => $allCat]);
+
             }
+            
             return responseJson(['status' => 'error', 'message' => 'No Record Found']);
 
         } catch (\Throwable $th) {

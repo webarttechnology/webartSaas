@@ -205,6 +205,7 @@ class Product
         FROM `products` p
         LEFT JOIN `product_categories` pc ON p.id = pc.product_id
         LEFT JOIN `categories` c ON pc.category_id = c.id
+        WHERE c.deleted_at IS NULL
         ORDER BY RAND() LIMIT 8");
         return $query->fetchAll(PDO::FETCH_OBJ);
     }

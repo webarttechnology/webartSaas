@@ -235,7 +235,9 @@ class HomeController extends Controller
       $optionM = new Option();
 
       $product = new Product;
-      $data['product'] = $product->getProductAll();
+      
+      // $data['product'] = $product->getProductAll();
+      $data['product'] = $product->getCategoryProductAll();
       $data['themeInfo'] = $optionM->getActive();
       $title = 'Shop';
       $this->view('themes/' . trim($data['themeInfo']->value) . '/' . 'shop', $data, $title);

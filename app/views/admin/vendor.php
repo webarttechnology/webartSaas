@@ -55,9 +55,7 @@ include 'common/sidebar.php';
 			<div id="kt_app_content_container" class="app-container container-xxl">
 				<!--begin::Layout-->
 				<div class="row">
-
 				  <?php foreach ($cjVendorCategory as  $value):?>
-
 					<div class="col-6 col-sm-4 col-md-3 col-lg-2">
 						<div class="nav-item mb-3 me-0">
 							<!--begin::Nav link-->

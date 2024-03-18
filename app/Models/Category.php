@@ -171,7 +171,7 @@ class Category
         $query = $this->db->query("SELECT DISTINCT c.id, c.name
         FROM categories c
         JOIN product_categories pc ON c.id = pc.category_id
-        WHERE c.parent_id IS NULL
+        WHERE c.parent_id IS NULL AND c.deleted_at IS NULL
         ORDER BY RAND()
         LIMIT 5
         ");

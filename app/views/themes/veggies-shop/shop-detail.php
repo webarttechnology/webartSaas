@@ -48,7 +48,8 @@
             <div class="col-xl-7 col-lg-7 col-md-6">
                 <div class="single-product-details">
                     <h2><?php echo $product->name ?></h2>
-                    <h5>$<?php echo number_format($product->base_price, 2) ?></h5>
+                    <!-- <h5>$<?php // echo number_format($product->base_price, 2) ?></h5> -->
+                    <h5>$<?php echo $product->base_price?></h5>
                     <p class="available-stock"><span> Limited Stock: <?php echo $product->shelf_qty ?></span>
                     <p>
                     <h4>Short Description:</h4>
@@ -224,7 +225,8 @@
                             </div>
                             <div class="why-text">
                                 <h4><?php echo ucfirst($proddata->name) ?></h4>
-                                <h5> $<?php echo number_format($proddata->base_price, 2) ?></h5>
+                                <!-- <h5> $<?php //echo number_format($proddata->base_price, 2) ?></h5> -->
+                                <h5> $<?php echo $proddata->base_price ?></h5>
                             </div>
                         </div>
                     </div>

@@ -27,10 +27,21 @@ class HomeController extends Controller
 
       $title = option('business_name');
       $category = new Category;
-      $data['allcategory'] = $category->getRandomCategory();
+      $data['categories'] = [];
+      $data['products'] = $category->getRandomCategory();
 
-      $product = new Product;
-      $data['product'] = $product->getCategoryProductAll();
+      // fire($data['products']);
+
+      foreach( $data['products'] as $key => $category )
+      {
+         if( !in_array($category->parent_category, $data['categories']) )
+         {
+            $data['categories'][] = $category->parent_category;
+         }
+      }
+
+      // $product = new Product;
+      // $data['product'] = $product->getCategoryProductAll();
 
       $this->view('themes/' . trim($data['themeInfo']->value) . '/' . 'index', $data, $title);
    }

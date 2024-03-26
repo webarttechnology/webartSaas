@@ -155,72 +155,7 @@ include 'common/sidebar.php';
 
                                     <hr class="product-divider">
 
-                                    <div class="form-group d-flex flex-column box">
-                                        <!-- <h6>Choose Color</h6>
-                                                            <ul>
-                                                                <li>
-                                                                    <div data-setting="radio">
-                                                                        <input type="radio" value="theme-color-blue" class="btn-check"
-                                                                            name="theme_color" id="theme-color-1"
-                                                                            data-colors="{&quot;primary&quot;: &quot;#00C3F9&quot;, &quot;info&quot;: &quot;#573BFF&quot;}">
-                                                                        <label class="btn btn-border d-block bg-transparent" for="theme-color-1"
-                                                                            data-bs-toggle="tooltip" data-bs-placement="top"
-                                                                            data-bs-original-title="" aria-label="">
-                                                                            <svg class="customizer-btn" xmlns="http://www.w3.org/2000/svg"
-                                                                                viewBox="0 0 24 24" width="26" height="26">
-                                                                                <circle cx="12" cy="12" r="10" fill="#573BFF"></circle>
-                                                                            </svg>
-                                                                        </label>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div data-setting="radio">
-                                                                        <input type="radio" value="theme-color-gray" class="btn-check"
-                                                                            name="theme_color" id="theme-color-2"
-                                                                            data-colors="{&quot;primary&quot;: &quot;#91969E&quot;, &quot;info&quot;: &quot;#FD8D00&quot;}">
-                                                                        <label class="btn btn-border d-block bg-transparent" for="theme-color-2"
-                                                                            data-bs-toggle="tooltip" data-bs-placement="top"
-                                                                            data-bs-original-title="" aria-label="">
-                                                                            <svg class="customizer-btn" xmlns="http://www.w3.org/2000/svg"
-                                                                                viewBox="0 0 24 24" width="26" height="26">
-                                                                                <circle cx="12" cy="12" r="10" fill="#FD8D00"></circle>
-                                                                            </svg>
-                                                                        </label>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div data-setting="radio">
-                                                                        <input type="radio" value="theme-color-red" class="btn-check"
-                                                                            name="theme_color" id="theme-color-3"
-                                                                            data-colors="{&quot;primary&quot;: &quot;#DB5363&quot;, &quot;info&quot;: &quot;#366AF0&quot;}">
-                                                                        <label class="btn btn-border d-block bg-transparent" for="theme-color-3"
-                                                                            data-bs-toggle="tooltip" data-bs-placement="top"
-                                                                            data-bs-original-title="" aria-label="">
-                                                                            <svg class="customizer-btn" xmlns="http://www.w3.org/2000/svg"
-                                                                                viewBox="0 0 24 24" width="26" height="26">
-                                                                                <circle cx="12" cy="12" r="10" fill="#DB5363"></circle>
-                                                                            </svg>
-                                                                        </label>
-                                                                    </div>
-                                                                </li>
-                                                            </ul> -->
-                                    </div>
-                                    <div class="product-form product-variation-form product-size-swatch">
-                                        <!-- <label class="mb-1">Size:</label>
-                                                                <div class="w-100"></div>
-                                                                <div class="button">
-                                                                    <input type="radio" id="small" name="check-substitution-2" />
-                                                                    <label class="btn btn-outline-secondary btn-sm" for="small">small</label>
-                                                                </div>
-                                                                <div class="button">
-                                                                    <input type="radio" id="medium" name="check-substitution-2" />
-                                                                    <label class="btn btn-outline-secondary btn-sm" for="medium">Medium</label>
-                                                                </div>
-                                                                <div class="button">
-                                                                    <input type="radio" id="large" name="check-substitution-2" />
-                                                                    <label class="btn btn-outline-secondary btn-sm" for="large">Large</label>
-                                                                </div> -->
-                                    </div>
+
                                 </div>
 
                                 <div class="product-variation-price">
@@ -236,10 +171,26 @@ include 'common/sidebar.php';
                                                                         <button class="qty-count qty-count--add" data-action="add" type="button">+</button>
                                                                     </div>
                                                                 </div> -->
-                                        <button class="btn btn-primary btn-cart">
+
+                                        <!-- <button class="btn btn-primary btn-cart add-store-data-modal">
                                             <i class="fa-solid fa-bag-shopping"></i>
                                             <span>Add to Store</span>
-                                        </button>
+                                        </button> -->
+                                        <?php if (in_array($cjVendorProduct->pid, array_column($product, 'vendor_product_id'))) : ?>
+                                            <button class="btn btn-primary btn-cart add-store-data-modal">
+                                                <i class="fa-solid fa-pencil"></i>
+                                                <span>Edit Store</span>
+                                            </button>
+                                            <button class="btn btn-danger btn-cart remove-store-data" data-id="<?php echo $cjVendorProduct->pid ?>">
+                                                <i class="fa-solid fa-trash-can"></i>
+                                                <span>Remove Store</span>
+                                            </button>
+                                        <?php else : ?>
+                                            <button class="btn btn-primary btn-cart add-store-data-modal">
+                                                <i class="fa-solid fa-bag-shopping"></i>
+                                                <span>Add to Store</span>
+                                            </button>
+                                        <?php endif; ?>
 
                                         <div class="social-links-wrapper">
                                             <div class="social-links">
@@ -712,563 +663,7 @@ include 'common/sidebar.php';
                             </div>
 
                             <!-- <h3>Related Products</h3> -->
-                            <!-- <div class="product-wrapper row">
-                                                    <div class="product-wrap col-sm-6 col-md-4 col-lg-3">
-                                                        <div class="product text-center">
-                                                            <figure class="product-media">
-                                                                <a href="#">
-                                                                    <img src="<?= url('/admin/') ?>/assets/media/vendor/3.jpg" alt="Product" width="" height="">
-                                                                </a>
-                                                                <div class="product-action-vertical">
-                                                                    <a href="#" class="btn-product-icon btn-cart w-icon-cart" title="Add to cart"></a>
-                                                                    <a href="#" class="btn-product-icon btn-wishlist w-icon-heart" title="Wishlist"></a>
-                                                                    <a href="#" class="btn-product-icon btn-compare w-icon-compare" title="Compare"></a>
-                                                                    <a href="#" class="btn-product-icon btn-quickview w-icon-search" title="Quick View"></a>
-                                                                </div>
-                                                            </figure>
-                                                            <div class="product-details">
-                                                                <h3 class="product-name">
-                                                                    <a href="#">3D Television</a>
-                                                                </h3>
-                                                                <div class="ratings-container">
-                                                                    <div class="ratings-full d-flex justify-content-center flex-column text-center align-items-center">
-                                                                        <ul class="d-flex">
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                    
-                                                                </div>
-                                                                <div class="product-pa-wrapper">
-                                                                    <div class="product-price">
-                                                                        $220.00 - $230.00
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="product-wrap col-sm-6 col-md-4 col-lg-3">
-                                                        <div class="product text-center">
-                                                            <figure class="product-media">
-                                                                <a href="#">
-                                                                    <img src="<?= url('/admin/') ?>/assets/media/vendor/3.jpg" alt="Product" width="" height="">
-                                                                </a>
-                                                                <div class="product-action-vertical">
-                                                                    <a href="#" class="btn-product-icon btn-cart w-icon-cart" title="Add to cart"></a>
-                                                                    <a href="#" class="btn-product-icon btn-wishlist w-icon-heart" title="Wishlist"></a>
-                                                                    <a href="#" class="btn-product-icon btn-compare w-icon-compare" title="Compare"></a>
-                                                                    <a href="#" class="btn-product-icon btn-quickview w-icon-search" title="Quick View"></a>
-                                                                </div>
-                                                            </figure>
-                                                            <div class="product-details">
-                                                                <h3 class="product-name">
-                                                                    <a href="#">3D Television</a>
-                                                                </h3>
-                                                                <div class="ratings-container">
-                                                                    <div class="ratings-full d-flex justify-content-center flex-column text-center align-items-center">
-                                                                        <ul class="d-flex">
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                    
-                                                                </div>
-                                                                <div class="product-pa-wrapper">
-                                                                    <div class="product-price">
-                                                                        $220.00 - $230.00
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="product-wrap col-sm-6 col-md-4 col-lg-3">
-                                                        <div class="product text-center">
-                                                            <figure class="product-media">
-                                                                <a href="#">
-                                                                    <img src="<?= url('/admin/') ?>/assets/media/vendor/3.jpg" alt="Product" width="" height="">
-                                                                </a>
-                                                                <div class="product-action-vertical">
-                                                                    <a href="#" class="btn-product-icon btn-cart w-icon-cart" title="Add to cart"></a>
-                                                                    <a href="#" class="btn-product-icon btn-wishlist w-icon-heart" title="Wishlist"></a>
-                                                                    <a href="#" class="btn-product-icon btn-compare w-icon-compare" title="Compare"></a>
-                                                                    <a href="#" class="btn-product-icon btn-quickview w-icon-search" title="Quick View"></a>
-                                                                </div>
-                                                            </figure>
-                                                            <div class="product-details">
-                                                                <h3 class="product-name">
-                                                                    <a href="#">3D Television</a>
-                                                                </h3>
-                                                                <div class="ratings-container">
-                                                                    <div class="ratings-full d-flex justify-content-center flex-column text-center align-items-center">
-                                                                        <ul class="d-flex">
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                    
-                                                                </div>
-                                                                <div class="product-pa-wrapper">
-                                                                    <div class="product-price">
-                                                                        $220.00 - $230.00
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="product-wrap col-sm-6 col-md-4 col-lg-3">
-                                                        <div class="product text-center">
-                                                            <figure class="product-media">
-                                                                <a href="#">
-                                                                    <img src="<?= url('/admin/') ?>/assets/media/vendor/3.jpg" alt="Product" width="" height="">
-                                                                </a>
-                                                                <div class="product-action-vertical">
-                                                                    <a href="#" class="btn-product-icon btn-cart w-icon-cart" title="Add to cart"></a>
-                                                                    <a href="#" class="btn-product-icon btn-wishlist w-icon-heart" title="Wishlist"></a>
-                                                                    <a href="#" class="btn-product-icon btn-compare w-icon-compare" title="Compare"></a>
-                                                                    <a href="#" class="btn-product-icon btn-quickview w-icon-search" title="Quick View"></a>
-                                                                </div>
-                                                            </figure>
-                                                            <div class="product-details">
-                                                                <h3 class="product-name">
-                                                                    <a href="#">3D Television</a>
-                                                                </h3>
-                                                                <div class="ratings-container">
-                                                                    <div class="ratings-full d-flex justify-content-center flex-column text-center align-items-center">
-                                                                        <ul class="d-flex">
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                    
-                                                                </div>
-                                                                <div class="product-pa-wrapper">
-                                                                    <div class="product-price">
-                                                                        $220.00 - $230.00
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="product-wrap col-sm-6 col-md-4 col-lg-3">
-                                                        <div class="product text-center">
-                                                            <figure class="product-media">
-                                                                <a href="#">
-                                                                    <img src="<?= url('/admin/') ?>/assets/media/vendor/3.jpg" alt="Product" width="" height="">
-                                                                </a>
-                                                                <div class="product-action-vertical">
-                                                                    <a href="#" class="btn-product-icon btn-cart w-icon-cart" title="Add to cart"></a>
-                                                                    <a href="#" class="btn-product-icon btn-wishlist w-icon-heart" title="Wishlist"></a>
-                                                                    <a href="#" class="btn-product-icon btn-compare w-icon-compare" title="Compare"></a>
-                                                                    <a href="#" class="btn-product-icon btn-quickview w-icon-search" title="Quick View"></a>
-                                                                </div>
-                                                            </figure>
-                                                            <div class="product-details">
-                                                                <h3 class="product-name">
-                                                                    <a href="#">3D Television</a>
-                                                                </h3>
-                                                                <div class="ratings-container">
-                                                                    <div class="ratings-full d-flex justify-content-center flex-column text-center align-items-center">
-                                                                        <ul class="d-flex">
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                    
-                                                                </div>
-                                                                <div class="product-pa-wrapper">
-                                                                    <div class="product-price">
-                                                                        $220.00 - $230.00
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="product-wrap col-sm-6 col-md-4 col-lg-3">
-                                                        <div class="product text-center">
-                                                            <figure class="product-media">
-                                                                <a href="#">
-                                                                    <img src="<?= url('/admin/') ?>/assets/media/vendor/3.jpg" alt="Product" width="" height="">
-                                                                </a>
-                                                                <div class="product-action-vertical">
-                                                                    <a href="#" class="btn-product-icon btn-cart w-icon-cart" title="Add to cart"></a>
-                                                                    <a href="#" class="btn-product-icon btn-wishlist w-icon-heart" title="Wishlist"></a>
-                                                                    <a href="#" class="btn-product-icon btn-compare w-icon-compare" title="Compare"></a>
-                                                                    <a href="#" class="btn-product-icon btn-quickview w-icon-search" title="Quick View"></a>
-                                                                </div>
-                                                            </figure>
-                                                            <div class="product-details">
-                                                                <h3 class="product-name">
-                                                                    <a href="#">3D Television</a>
-                                                                </h3>
-                                                                <div class="ratings-container">
-                                                                    <div class="ratings-full d-flex justify-content-center flex-column text-center align-items-center">
-                                                                        <ul class="d-flex">
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                    
-                                                                </div>
-                                                                <div class="product-pa-wrapper">
-                                                                    <div class="product-price">
-                                                                        $220.00 - $230.00
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="product-wrap col-sm-6 col-md-4 col-lg-3">
-                                                        <div class="product text-center">
-                                                            <figure class="product-media">
-                                                                <a href="#">
-                                                                    <img src="<?= url('/admin/') ?>/assets/media/vendor/3.jpg" alt="Product" width="" height="">
-                                                                </a>
-                                                                <div class="product-action-vertical">
-                                                                    <a href="#" class="btn-product-icon btn-cart w-icon-cart" title="Add to cart"></a>
-                                                                    <a href="#" class="btn-product-icon btn-wishlist w-icon-heart" title="Wishlist"></a>
-                                                                    <a href="#" class="btn-product-icon btn-compare w-icon-compare" title="Compare"></a>
-                                                                    <a href="#" class="btn-product-icon btn-quickview w-icon-search" title="Quick View"></a>
-                                                                </div>
-                                                            </figure>
-                                                            <div class="product-details">
-                                                                <h3 class="product-name">
-                                                                    <a href="#">3D Television</a>
-                                                                </h3>
-                                                                <div class="ratings-container">
-                                                                    <div class="ratings-full d-flex justify-content-center flex-column text-center align-items-center">
-                                                                        <ul class="d-flex">
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                    
-                                                                </div>
-                                                                <div class="product-pa-wrapper">
-                                                                    <div class="product-price">
-                                                                        $220.00 - $230.00
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="product-wrap col-sm-6 col-md-4 col-lg-3">
-                                                        <div class="product text-center">
-                                                            <figure class="product-media">
-                                                                <a href="#">
-                                                                    <img src="<?= url('/admin/') ?>/assets/media/vendor/3.jpg" alt="Product" width="" height="">
-                                                                </a>
-                                                                <div class="product-action-vertical">
-                                                                    <a href="#" class="btn-product-icon btn-cart w-icon-cart" title="Add to cart"></a>
-                                                                    <a href="#" class="btn-product-icon btn-wishlist w-icon-heart" title="Wishlist"></a>
-                                                                    <a href="#" class="btn-product-icon btn-compare w-icon-compare" title="Compare"></a>
-                                                                    <a href="#" class="btn-product-icon btn-quickview w-icon-search" title="Quick View"></a>
-                                                                </div>
-                                                            </figure>
-                                                            <div class="product-details">
-                                                                <h3 class="product-name">
-                                                                    <a href="#">3D Television</a>
-                                                                </h3>
-                                                                <div class="ratings-container">
-                                                                    <div class="ratings-full d-flex justify-content-center flex-column text-center align-items-center">
-                                                                        <ul class="d-flex">
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                    
-                                                                </div>
-                                                                <div class="product-pa-wrapper">
-                                                                    <div class="product-price">
-                                                                        $220.00 - $230.00
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="product-wrap col-sm-6 col-md-4 col-lg-3">
-                                                        <div class="product text-center">
-                                                            <figure class="product-media">
-                                                                <a href="#">
-                                                                    <img src="<?= url('/admin/') ?>/assets/media/vendor/3.jpg" alt="Product" width="" height="">
-                                                                </a>
-                                                                <div class="product-action-vertical">
-                                                                    <a href="#" class="btn-product-icon btn-cart w-icon-cart" title="Add to cart"></a>
-                                                                    <a href="#" class="btn-product-icon btn-wishlist w-icon-heart" title="Wishlist"></a>
-                                                                    <a href="#" class="btn-product-icon btn-compare w-icon-compare" title="Compare"></a>
-                                                                    <a href="#" class="btn-product-icon btn-quickview w-icon-search" title="Quick View"></a>
-                                                                </div>
-                                                            </figure>
-                                                            <div class="product-details">
-                                                                <h3 class="product-name">
-                                                                    <a href="#">3D Television</a>
-                                                                </h3>
-                                                                <div class="ratings-container">
-                                                                    <div class="ratings-full d-flex justify-content-center flex-column text-center align-items-center">
-                                                                        <ul class="d-flex">
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                    
-                                                                </div>
-                                                                <div class="product-pa-wrapper">
-                                                                    <div class="product-price">
-                                                                        $220.00 - $230.00
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="product-wrap col-sm-6 col-md-4 col-lg-3">
-                                                        <div class="product text-center">
-                                                            <figure class="product-media">
-                                                                <a href="#">
-                                                                    <img src="<?= url('/admin/') ?>/assets/media/vendor/3.jpg" alt="Product" width="" height="">
-                                                                </a>
-                                                                <div class="product-action-vertical">
-                                                                    <a href="#" class="btn-product-icon btn-cart w-icon-cart" title="Add to cart"></a>
-                                                                    <a href="#" class="btn-product-icon btn-wishlist w-icon-heart" title="Wishlist"></a>
-                                                                    <a href="#" class="btn-product-icon btn-compare w-icon-compare" title="Compare"></a>
-                                                                    <a href="#" class="btn-product-icon btn-quickview w-icon-search" title="Quick View"></a>
-                                                                </div>
-                                                            </figure>
-                                                            <div class="product-details">
-                                                                <h3 class="product-name">
-                                                                    <a href="#">3D Television</a>
-                                                                </h3>
-                                                                <div class="ratings-container">
-                                                                    <div class="ratings-full d-flex justify-content-center flex-column text-center align-items-center">
-                                                                        <ul class="d-flex">
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                    
-                                                                </div>
-                                                                <div class="product-pa-wrapper">
-                                                                    <div class="product-price">
-                                                                        $220.00 - $230.00
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="product-wrap col-sm-6 col-md-4 col-lg-3">
-                                                        <div class="product text-center">
-                                                            <figure class="product-media">
-                                                                <a href="#">
-                                                                    <img src="<?= url('/admin/') ?>/assets/media/vendor/3.jpg" alt="Product" width="" height="">
-                                                                </a>
-                                                                <div class="product-action-vertical">
-                                                                    <a href="#" class="btn-product-icon btn-cart w-icon-cart" title="Add to cart"></a>
-                                                                    <a href="#" class="btn-product-icon btn-wishlist w-icon-heart" title="Wishlist"></a>
-                                                                    <a href="#" class="btn-product-icon btn-compare w-icon-compare" title="Compare"></a>
-                                                                    <a href="#" class="btn-product-icon btn-quickview w-icon-search" title="Quick View"></a>
-                                                                </div>
-                                                            </figure>
-                                                            <div class="product-details">
-                                                                <h3 class="product-name">
-                                                                    <a href="#">3D Television</a>
-                                                                </h3>
-                                                                <div class="ratings-container">
-                                                                    <div class="ratings-full d-flex justify-content-center flex-column text-center align-items-center">
-                                                                        <ul class="d-flex">
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                    
-                                                                </div>
-                                                                <div class="product-pa-wrapper">
-                                                                    <div class="product-price">
-                                                                        $220.00 - $230.00
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="product-wrap col-sm-6 col-md-4 col-lg-3">
-                                                        <div class="product text-center">
-                                                            <figure class="product-media">
-                                                                <a href="#">
-                                                                    <img src="<?= url('/admin/') ?>/assets/media/vendor/3.jpg" alt="Product" width="" height="">
-                                                                </a>
-                                                                <div class="product-action-vertical">
-                                                                    <a href="#" class="btn-product-icon btn-cart w-icon-cart" title="Add to cart"></a>
-                                                                    <a href="#" class="btn-product-icon btn-wishlist w-icon-heart" title="Wishlist"></a>
-                                                                    <a href="#" class="btn-product-icon btn-compare w-icon-compare" title="Compare"></a>
-                                                                    <a href="#" class="btn-product-icon btn-quickview w-icon-search" title="Quick View"></a>
-                                                                </div>
-                                                            </figure>
-                                                            <div class="product-details">
-                                                                <h3 class="product-name">
-                                                                    <a href="#">3D Television</a>
-                                                                </h3>
-                                                                <div class="ratings-container">
-                                                                    <div class="ratings-full d-flex justify-content-center flex-column text-center align-items-center">
-                                                                        <ul class="d-flex">
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                    
-                                                                </div>
-                                                                <div class="product-pa-wrapper">
-                                                                    <div class="product-price">
-                                                                        $220.00 - $230.00
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="product-wrap col-sm-6 col-md-4 col-lg-3">
-                                                        <div class="product text-center">
-                                                            <figure class="product-media">
-                                                                <a href="#">
-                                                                    <img src="<?= url('/admin/') ?>/assets/media/vendor/3.jpg" alt="Product" width="" height="">
-                                                                </a>
-                                                                <div class="product-action-vertical">
-                                                                    <a href="#" class="btn-product-icon btn-cart w-icon-cart" title="Add to cart"></a>
-                                                                    <a href="#" class="btn-product-icon btn-wishlist w-icon-heart" title="Wishlist"></a>
-                                                                    <a href="#" class="btn-product-icon btn-compare w-icon-compare" title="Compare"></a>
-                                                                    <a href="#" class="btn-product-icon btn-quickview w-icon-search" title="Quick View"></a>
-                                                                </div>
-                                                            </figure>
-                                                            <div class="product-details">
-                                                                <h3 class="product-name">
-                                                                    <a href="#">3D Television</a>
-                                                                </h3>
-                                                                <div class="ratings-container">
-                                                                    <div class="ratings-full d-flex justify-content-center flex-column text-center align-items-center">
-                                                                        <ul class="d-flex">
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                    
-                                                                </div>
-                                                                <div class="product-pa-wrapper">
-                                                                    <div class="product-price">
-                                                                        $220.00 - $230.00
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="product-wrap col-sm-6 col-md-4 col-lg-3">
-                                                        <div class="product text-center">
-                                                            <figure class="product-media">
-                                                                <a href="#">
-                                                                    <img src="<?= url('/admin/') ?>/assets/media/vendor/3.jpg" alt="Product" width="" height="">
-                                                                </a>
-                                                                <div class="product-action-vertical">
-                                                                    <a href="#" class="btn-product-icon btn-cart w-icon-cart" title="Add to cart"></a>
-                                                                    <a href="#" class="btn-product-icon btn-wishlist w-icon-heart" title="Wishlist"></a>
-                                                                    <a href="#" class="btn-product-icon btn-compare w-icon-compare" title="Compare"></a>
-                                                                    <a href="#" class="btn-product-icon btn-quickview w-icon-search" title="Quick View"></a>
-                                                                </div>
-                                                            </figure>
-                                                            <div class="product-details">
-                                                                <h3 class="product-name">
-                                                                    <a href="#">3D Television</a>
-                                                                </h3>
-                                                                <div class="ratings-container">
-                                                                    <div class="ratings-full d-flex justify-content-center flex-column text-center align-items-center">
-                                                                        <ul class="d-flex">
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                    
-                                                                </div>
-                                                                <div class="product-pa-wrapper">
-                                                                    <div class="product-price">
-                                                                        $220.00 - $230.00
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="product-wrap col-sm-6 col-md-4 col-lg-3">
-                                                        <div class="product text-center">
-                                                            <figure class="product-media">
-                                                                <a href="#">
-                                                                    <img src="<?= url('/admin/') ?>/assets/media/vendor/3.jpg" alt="Product" width="" height="">
-                                                                </a>
-                                                                <div class="product-action-vertical">
-                                                                    <a href="#" class="btn-product-icon btn-cart w-icon-cart" title="Add to cart"></a>
-                                                                    <a href="#" class="btn-product-icon btn-wishlist w-icon-heart" title="Wishlist"></a>
-                                                                    <a href="#" class="btn-product-icon btn-compare w-icon-compare" title="Compare"></a>
-                                                                    <a href="#" class="btn-product-icon btn-quickview w-icon-search" title="Quick View"></a>
-                                                                </div>
-                                                            </figure>
-                                                            <div class="product-details">
-                                                                <h3 class="product-name">
-                                                                    <a href="#">3D Television</a>
-                                                                </h3>
-                                                                <div class="ratings-container">
-                                                                    <div class="ratings-full d-flex justify-content-center flex-column text-center align-items-center">
-                                                                        <ul class="d-flex">
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                            <li><a href="#"><i class="fa-solid fa-star"></i></a></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                    
-                                                                </div>
-                                                                <div class="product-pa-wrapper">
-                                                                    <div class="product-price">
-                                                                        $220.00 - $230.00
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div> -->
+
                         </div>
                     </div>
 
@@ -1282,4 +677,143 @@ include 'common/sidebar.php';
     <!--end::Content-->
 </div>
 <!--end::Content wrapper-->
+
+
+<!--begin::Modals-->
+<!--begin::Modal - variant - Add-->
+<div class="modal fade" id="kt_modal_add_store" tabindex="-1" aria-hidden="true">
+    <!--begin::Modal dialog-->
+    <div class="modal-dialog modal-dialog-centered mw-650px">
+        <!--begin::Modal content-->
+        <div class="modal-content">
+            <!--begin::Form-->
+            <form class="form save_vendor_product" action="<?= url('dw-admin/save-vendor-product') ?>" method="POST" id="kt_modal_add_category_form" data-kt-redirect="" <?= url('/dw-admin/add-product') ?>">
+                <?= csrf_field() ?>
+                <input type="hidden" name="type" value="<?php echo ($vendor_variants) ? 'edit':'add'?>">
+                <input type="hidden" name="price" value="<?php echo $cjVendorProduct->sellPrice ?>">
+                <input type="hidden" name="prod_id" value="<?php echo ($product_id) ? $product_id->id:''?>">
+                <input type="hidden" name="vendor_prod_id" value="<?php echo $cjVendorProduct->pid ?>">
+                <input type="hidden" name="name" value="<?php echo $cjVendorProduct->productNameEn ?>">
+                <input type="hidden" name="thumb_image" value="<?php echo $cjVendorProduct->productImageSet[0] ?>">
+                <input type="hidden" name="sku" value="<?php echo $cjVendorProduct->productSku ?>">
+                <div class="d-none">
+                    <?php foreach ($cjVendorProduct->productImageSet as $item) : ?>
+                        <div class="swiper-slide">
+                            <input type="hidden" name="prod_image[]" value="<?php echo $item ?>">
+                        </div>
+                    <?php endforeach ?>
+                </div>
+                <!--begin::Modal header-->
+                <div class="modal-header" id="kt_modal_add_category_header">
+                    <!--begin::Modal title-->
+                    <h2 class="fw-bold">Add Store Variant</h2>
+                    <!--end::Modal title-->
+                    <!--begin::Close-->
+                    <div id="kt_modal_add_category_close" data-bs-dismiss="modal" class="btn btn-icon btn-sm btn-active-icon-primary">
+                        <i class="ki-duotone ki-cross fs-1">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                        </i>
+                    </div>
+                    <!--end::Close-->
+                </div>
+                <!--end::Modal header-->
+                <!--begin::Modal body-->
+                <div class="modal-body py-10 px-lg-17">
+                    <!--begin::Scroll-->
+                    <div class="scroll-y me-n7 pe-7" id="kt_modal_add_category_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_category_header" data-kt-scroll-wrappers="#kt_modal_add_category_scroll" data-kt-scroll-offset="300px">
+                    </div>
+                    <!--end::Scroll-->
+
+
+                    <div class="mb-10 fv-row add-all-category">
+                        <label class="form-label">Choose category</label>
+
+                        <select class="form-control sub_category mb-3" name="sub_category[]" id="sub_category">
+                            <option value="">Choose Category</option>
+                            <?php foreach ($categories as $item) : ?>
+                                <option value="<?php echo $item->id ?>"><?php echo $item->name ?></option>
+                            <?php endforeach ?>
+                        </select>
+                        
+                    </div>
+
+                    <div class="mb-10 fv-row add-all-category">
+                        <label class="form-label">Select Percentage</label>
+
+                        <select class="form-control mb-3" name="percentage" id="percentage">
+                            <option value="">Choose Percentage</option>
+                            <?php for ($i = 1; $i <= 100; $i++) : ?>
+                                <option value="<?php echo $i; ?>"><?php echo $i; ?>%</option>
+                            <?php endfor; ?>
+                        </select>
+                    </div>
+
+                    <!-- <div class="row">
+                        <?php foreach ($cjVendorProduct->variants  as $variantdata) : ?>
+                            <input type="hidden" name="variant_data[<?php echo $variantdata->vid ?>][vid]" value="<?php echo $variantdata->vid ?>">
+                            <input type="hidden" name="variant_data[<?php echo $variantdata->vid ?>][pid]" value="<?php echo $variantdata->pid ?>">
+                            <div class="col-md-6">
+                                <div class="mb-10 fv-row ">
+                                    <label class="form-label"><?php echo $variantdata->variantNameEn ?></label>
+                                    <input type="text" name="variant_data[<?php echo $variantdata->vid ?>][price]" class="form-control variant_price" data-original-price="<?php echo number_format($variantdata->variantSellPrice, 2) ?>" value="<?php echo number_format($variantdata->variantSellPrice, 2) ?>">
+                                </div>
+                            </div>
+                        <?php endforeach ?>
+                    </div> -->
+
+
+
+                    <div class="row">
+                        <?php foreach ($cjVendorProduct->variants as $variantdata) : ?>
+                            <?php if ($vendor_variants) : ?>
+                                <?php foreach ($vendor_variants as $vendor_variant) : ?>
+                                    <?php if ($vendor_variant->variant_id == $variantdata->vid) : ?>
+                                        <input type="hidden" name="variant_data[<?php echo $variantdata->vid ?>][vid]" value="<?php echo $variantdata->vid ?>">
+                                        <input type="hidden" name="variant_data[<?php echo $variantdata->vid ?>][pid]" value="<?php echo $variantdata->pid ?>">
+                                        <div class="col-md-6">
+                                            <div class="mb-10 fv-row ">
+                                                <label class="form-label"><?php echo $variantdata->variantNameEn ?></label>
+                                                <input type="text" name="variant_data[<?php echo $variantdata->vid ?>][price]" class="form-control variant_price" data-original-price="<?php echo number_format($vendor_variant->variant_price, 2) ?>" value="<?php echo number_format($vendor_variant->variant_price, 2) ?>">
+                                            </div>
+                                        </div>
+                                    <?php endif ?>
+                                <?php endforeach ?>
+                            <?php else : ?>
+                                <input type="hidden" name="variant_data[<?php echo $variantdata->vid ?>][vid]" value="<?php echo $variantdata->vid ?>">
+                                <input type="hidden" name="variant_data[<?php echo $variantdata->vid ?>][pid]" value="<?php echo $variantdata->pid ?>">
+                                <div class="col-md-6">
+                                    <div class="mb-10 fv-row ">
+                                        <label class="form-label"><?php echo $variantdata->variantNameEn ?></label>
+                                        <input type="text" name="variant_data[<?php echo $variantdata->vid ?>][price]" class="form-control variant_price" data-original-price="<?php echo number_format($variantdata->variantSellPrice, 2) ?>" value="<?php echo number_format($variantdata->variantSellPrice, 2) ?>">
+                                    </div>
+                                </div>
+                            <?php endif; ?>
+                        <?php endforeach ?>
+                    </div>
+
+
+                </div>
+                <!--end::Modal body-->
+                <!--begin::Modal footer-->
+                <div class="modal-footer flex-center">
+                    <!--begin::Button-->
+                    <button type="reset" id="kt_modal_add_category_cancel" data-bs-dismiss="modal" class="btn btn-light me-3">Discard</button>
+                    <!--end::Button-->
+                    <!--begin::Button-->
+                    <button type="submit" class="btn btn-primary">
+                        <span class="indicator-label">Add</span>
+                        <span class="indicator-progress">Please wait...
+                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                    </button>
+                    <!--end::Button-->
+                </div>
+                <!--end::Modal footer-->
+            </form>
+            <!--end::Form-->
+        </div>
+    </div>
+</div>
+<!--end::Modal - variant - Add-->
+<!--end::Modals-->
 <?php include("common/footer.php") ?>

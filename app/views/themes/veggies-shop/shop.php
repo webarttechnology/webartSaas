@@ -71,7 +71,8 @@
                                                 </div>
                                                 <div class="why-text">
                                                     <h4><?php echo ucfirst($data->name) ?></h4>
-                                                    <h5> $<?php echo number_format($data->base_price, 2) ?></h5>
+                                                    <!-- <h5> $<?php echo number_format($data->base_price, 2) ?></h5> -->
+                                                    <h5> $<?php echo $data->base_price ?></h5>
                                                 </div>
                                             </div>
                                         </div>
@@ -281,7 +282,8 @@
                                                 <div class="why-text full-width">
                                                     <h4><?php echo ucfirst($data->name) ?></h4>
                                                     <!-- <h5> <del>$ 60.00</del> $40.79</h5> -->
-                                                    <h5>$<?php echo number_format($data->base_price, 2) ?></h5>
+                                                    <!-- <h5>$<?php echo number_format($data->base_price, 2) ?></h5> -->
+                                                    <h5>$<?php echo $data->base_price ?></h5>
                                                     <p><?php echo ucfirst($data->description) ?></p>
                                                     <a class="btn hvr-hover" href="#">Add to Cart</a>
                                                 </div>

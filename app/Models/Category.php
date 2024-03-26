@@ -157,24 +157,25 @@ class Category
     
     public function getRandomCategory()
     {
-        
-        // $query = $this->db->query("SELECT * FROM categories WHERE `parent_id` IS NULL ORDER BY RAND() LIMIT 5");
-       
-        // $query = $this->db->query("SELECT c.*
-        //     FROM categories c
-        //     JOIN product_categories pc ON c.id = pc.category_id
-        //     WHERE c.parent_id IS NULL
-        //     ORDER BY RAND()
-        //     LIMIT 5
+
+        // $query = $this->db->query("SELECT DISTINCT c.id, c.name
+        // FROM categories c
+        // JOIN product_categories pc ON c.id = pc.category_id
+        // WHERE c.parent_id IS NULL AND c.deleted_at IS NULL
+        // ORDER BY RAND()
+        // LIMIT 5
         // ");
 
-        $query = $this->db->query("SELECT DISTINCT c.id, c.name
-        FROM categories c
-        JOIN product_categories pc ON c.id = pc.category_id
-        WHERE c.parent_id IS NULL AND c.deleted_at IS NULL
+        $query = $this->db->query("SELECT p.*, c_parent.name AS parent_category
+        FROM products p
+        JOIN product_categories pc ON p.id = pc.product_id
+        JOIN categories c ON pc.category_id = c.id
+        LEFT JOIN categories c_parent ON c.parent_id = c_parent.id
+        WHERE c.deleted_at IS NULL AND pc.deleted_at IS NULL
         ORDER BY RAND()
-        LIMIT 5
+        LIMIT 10;
         ");
+
 
         return $query->fetchAll(PDO::FETCH_OBJ);
     }

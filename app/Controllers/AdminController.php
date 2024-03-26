@@ -161,6 +161,7 @@ class AdminController extends Controller
    {
       $product = new Product;
       $data['product'] = $product->getProductAll();
+      $data['vendorproduct'] = $product->getVendorProductAll();
       $title = 'Product';
       $this->view('admin/products',  $data, $title);
    }
@@ -478,9 +479,28 @@ class AdminController extends Controller
 
    public function vendor_product_details($id)
    {
+      $category = new Category;
+      $product = new Product;
+      $data['product'] = $product->getProductAll();
+      $data['product_id'] = $product->getProductByVendorId($id);
       $data['cjVendorProduct'] = json_decode(cjCurl('product-details', $id))->data;
       $data['id'] = $id;
-      // fire($data['cjVendorProduct']);
+      $data['categories'] = $category->getCategory();
+      $data['vendor_variants'] = $product->getVendorVariant($id);
+
+      // foreach ($product->getProductCategory( $data['product_id']->id) as $value) {
+      //    $categoryData = $category->getparentCategory($value->category_id);
+      //    $words = explode(", ", $categoryData);
+      //    $reversed_words[] = [
+      //       'id'              => $value->id,
+      //       'category_id'     => $value->category_id,
+      //       'reversed_words'  => array_reverse($words)
+      //   ];
+      // }
+      // $data['category']          =  $reversed_words;
+      // fire( $data['category']);
+    
+      fire($data['cjVendorProduct']);
       $this->view('admin/vendor-product-details', $data);
    }
    

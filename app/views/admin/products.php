@@ -20,7 +20,7 @@ include 'common/sidebar.php';
 					<ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
 						<!--begin::Item-->
 						<li class="breadcrumb-item text-muted">
-							<a href="<?=  url('/dw-admin/dashboard') ?>" class="text-muted text-hover-primary">Home</a>
+							<a href="<?= url('/dw-admin/dashboard') ?>" class="text-muted text-hover-primary">Home</a>
 						</li>
 						<!--end::Item-->
 						<!--begin::Item-->
@@ -49,10 +49,10 @@ include 'common/sidebar.php';
 					<div class="m-0">
 						<!--begin::Menu toggle-->
 						<a href="#" class="btn btn-sm btn-flex btn-secondary fw-bold" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
-						<i class="ki-duotone ki-filter fs-6 text-muted me-1">
-							<span class="path1"></span>
-							<span class="path2"></span>
-						</i>Filter</a>
+							<i class="ki-duotone ki-filter fs-6 text-muted me-1">
+								<span class="path1"></span>
+								<span class="path2"></span>
+							</i>Filter</a>
 						<!--end::Menu toggle-->
 						<!--begin::Menu 1-->
 						<div class="menu menu-sub menu-sub-dropdown w-250px w-md-300px" data-kt-menu="true" id="kt_menu_65a1214c6c869">
@@ -167,6 +167,12 @@ include 'common/sidebar.php';
 						<!--begin::Card toolbar-->
 						<div class="card-toolbar flex-row-fluid justify-content-end gap-5">
 							<div class="w-100 mw-150px">
+								<select class="form-select form-select-solid choosetype" data-control="select2" data-hide-search="true">
+									<option value="admin">Admin</option>
+									<option value="vendor">Vendor</option>
+								</select>
+							</div>
+							<div class="w-100 mw-150px">
 								<!--begin::Select2-->
 								<select class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Status" data-kt-ecommerce-product-filter="status">
 									<option></option>
@@ -178,7 +184,7 @@ include 'common/sidebar.php';
 								<!--end::Select2-->
 							</div>
 							<!--begin::Add product-->
-							<a href="<?=  url('/dw-admin/add-product') ?>" class="btn btn-primary">Add Product</a>
+							<a href="<?= url('/dw-admin/add-product') ?>" class="btn btn-primary">Add Product</a>
 							<!--end::Add product-->
 						</div>
 						<!--end::Card toolbar-->
@@ -204,79 +210,156 @@ include 'common/sidebar.php';
 									<th class="text-end min-w-70px">Actions</th>
 								</tr>
 							</thead>
-							<tbody class="fw-semibold text-gray-600">
-								<?php  foreach($product as $value): ?>
-								<tr>
-									<td>
-										<div class="form-check form-check-sm form-check-custom form-check-solid">
-											<input class="form-check-input" type="checkbox" value="1" />
-										</div>
-									</td>
-									<td>
-										<div class="d-flex align-items-center">
-											<!--begin::Thumbnail-->
-											<a href="<?=  url('/dw-admin/edit-product/'.$value->id) ?>" class="symbol symbol-50px">
-												<span class="symbol-label" style="background-image:url(<?php echo  $value->thumb_img ?? '#' ?>);"></span>
-											</a>
-											<!--end::Thumbnail-->
-											<div class="ms-5">
-												<!--begin::Title-->
-												<a href="<?=  url('/dw-admin/edit-product/'.$value->id) ?>" class="text-gray-800 text-hover-primary fs-5 fw-bold" data-kt-ecommerce-product-filter="product_name"><?php echo $value->name ?></a>
-												<!--end::Title-->
+
+							<tbody class="fw-semibold text-gray-600" id="adminTable">
+								<?php foreach ($product as $value) : ?>
+									<tr>
+										<td>
+											<div class="form-check form-check-sm form-check-custom form-check-solid">
+												<input class="form-check-input" type="checkbox" value="1" />
 											</div>
-										</div>
-									</td>
-									<td class="text-end pe-0">
-										<span class="fw-bold"><?php echo $value->sku ?></span>
-									</td>
-									<td class="text-end pe-0" data-order="6">
-										<!-- <span class="badge badge-light-warning">Low stock</span> -->
-										<span class="fw-bold ms-3"><?php echo $value->shelf_qty ?? 0 ?></span>
-									</td>
-									<td class="text-end pe-0"><?php echo $value->base_price ?></td>
-									<td class="text-end pe-0" data-order="rating-4">
-										<div class="rating justify-content-end">
-											<div class="rating-label checked">
-												<i class="ki-duotone ki-star fs-6"></i>
+										</td>
+										<td>
+											<div class="d-flex align-items-center">
+												<!--begin::Thumbnail-->
+												<a href="<?= url('/dw-admin/edit-product/' . $value->id) ?>" class="symbol symbol-50px">
+													<span class="symbol-label" style="background-image:url(<?php echo  $value->thumb_img ?? '#' ?>);"></span>
+												</a>
+												<!--end::Thumbnail-->
+												<div class="ms-5">
+													<!--begin::Title-->
+													<a href="<?= url('/dw-admin/edit-product/' . $value->id) ?>" class="text-gray-800 text-hover-primary fs-5 fw-bold" data-kt-ecommerce-product-filter="product_name"><?php echo $value->name ?></a>
+													<!--end::Title-->
+												</div>
 											</div>
-											<div class="rating-label">
-												<i class="ki-duotone ki-star fs-6"></i>
+										</td>
+										<td class="text-end pe-0">
+											<span class="fw-bold"><?php echo $value->sku ?></span>
+										</td>
+										<td class="text-end pe-0" data-order="6">
+											<!-- <span class="badge badge-light-warning">Low stock</span> -->
+											<span class="fw-bold ms-3"><?php echo $value->shelf_qty ?? 0 ?></span>
+										</td>
+										<td class="text-end pe-0"><?php echo $value->base_price ?></td>
+										<td class="text-end pe-0" data-order="rating-4">
+											<div class="rating justify-content-end">
+												<div class="rating-label checked">
+													<i class="ki-duotone ki-star fs-6"></i>
+												</div>
+												<div class="rating-label">
+													<i class="ki-duotone ki-star fs-6"></i>
+												</div>
+												<div class="rating-label ">
+													<i class="ki-duotone ki-star fs-6"></i>
+												</div>
+												<div class="rating-label">
+													<i class="ki-duotone ki-star fs-6"></i>
+												</div>
+												<div class="rating-label">
+													<i class="ki-duotone ki-star fs-6"></i>
+												</div>
 											</div>
-											<div class="rating-label ">
-												<i class="ki-duotone ki-star fs-6"></i>
+										</td>
+										<td class="text-end pe-0" data-order="Scheduled">
+											<!--begin::Badges-->
+											<div class="badge badge-light-primary"><?php echo $value->status ?></div>
+											<!--end::Badges-->
+										</td>
+										<td class="text-end">
+											<a href="#" class="btn btn-sm btn-light btn-flex btn-center btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
+												<i class="ki-duotone ki-down fs-5 ms-1"></i></a>
+											<!--begin::Menu-->
+											<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4" data-kt-menu="true">
+												<!--begin::Menu item-->
+												<div class="menu-item px-3">
+													<a href="<?= url('/dw-admin/edit-product/' . $value->id) ?>" class="menu-link px-3">Edit</a>
+												</div>
+												<!--end::Menu item-->
+												<!--begin::Menu item-->
+												<div class="menu-item px-3">
+													<a href="#" class="menu-link px-3" data-kt-ecommerce-product-filter="delete_row">Delete</a>
+												</div>
+												<!--end::Menu item-->
 											</div>
-											<div class="rating-label">
-												<i class="ki-duotone ki-star fs-6"></i>
+											<!--end::Menu-->
+										</td>
+									</tr>
+								<?php endforeach ?>
+							</tbody>
+
+							<tbody class="fw-semibold text-gray-600 d-none" id="vendorTable">
+								<?php foreach ($vendorproduct as $value) : ?>
+									<tr>
+										<td>
+											<div class="form-check form-check-sm form-check-custom form-check-solid">
+												<input class="form-check-input" type="checkbox" value="1" />
 											</div>
-											<div class="rating-label">
-												<i class="ki-duotone ki-star fs-6"></i>
+										</td>
+										<td>
+											<div class="d-flex align-items-center">
+												<!--begin::Thumbnail-->
+												<a href="<?= url('/dw-admin/edit-product/' . $value->id) ?>" class="symbol symbol-50px">
+													<span class="symbol-label" style="background-image:url(<?php echo  $value->thumb_img ?? '#' ?>);"></span>
+												</a>
+												<!--end::Thumbnail-->
+												<div class="ms-5">
+													<!--begin::Title-->
+													<a href="<?= url('/dw-admin/edit-product/' . $value->id) ?>" class="text-gray-800 text-hover-primary fs-5 fw-bold" data-kt-ecommerce-product-filter="product_name"><?php echo $value->name ?></a>
+													<!--end::Title-->
+												</div>
 											</div>
-										</div>
-									</td>
-									<td class="text-end pe-0" data-order="Scheduled">
-										<!--begin::Badges-->
-										<div class="badge badge-light-primary"><?php echo $value->status ?></div>
-										<!--end::Badges-->
-									</td>
-									<td class="text-end">
-										<a href="#" class="btn btn-sm btn-light btn-flex btn-center btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions 
-										<i class="ki-duotone ki-down fs-5 ms-1"></i></a>
-										<!--begin::Menu-->
-										<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4" data-kt-menu="true">
-											<!--begin::Menu item-->
-											<div class="menu-item px-3">
-												<a href="<?=  url('/dw-admin/edit-product/'.$value->id) ?>" class="menu-link px-3">Edit</a>
+										</td>
+										<td class="text-end pe-0">
+											<span class="fw-bold"><?php echo $value->sku ?></span>
+										</td>
+										<td class="text-end pe-0" data-order="6">
+											<!-- <span class="badge badge-light-warning">Low stock</span> -->
+											<span class="fw-bold ms-3"><?php echo $value->shelf_qty ?? 0 ?></span>
+										</td>
+										<td class="text-end pe-0"><?php echo $value->base_price ?></td>
+										<td class="text-end pe-0" data-order="rating-4">
+											<div class="rating justify-content-end">
+												<div class="rating-label checked">
+													<i class="ki-duotone ki-star fs-6"></i>
+												</div>
+												<div class="rating-label">
+													<i class="ki-duotone ki-star fs-6"></i>
+												</div>
+												<div class="rating-label ">
+													<i class="ki-duotone ki-star fs-6"></i>
+												</div>
+												<div class="rating-label">
+													<i class="ki-duotone ki-star fs-6"></i>
+												</div>
+												<div class="rating-label">
+													<i class="ki-duotone ki-star fs-6"></i>
+												</div>
 											</div>
-											<!--end::Menu item-->
-											<!--begin::Menu item-->
-											<div class="menu-item px-3">
-												<a href="#" class="menu-link px-3" data-kt-ecommerce-product-filter="delete_row">Delete</a>
+										</td>
+										<td class="text-end pe-0" data-order="Scheduled">
+											<!--begin::Badges-->
+											<div class="badge badge-light-primary"><?php echo $value->status ?></div>
+											<!--end::Badges-->
+										</td>
+										<td class="text-end">
+											<a href="#" class="btn btn-sm btn-light btn-flex btn-center btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
+												<i class="ki-duotone ki-down fs-5 ms-1"></i></a>
+											<!--begin::Menu-->
+											<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4" data-kt-menu="true">
+												<!--begin::Menu item-->
+												<div class="menu-item px-3">
+													<a href="<?= url('/dw-admin/edit-product/' . $value->id) ?>" class="menu-link px-3">Edit</a>
+												</div>
+												<!--end::Menu item-->
+												<!--begin::Menu item-->
+												<div class="menu-item px-3">
+													<a href="#" class="menu-link px-3" data-kt-ecommerce-product-filter="delete_row">Delete</a>
+												</div>
+												<!--end::Menu item-->
 											</div>
-											<!--end::Menu item-->
-										</div>
-										<!--end::Menu-->
-									</td>
-								</tr>
+											<!--end::Menu-->
+										</td>
+									</tr>
 								<?php endforeach ?>
 							</tbody>
 						</table>
@@ -291,4 +374,4 @@ include 'common/sidebar.php';
 		<!--end::Content-->
 	</div>
 	<!--end::Content wrapper-->
-<?php include("common/footer.php") ?> 					
+	<?php include("common/footer.php") ?>

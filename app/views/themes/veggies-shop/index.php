@@ -107,8 +107,8 @@
                 <div class="special-menu text-center">
                     <div class="button-group filter-button-group">
                         <button class="active" data-filter="*">All</button>
-                        <?php foreach ($allcategory as $category) : ?>
-                            <button data-filter=".<?php echo $category->name ?>"><?php echo $category->name ?></button>
+                        <?php foreach ($categories as $category) : ?>
+                            <button data-filter=".<?php echo $category ?>"><?php echo $category ?></button>
                         <?php endforeach ?>
                         <!-- <button data-filter=".top-featured">Top featured</button>
                             <button data-filter=".best-seller">Best seller</button> -->
@@ -118,27 +118,28 @@
         </div>
 
         <div class="row special-list">
-        <?php foreach ($product as $data) :?>
-                <div class="col-lg-3 col-md-6 special-grid <?php echo $data->categoryname ?>">
+        <?php foreach ($products as $product) :?>
+                <div class="col-lg-3 col-md-6 special-grid <?php echo $product->parent_category ?>">
                     <div class="products-single fix">
                         <div class="box-img-hover">
                             <div class="type-lb">
                                 <p class="sale">Sale</p>
                             </div>
                             <!-- <img src="<?= url('themes/' . $themeInfo->value) ?>/images/img-pro-01.jpg" class="img-fluid" alt="Image"> -->
-                            <img src="<?php echo $data->thumb_img ?? url('/admin/assets/media/svg/files/blank-image.svg') ?>" class="img-fluid" alt="Image">
+                            <img src="<?php echo $product->thumb_img ?? url('/admin/assets/media/svg/files/blank-image.svg') ?>" class="img-fluid" alt="Image">
                             <div class="mask-icon">
                                 <ul>
-                                    <li><a href="<?= url('/shop-detail/'. strtolower(str_replace(' ', '-', $data->name)).'/'. $data->id) ?>" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
+                                    <li><a href="<?= url('/shop-detail/'. strtolower(str_replace(' ', '-', $product->name)).'/'. $product->id) ?>" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
                                     <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
                                     <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
                                 </ul>
-                                <a class="cart manage_cart" href="#" data-id="<?php echo $data->id ?>">Add to Cart</a>
+                                <a class="cart manage_cart" href="#" data-id="<?php echo $product->id ?>">Add to Cart</a>
                             </div>
                         </div>
                         <div class="why-text">
-                            <h4><?php echo ucfirst($data->name) ?></h4>
-                            <h5> $<?php echo number_format($data->base_price, 2) ?></h5>
+                            <h4><?php echo ucfirst($product->name) ?></h4>
+                            <!-- <h5> $<?php // echo number_format($data->base_price, 2) ?></h5> -->
+                            <h5> $<?php echo $product->base_price ?></h5>
                         </div>
                     </div>
                 </div>

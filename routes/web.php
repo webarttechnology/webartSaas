@@ -34,6 +34,7 @@ $routes = [
 
         '/get-cart'                 => ['HomeController@getCart'],
         '/cart-data'                => ['HomeController@cartData'],
+        '/product-data'             => ['AdminController@productData'],
 
         '/logout'         => [
             'HomeController@logout', [
@@ -309,7 +310,12 @@ $routes = [
         '/dw-admin/save-coupon'         => ['CouponController@save_coupon'],
         '/dw-admin/delete-coupon'       => ['CouponController@delete_coupon'],
 
-        '/get-coupon'                 => ['HomeController@getCoupon'],
+        '/get-coupon'                   => ['HomeController@getCoupon'],
+
+        '/dw-admin/save-vendor-product'  => ['ProductController@save_vendor_product'],
+        '/dw-admin/delete-store-product' => ['ProductController@delete_store_product'],
+
+       
 
     ],
 

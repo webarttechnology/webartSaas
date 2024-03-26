@@ -500,7 +500,7 @@ class AdminController extends Controller
       // $data['category']          =  $reversed_words;
       // fire( $data['category']);
     
-      fire($data['cjVendorProduct']);
+      // fire($data['cjVendorProduct']);
       $this->view('admin/vendor-product-details', $data);
    }
    

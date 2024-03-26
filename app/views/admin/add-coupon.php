@@ -35,14 +35,7 @@ include 'common/sidebar.php';
                     <!--end::Breadcrumb-->
                 </div>
                 <!--end::Page title-->
-                <!--begin::Actions-->
-                <div class="d-flex align-items-center gap-2 gap-lg-3">
-
-                    <!--begin::Primary button-->
-                    <a href="#" class="btn btn-sm fw-bold btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_create_app">Create</a>
-                    <!--end::Primary button-->
-                </div>
-                <!--end::Actions-->
+               
             </div>
             <!--end::Toolbar container-->
         </div>
@@ -136,7 +129,7 @@ include 'common/sidebar.php';
                                         </div>
                                         <div class="col-md-9">
                                             <!--begin::Input-->
-                                            <input type="date" class="form-control form-control-solid coupons" id="start" name="start">
+                                            <input type="date" class="form-control form-control-solid coupons" id="start" name="start"  min="<?= date('Y-m-d') ?>">
                                             <!--end::Input-->
                                         </div>
                                     </div>
@@ -159,7 +152,7 @@ include 'common/sidebar.php';
                                         </div>
                                         <div class="col-md-9">
                                             <!--begin::Input-->
-                                            <input type="date" class="form-control form-control-solid coupons" id="expired" name="expired">
+                                            <input type="date" class="form-control form-control-solid coupons" id="expired" name="expired" min="<?= date('Y-m-d') ?>">
                                             <!--end::Input-->
                                         </div>
                                     </div>

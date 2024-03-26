@@ -116,7 +116,7 @@ include 'common/sidebar.php';
 
                                                 <div class="ms-5">
                                                     <!--begin::Title-->
-                                                    <a href="<?= url('/dw-admin/edit-product/' . $data->id) ?>" class="text-gray-800 text-hover-primary fs-5 fw-bold" data-kt-ecommerce-product-filter="product_name"><?php echo $data->coupon_name ?></a>
+                                                    <a href="<?= url('/dw-admin/edit-coupon/' . $data->id) ?>" class="text-gray-800 text-hover-primary fs-5 fw-bold" data-kt-ecommerce-product-filter="product_name"><?php echo $data->coupon_name ?></a>
                                                     <!--end::Title-->
                                                 </div>
                                             </div>

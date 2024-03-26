@@ -28,10 +28,21 @@ class HomeController extends Controller
 
       $title = option('business_name');
       $category = new Category;
-      $data['allcategory'] = $category->getRandomCategory();
+      $data['categories'] = [];
+      $data['products'] = $category->getRandomCategory();
 
-      $product = new Product;
-      $data['product'] = $product->getCategoryProductAll();
+      // fire($data['products']);
+
+      foreach( $data['products'] as $key => $category )
+      {
+         if( !in_array($category->parent_category, $data['categories']) )
+         {
+            $data['categories'][] = $category->parent_category;
+         }
+      }
+
+      // $product = new Product;
+      // $data['product'] = $product->getCategoryProductAll();
 
       //  fire(ThemeAction('Home', 'Banner'));
 
@@ -240,7 +251,9 @@ class HomeController extends Controller
       $optionM = new Option();
 
       $product = new Product;
-      $data['product'] = $product->getProductAll();
+      
+      // $data['product'] = $product->getProductAll();
+      $data['product'] = $product->getCategoryProductAll();
       $data['themeInfo'] = $optionM->getActive();
       $title = 'Shop';
       $this->view('themes/' . trim($data['themeInfo']->value) . '/' . 'shop', $data, $title);

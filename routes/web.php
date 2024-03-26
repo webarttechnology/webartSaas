@@ -287,6 +287,7 @@ $routes = [
         '/dw-admin/password/email'      => ['AdminController@sendresetLinkemail'],
         '/dw-admin/password/reset'      => ['AdminController@resetPassword'],
         '/dw-admin/update-category'     => ['CategoryController@update_category'],
+        '/dw-admin/delete-category'     => ['CategoryController@delete_category'],
         '/dw-admin/get-category-name'   => ['CategoryController@get_category_name'],
         '/dw-admin/list-all-category'   => ['CategoryController@list_all_category'],
         '/dw-admin/save-settings'       => ['SettingsController@save_settings'],
@@ -310,6 +311,13 @@ $routes = [
         '/dw-admin/delete-coupon'       => ['CouponController@delete_coupon'],
 
         '/get-coupon'                 => ['HomeController@getCoupon'],
+
+
+        ///// Builder 
+        '/edit-builder'                 => ['BuilderController@edit_builder'],
+        '/edit-theme-save'              => ['BuilderController@edit_theme_save'],
+        '/back-edit-theme'              => ['BuilderController@back_edit_theme'],
+       
 
     ],
 

@@ -210,7 +210,7 @@ include 'common/sidebar.php';
 													<a href="<?= url('/dw-admin/edit-category/'.$category->id) ?>" class="text-gray-800 text-hover-primary fs-5 fw-bold mb-1" data-kt-ecommerce-category-filter="category_name"><?php echo $category->name ?></a>
 													<!--end::Title-->
 													<!--begin::Description-->
-													<div class="text-muted fs-7 fw-bold"><?php echo $category->descriptions ?? $category->parent_description ?></div>
+													<div class="text-muted fs-7 fw-bold"><?php echo $category->description ?? $category->parent_description ?></div>
 													<!--end::Description-->
 												</div>
 											</div>
@@ -237,7 +237,7 @@ include 'common/sidebar.php';
 												<!--end::Menu item-->
 												<!--begin::Menu item-->
 												<div class="menu-item px-3">
-													<a href="#" class="menu-link px-3" data-kt-ecommerce-category-filter="delete_row">Delete</a>
+												<a href="#" data-id="<?php echo $category->id ?>" class="menu-link px-3 delete-category" data-kt-ecommerce-category-filter="delete_row">Delete</a>
 												</div>
 												<!--end::Menu item-->
 											</div>

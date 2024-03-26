@@ -1,10 +1,11 @@
 <?php
 
-use App\Models\Cart;
 use Core\Database;
+use App\Models\Cart;
 use App\Models\Option;
-
-
+use App\Models\Builder;
+use App\Models\Category;
+use App\Models\Product;
 
 /**
  * The "fire" function in PHP is used to display the value and type of a variable in a formatted manner
@@ -254,6 +255,9 @@ function cjCurl($type, $id = null){
     if ($response === false) {
         fire(curl_error($ch));
     } 
+    // fire($response) ;
+
+
 
     curl_close($ch);
     
@@ -270,4 +274,34 @@ function CartCount()
 
     return $result['cartCount'];
 
+}
+
+
+function ThemeAction($page, $section)
+{
+    $optionM    = new Option();
+    $themeInfo  = $optionM->getActive();
+    $theme      = new Builder;
+    $result     = $theme->getEditTheme(trim($themeInfo->value), $page, $section);
+    return $result;
+}
+
+function authCheck()
+{
+    return isset($_SESSION['Auth_Admin']);
+}
+
+
+function categories()
+{
+    $category =  new Category;
+    $result = $category->getCategory();
+    return $result;
+}
+
+function products()
+{
+    $product =  new Product;
+    $result = $product->getProductAll();
+    return $result;
 }

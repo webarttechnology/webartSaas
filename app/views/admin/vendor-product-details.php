@@ -55,7 +55,7 @@ include 'common/sidebar.php';
 
 							$total_review_data = json_decode(cjCurl('product-reviews', $id))->data;
 
-							$total_review = count($total_review_data->list);
+							$total_review = !empty($total_review_data->list) ? count($total_review_data->list) : 0;
 
 							$total_score = 0;
 
@@ -88,19 +88,13 @@ include 'common/sidebar.php';
                                                     <!-- Swiper and EasyZoom plugins start -->
                                                     <div class="swiper-container gallery-top mb-3">
                                                         <div class="swiper-wrapper">
-
 														<?php  foreach($cjVendorProduct->productImageSet as $item): ?>
-
                                                         <div class="swiper-slide easyzoom easyzoom--overlay">
                                                             <a href="<?php echo $item;  ?>">
                                                             <img src="<?php echo $item;  ?>" alt="" class="img-fluid"/> 
                                                             </a>
                                                         </div>
-
 														<?php  endforeach ?>
-
-                                                     
-                                                    
                                                         </div>
                                                         <!-- Add Arrows -->
                                                         <div class="swiper-button-next swiper-button-white"></div>

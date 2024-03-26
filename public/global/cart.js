@@ -1,5 +1,19 @@
 $(document).ready(function () {
 
+    function ToasterMsg(msg, type){
+        if (type === 'success') {
+            $('body').append('<div id="trixcarttoaster" class="toaster-success" style="font-size: 17px; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background-color: #333; color: #fff; padding: 15px 25px; border-radius: 4px; display: none; z-index: 999;"></div>');
+            $('#trixcarttoaster').text(msg).fadeIn().delay(5000).fadeOut();
+            
+        } else{
+            $('body').append('<div id="trixcarttoaster" class="toaster-error" style="font-size: 17px; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background-color: #bb1010; color: #fff; padding: 15px 25px; border-radius: 4px; display: none; z-index: 999;"></div>');
+            $('#trixcarttoaster').text(msg).fadeIn().delay(5000).fadeOut();
+        }
+        setTimeout(function() {
+            $('#trixcarttoaster').remove();
+        }, 5000);
+    }
+
     const csrf_token = $('meta[name="csrf-token"]').attr('content');
 
     function manageCart(productId, quantity, type) {
@@ -17,16 +31,15 @@ $(document).ready(function () {
                
 
                 if (response.status == 'success') {
-                    $('body').append('<div id="trixcarttoaster" class="toaster-success" style="font-size: 17px; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background-color: #333; color: #fff; padding: 15px 25px; border-radius: 4px; display: none; z-index: 999;"></div>');
-                    $('#trixcarttoaster').text(response.message).fadeIn().delay(5000).fadeOut();
+                   
+                    ToasterMsg(response.message, 'success');
 
                     if (removetype == "remove") {
                         window.location.reload();
                     }
 
                 } else {
-                    $('body').append('<div id="trixcarttoaster" class="toaster-error" style="font-size: 17px; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background-color: #bb1010; color: #fff; padding: 15px 25px; border-radius: 4px; display: none; z-index: 999;"></div>');
-                    $('#trixcarttoaster').text(response.message).fadeIn().delay(5000).fadeOut();
+                    ToasterMsg(response.message, 'error');
                 }
 
                 
@@ -125,12 +138,9 @@ $(document).ready(function () {
                 if (response.status === 'success') {
                     $('.grand_total').text('$ ' + response.data.grand_total.toFixed(2));
                     $('.couponfield').text('$ ' + response.data.discount);
-
-                    $('body').append('<div id="trixcarttoaster" class="toaster-success" style="font-size: 17px; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background-color: #333; color: #fff; padding: 15px 25px; border-radius: 4px; display: none; z-index: 999;"></div>');
-                    $('#trixcarttoaster').text(response.message).fadeIn().delay(5000).fadeOut();
+                    ToasterMsg(response.message, 'success');
                 } else{
-                    $('body').append('<div id="trixcarttoaster" class="toaster-error" style="font-size: 17px; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background-color: #bb1010; color: #fff; padding: 15px 25px; border-radius: 4px; display: none; z-index: 999;"></div>');
-                    $('#trixcarttoaster').text(response.message).fadeIn().delay(5000).fadeOut();
+                    ToasterMsg(response.message, 'error');
                 }
             },
 

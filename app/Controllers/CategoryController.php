@@ -105,7 +105,7 @@ class CategoryController extends Controller
     {
 
 
-        try {
+        // try {
 
             $request = new Request;
 
@@ -158,9 +158,10 @@ class CategoryController extends Controller
 
             $category_data = [
                 'name' => $request->get('category'),
-                'parent_id' => $request->get('sub_category') ? $sub_category[$last_sub_category_index] : null,
-                'status' => $request->get('status'),
-                'image' => $imageUrl
+                'parent_id'     => $request->get('sub_category') ? $sub_category[$last_sub_category_index] : null,
+                'status'        => $request->get('status'),
+                'image'         => $imageUrl,
+                'description'   => $request->get('description'),
             ];
 
 
@@ -168,11 +169,11 @@ class CategoryController extends Controller
             $update = $update_category->updateCategoryById($request->get('category_id'), $category_data);
             return responseJson(['status' => 'success', 'message' => 'Category Updated Successfully']);
 
-        } catch (\Throwable $th) {
+        // } catch (\Throwable $th) {
 
-            return responseJson(['status' => 'errors', 'message' => $th]);
+        //     return responseJson(['status' => 'errors', 'message' => $th]);
 
-        }
+        // }
     }
 
     public function list_all_category()
@@ -220,6 +221,17 @@ class CategoryController extends Controller
 
     }
 
+
+
+    public function delete_category()
+    {
+        $request = new Request;
+        $id = intval($request->get('id'));
+        // fire($id);
+        $category = new Category;
+        $category->softDeleteCategory($id);
+        return responseJson(['status' => 'success', 'message' => 'Deleted Successfully']);
+    }
 
     
 }

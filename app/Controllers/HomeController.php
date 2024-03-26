@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\Builder;
 use Core\Mail;
 use Core\Request;
 use App\Models\Cart;
@@ -31,6 +32,10 @@ class HomeController extends Controller
 
       $product = new Product;
       $data['product'] = $product->getCategoryProductAll();
+
+      //  fire(ThemeAction('Home', 'Banner'));
+
+      // fire(authCheck());
 
       $this->view('themes/' . trim($data['themeInfo']->value) . '/' . 'index', $data, $title);
    }

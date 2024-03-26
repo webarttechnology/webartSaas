@@ -77,9 +77,9 @@ class AdminController extends Controller
 
 
 
-         if ($_SERVER['HTTP_HOST'] == 'webartsaas.test') {
+         if ($_SERVER['HTTP_HOST'] == 'domain.test') {
             ////// Local
-            $url = 'http://saas.test/api/login-action';
+            $url = 'http://newtrixcart.test/api/login-action';
          } else {
             ///// Live 
             $url = 'https://prototype.trixcart.com/api/login-action';
@@ -509,9 +509,9 @@ class AdminController extends Controller
          }
 
 
-         if ($_SERVER['HTTP_HOST'] == 'webartsaas.test') {
+         if ($_SERVER['HTTP_HOST'] == 'domain.test') {
             ////// Local
-            $url = 'http://saas.test/api/password/email';
+            $url = 'http://newtrixcart.test/api/password/email';
          } else {
             ///// Live
             $url = 'https://prototype.trixcart.com/api/password/email';
@@ -557,9 +557,9 @@ class AdminController extends Controller
    public function showResetForm($token, $id)
    {
 
-      if ($_SERVER['HTTP_HOST'] == 'webartsaas.test') {
+      if ($_SERVER['HTTP_HOST'] == 'domain.test') {
          ////// Local
-         $url = 'http://saas.test/api/valid-user';
+         $url = 'http://newtrixcart.test/api/valid-user';
       } else {
          ///// Live
          $url = 'https://prototype.trixcart.com/api/valid-user';
@@ -619,9 +619,9 @@ class AdminController extends Controller
          }
 
 
-         if ($_SERVER['HTTP_HOST'] == 'webartsaas.test') {
+         if ($_SERVER['HTTP_HOST'] == 'domain.test') {
             ////// Local
-            $url = 'http://saas.test/api/password/reset';
+            $url = 'http://newtrixcart.test/api/password/reset';
          } else {
             ///// Live
             $url = 'https://prototype.trixcart.com/api/password/reset';

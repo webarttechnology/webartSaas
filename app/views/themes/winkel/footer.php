@@ -75,6 +75,20 @@
   <!-- loader -->
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
+  <div class="modal fade builderModal" id="myModal">
+     <div class="modal-dialog modal-xl">
+       <div class="modal-content">
+         <!-- Modal body -->
+         <div class="modal-body">
+		 	<button type="button" class="close" data-dismiss="modal">&times;</button>
+			 <div id="builder-section"></div>
+		 </div>
+       </div>
+     </div>
+   </div>
+
+  <!-- <div id="builder-section"></div> -->
+
   <script src="<?= url('themes/'. $themeInfo->value)?>/js/jquery.min.js"></script>
   <script src="<?= url('themes/'. $themeInfo->value)?>/js/jquery-migrate-3.0.1.min.js"></script>
   <script src="<?= url('themes/'. $themeInfo->value)?>/js/popper.min.js"></script>
@@ -92,6 +106,9 @@
   <script src="<?= url('themes/'. $themeInfo->value)?>/js/google-map.js"></script>
   <script src="<?= url('themes/'. $themeInfo->value)?>/js/main.js"></script>
   <script src="<?php echo url('global/login.js') ?>"></script>
+  <script src="<?php echo url('global/common.js') ?>"></script>
+  <script src="<?php echo url('global/builder.js') ?>"></script>
+
   <script>
 		$(document).ready(function(){
 

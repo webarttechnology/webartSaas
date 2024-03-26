@@ -302,8 +302,8 @@ include 'common/sidebar.php';
 									<label class="form-label">Description</label>
 									<!--end::Label-->
 									<!--begin::Editor-->
-									<textarea class="min-h-200px mb-2" name="description" id="kt_ecommerce_add_category_description" style="width: 100%; outline: none;"><?php echo $category[0]->description ?></textarea>
-									<!-- <div id="kt_ecommerce_add_category_description" name="kt_ecommerce_add_category_description" class="min-h-200px mb-2"></div> -->
+									<!-- <textarea class="min-h-200px mb-2" name="description" id="kt_ecommerce_add_category_description" style="width: 100%; outline: none;">hjhgjjjj</textarea> -->
+									<div id="kt_ecommerce_add_category_description" name="kt_ecommerce_add_category_description" class="min-h-200px mb-2"><?php echo $category[0]->description ?></div>
 									<!--end::Editor-->
 									<!--begin::Description-->
 									<div class="text-muted fs-7">Set a description to the category for better visibility.</div>

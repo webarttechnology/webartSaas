@@ -59,17 +59,19 @@ class Category
         return $query->fetchAll(PDO::FETCH_OBJ);
     }
 
+
     public function getAllCategory()
     {
-
         // $query = $this->db->query("SELECT * FROM `categories` WHERE `parent_id` IS NOT NULL");
-        //for User
-        // $query = $this->db->query("SELECT c1.id, c1.name, c2.name AS parent_name, c1.image, c2.status AS parent_status, c1.description, c1.created_at FROM categories c1 LEFT JOIN categories c2 ON c1.parent_id = c2.id WHERE c1.parent_id IS NOT NULL AND c2.status = 'Active'");
+
+        //for User 
+        // $query = $this->db->query("SELECT c1.id, c1.name, c2.name AS parent_name, c1.image, c2.status AS parent_status, c1.description, c1.created_at  FROM categories c1 LEFT JOIN categories c2 ON c1.parent_id = c2.id WHERE c1.parent_id IS NOT NULL AND c2.status = 'Active'");
+
         //For Admin
-        $query = $this->db->query("SELECT c1.id, c1.name, c2.name AS parent_name, c1.image, c1.status, c2.description, c1.description AS parent_description,  c1.created_at  FROM categories c1 LEFT JOIN categories c2 ON c1.parent_id = c2.id");
+        $query = $this->db->query("SELECT c1.id, c1.name, c2.name AS parent_name, c1.image, c2.status, c1.description, c1.created_at AS parent_status FROM categories c1 LEFT JOIN categories c2 ON c1.parent_id = c2.id WHERE c1.deleted_at IS NULL");
+
         return $query->fetchAll(PDO::FETCH_OBJ);
     }
-
 
     public function getparentCategory($id)
     {
@@ -96,7 +98,7 @@ class Category
 
     public function getCategoryAll()
     {
-        $query = $this->db->query("SELECT * FROM categories");
+        $query = $this->db->query("SELECT * FROM categories WHERE `deleted_at` = null");
         return $query->fetchAll(PDO::FETCH_OBJ);
     }
 
@@ -107,7 +109,8 @@ class Category
             `name` = :name,
             `parent_id` = :parent_id,
             `status` = :status,
-            `image` = :image
+            `image` = :image,
+            `description` = :description
             WHERE `id` = :id";
 
         $query = $this->db->prepare($query);
@@ -115,6 +118,7 @@ class Category
         $query->bindValue(':parent_id', $category_data['parent_id']);
         $query->bindValue(':status', $category_data['status']);
         $query->bindValue(':image', $category_data['image']);
+        $query->bindValue(':description', $category_data['description']);
         $query->bindValue(':id', $id);
 
         $query->execute();
@@ -179,6 +183,22 @@ class Category
         return $query->fetchAll(PDO::FETCH_OBJ);
     }
     
+    public function softDeleteCategory($id)
+    {
+        // Get the IDs of the categories to be updated
+        $query = "SELECT id FROM `categories` WHERE id = :id OR parent_id = :id OR parent_id IN (SELECT id FROM `categories` WHERE parent_id = :id)";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindValue(':id', $id);
+        $stmt->execute();
+        $ids = $stmt->fetchAll(PDO::FETCH_COLUMN);
 
+        // Update the categories
+        $query = "UPDATE `categories` SET deleted_at = NOW(), status = 'Inactive' WHERE id IN (" . implode(',', $ids) . ")";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+
+        return true;
+    }
+    
 
 }

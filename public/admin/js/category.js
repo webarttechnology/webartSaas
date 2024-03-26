@@ -35,6 +35,8 @@ $(document).ready(function () {
         var url = $(this).attr('action');
         var method = $(this).attr('method');
         var data = new FormData($(this)[0]);
+
+        data.append('description', document.querySelector('#kt_ecommerce_add_category_description .ql-editor').innerHTML);
         
         $.ajax({
             url: url,
@@ -249,6 +251,34 @@ $(document).ready(function () {
           });
   
       });
+
+
+      $(document).on("click", ".delete-category", function (e) {
+        e.preventDefault();
+        var categoryId = $(this).data('id');
+        if(confirm('Are you sure you want to delete this category?')) {
+            $.ajax({
+                url: '/dw-admin/delete-category',
+                method: 'POST',
+                data: {id: categoryId, csrf_token: csrf_token},
+                success: function(data) {
+                    // Handle success response
+                    if (data.status == 'success') {
+              
+                        Swal.fire({ text: data.message, icon: "success", buttonsStyling: !1, confirmButtonText: "Ok, got it!", customClass: { confirmButton: "btn btn-primary" } });
+    
+                        setTimeout(() => {
+                            location.reload();
+                        }, 1000);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    // Handle error
+                    console.error(xhr.responseText);
+                }
+            });
+        }
+    });
 
 
 
